@@ -1,0 +1,172 @@
+/* BankForm.scss */
+.bank-form-container {
+    background: #001a4d;
+    color: #fff;
+    min-height: 100vh;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  
+    .header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #ffd700;
+  
+      .logo {
+        display: inline-block;
+        margin-right: 10px;
+        background: url('') no-repeat center;
+        background-size: contain;
+        width: 40px;
+        height: 40px;
+      }
+    }
+  
+    .tab-container {
+      .ant-tabs-nav {
+        margin-bottom: 20px;
+        .ant-tabs-tab {
+          color: #ffd700;
+  
+          &.ant-tabs-tab-active {
+            color: #fff;
+          }
+        }
+      }
+    }
+  
+    .form-container {
+      .ant-form-item {
+        margin-bottom: 16px;
+  
+        label {
+          color: #ffd700;
+        }
+  
+        input {
+          border: none;
+          background: #001f5b;
+          color: #fff;
+          padding: 10px;
+          border-radius: 4px;
+          width: 100%;
+  
+          &::placeholder {
+            color: #aaa;
+          }
+        }
+      }
+  
+      .ant-btn-primary {
+        background: #ffd700;
+        border: none;
+        color: #001a4d;
+        font-weight: bold;
+        padding: 10px;
+        width: 100%;
+  
+        &:hover {
+          background: #e6b800;
+          color: #001a4d;
+        }
+      }
+    }
+  
+    .upi-placeholder {
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      background: #001f5b;
+      border-radius: 4px;
+    }
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .bank-form-container {
+      padding: 10px;
+  
+      .header {
+        font-size: 18px;
+        .logo {
+          width: 30px;
+          height: 30px;
+        }
+      }
+  
+      .tab-container {
+        .ant-tabs-nav {
+          .ant-tabs-tab {
+            font-size: 14px;
+          }
+        }
+      }
+  
+      .form-container {
+        .ant-form-item {
+          margin-bottom: 12px;
+  
+          input {
+            font-size: 14px;
+            padding: 8px;
+          }
+        }
+  
+        .ant-btn-primary {
+          padding: 8px;
+          font-size: 14px;
+        }
+      }
+  
+      .upi-placeholder {
+        font-size: 14px;
+        padding: 15px;
+      }
+    }
+  }
+  
+  /* Extra small devices */
+  @media (max-width: 480px) {
+    .bank-form-container {
+      .header {
+        font-size: 16px;
+        .logo {
+          width: 25px;
+          height: 25px;
+        }
+      }
+  
+      .tab-container {
+        .ant-tabs-nav {
+          .ant-tabs-tab {
+            font-size: 12px;
+          }
+        }
+      }
+  
+      .form-container {
+        .ant-form-item {
+          margin-bottom: 10px;
+  
+          input {
+            font-size: 12px;
+            padding: 6px;
+          }
+        }
+  
+        .ant-btn-primary {
+          padding: 6px;
+          font-size: 12px;
+        }
+      }
+  
+      .upi-placeholder {
+        font-size: 12px;
+        padding: 10px;
+      }
+    }
+  }
+  

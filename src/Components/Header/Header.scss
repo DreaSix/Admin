@@ -1,0 +1,40 @@
+.header {
+  background-color: #003366;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed; /* Fixed positioning */
+  top: 0; /* Stick to top */
+  left: 0; /* Align to left */
+  right: 0; /* Align to right */
+  z-index: 1000; /* Ensure it's above other content */
+
+  .logo {
+    width: 120px;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+
+    .user-profile {
+      margin-right: 10px;
+      color: white;
+    }
+
+    .deposit-button {
+      background-color: #fff;
+      border: none;
+      color: #000;
+      margin-right: 10px;
+      border-radius: 15px;
+    }
+
+    .balance {
+      background-color: #ffd700;
+      padding: 5px 10px;
+      border-radius: 15px;
+    }
+  }
+}

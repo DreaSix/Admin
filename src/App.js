@@ -1,23 +1,36 @@
-import logo from "./logo.svg";
-import "./App.css";
+
+import CreateMatchPage from "./Components/CreateMatch/CreateMatch";
+import AddPlayer from "./Components/CreatePlayers/AddPlayer";
+import CreatePlayers from "./Components/CreatePlayers/CreatePlayers";
+import CreateTeams from "./Components/CreateTeams/CreateTeams";
+import CreateWinners from "./Components/CreateWinner/CreateWinner";
+import HomePage from "./Components/HomePage/HomePage";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Transactions from "./Components/Transactions/Transactions";
+import Deposite from "./Components/Deposite/Deposite";
+import Withdrawl from "./Components/WithDrawl/WithDrawl";
+import Users from "./Components/Users/Users";
+import NewUsers from "./Components/NewUsers/NewUsers";
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          DREAM 6
-        </a>
-      </header>
+    <div>
+    <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />  
+          <Route path="/create-match" element={<CreateMatchPage />} />
+          <Route path="/create-teams" element={<CreateTeams />} />
+          <Route path="/create-winners" element={<CreateWinners />} />
+          <Route path="/create-players" element={<CreatePlayers/>} />
+          <Route path="/add-players" element={<AddPlayer/>} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/transactions" element={<Transactions />} />
+          <Route path="/deposite" element={<Deposite />} />
+          <Route path="/withdrawl" element={<Withdrawl />} />
+          <Route path="/new-users" element={<NewUsers />} />
+        </Routes>
+      </Router>
     </div>
   );
 }

@@ -1,0 +1,151 @@
+.deposit-withdraw-container {
+    padding: 20px;
+    background-color: #001d4a;
+    color: white;
+  
+    .tab-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+  
+      .ant-btn {
+        background-color: transparent;
+        color: #ffffff;
+        border: 1px solid #ffffff;
+        font-size: 16px;
+        font-weight: bold;
+        width: 120px;
+        text-align: center;
+  
+        &:hover {
+          background-color: #ffc107;
+          color: #000000;
+          border-color: #ffc107;
+        }
+  
+        &.active-tab {
+          background-color: #ffc107;
+          color: #000000;
+          border-color: #ffc107;
+        }
+      }
+    }
+  
+    .search-bar {
+      margin-bottom: 20px;
+  
+      input {
+        width: 100%;
+        padding: 10px 15px;
+        border-radius: 4px;
+        border: 1px solid #ffffff;
+        background-color: #ffffff;
+        color: #000000;
+  
+        &:focus {
+          border-color: #ffc107;
+          box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+        }
+  
+        &::placeholder {
+          color: #999999;
+        }
+      }
+  
+      .anticon {
+        color: #999999;
+      }
+    }
+  
+    .ant-table {
+      background-color: #00264d;
+      border-radius: 8px;
+  
+      .ant-table-thead > tr > th {
+        background-color: #003366;
+        color: #ffffff;
+        font-size: 14px;
+        text-align: center;
+      }
+  
+      .ant-table-tbody > tr > td {
+        color: #ffffff;
+        font-size: 14px;
+        text-align: center;
+        border-color: #004080;
+  
+        &:hover {
+          background-color: #004d99;
+        }
+      }
+  
+      .ant-table-bordered {
+        border-color: #003366;
+      }
+    }
+  
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      .tab-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+  
+        .ant-btn {
+          width: 100px;
+          font-size: 14px;
+        }
+      }
+  
+      .search-bar {
+        margin-bottom: 15px;
+  
+        input {
+          padding: 8px 10px;
+          font-size: 14px;
+        }
+      }
+  
+      .ant-table {
+        font-size: 12px;
+  
+        .ant-table-thead > tr > th {
+          font-size: 12px;
+        }
+  
+        .ant-table-tbody > tr > td {
+          font-size: 12px;
+        }
+      }
+    }
+  
+    @media (max-width: 480px) {
+      padding: 10px;
+  
+      .tab-buttons {
+        gap: 5px;
+  
+        .ant-btn {
+          width: 90px;
+          font-size: 12px;
+        }
+      }
+  
+      .search-bar {
+        margin-bottom: 10px;
+  
+        input {
+          padding: 6px 8px;
+          font-size: 12px;
+        }
+      }
+  
+      .ant-table {
+        .ant-table-thead > tr > th,
+        .ant-table-tbody > tr > td {
+          font-size: 10px;
+          padding: 4px 6px;
+        }
+      }
+    }
+  }
+  
