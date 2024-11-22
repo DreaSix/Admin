@@ -1,0 +1,124 @@
+.dashboard-container {
+  background-color: #0d1117;
+  padding: 20px;
+
+  .section {
+    margin-bottom: 20px;
+
+    .section-title {
+      color: #ffffff;
+    }
+
+    .create-button {
+      background-color: #fadb14;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      border-radius: 8px;
+    }
+
+    .match-card {
+      background-color: #161b22;
+      border-radius: 10px;
+      overflow: hidden;
+      .match-image {
+        width: 100%;
+        height: auto;
+        border-bottom: 2px solid #24292f;
+      }
+      .match-info {
+        padding: 10px;
+        .match-title {
+          color: #ffffff;
+        }
+        .match-timer {
+          color: #ff4d4f;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .buttons-section {
+      .action-button {
+        width: 100%;
+        height: 40px;
+        font-weight: bold;
+        border-radius: 8px;
+
+        &.deposit-button {
+          background-color: #52c41a;
+          color: #fff;
+        }
+
+        &.withdraw-button {
+          background-color: #ff4d4f;
+          color: #fff;
+        }
+
+        &.newuser-button {
+          background-color: #faad14;
+          color: #fff;
+        }
+      }
+    }
+
+    .players-card {
+      background-color: #161b22;
+      border-radius: 10px;
+
+      .players-icon {
+        width: 40px;
+        height: 40px;
+      }
+
+      .players-text {
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      .arrow-button {
+        font-size: 20px;
+        color: #ffffff;
+      }
+    }
+
+    .winner-card {
+      background-color: #161b22;
+      border-radius: 10px;
+
+      .winner-badge {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .winner-name {
+        color: #ffffff;
+        font-weight: bold;
+      }
+
+      .winner-match {
+        color: #aaa;
+      }
+
+      .winner-prize {
+        color: #ffffff;
+        font-weight: bold;
+      }
+
+      .top-sixer-button {
+        background: linear-gradient(45deg, #ff7a45, #40a9ff);
+        color: #fff;
+        border: none;
+        font-weight: bold;
+        border-radius: 8px;
+      }
+    }
+  }
+}

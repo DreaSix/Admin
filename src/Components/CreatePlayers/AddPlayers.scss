@@ -1,0 +1,74 @@
+.create-player-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #141414; // Dark background
+    color: #fff;
+    border-radius: 10px;
+  
+    h1 {
+      text-align: center;
+      color: #ffd700; // Gold color
+      font-size: 1.5rem; // Scales for smaller screens
+    }
+  
+    .ant-form-item-label > label {
+      color: #fff; // White text for labels
+    }
+  
+    .ant-upload.ant-upload-select-picture-card {
+      background: #2a2a2a;
+      border: 1px dashed #555;
+      color: #fff;
+  
+      div {
+        text-align: center;
+        font-size: 0.9rem; // Adjust font size for smaller screens
+      }
+    }
+  
+    .ant-btn-primary {
+      background-color: #ffd700; // Gold button
+      border-color: #ffd700;
+  
+      &:hover {
+        background-color: #e6be00;
+        border-color: #e6be00;
+      }
+    }
+  
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      padding: 15px;
+  
+      h1 {
+        font-size: 1.2rem; // Smaller font for mobile
+      }
+  
+      .ant-form-item {
+        margin-bottom: 10px; // Reduce spacing between form items
+      }
+  
+      .ant-btn-primary {
+        font-size: 1rem; // Adjust button size
+        padding: 10px; // Better touch experience
+      }
+    }
+  
+    @media (max-width: 480px) {
+      padding: 10px;
+  
+      h1 {
+        font-size: 1rem; // Further scaling down
+      }
+  
+      .ant-form-item-label > label {
+        font-size: 0.9rem; // Smaller label text
+      }
+  
+      .ant-btn-primary {
+        font-size: 0.9rem; // Scale down button text
+      }
+    }
+  }
+  

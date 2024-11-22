@@ -1,0 +1,27 @@
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color:#003366 ;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+
+    .nav-item {
+      text-align: center;
+      color: white;
+
+      p {
+        margin: 0;
+        font-size: 12px;
+      }
+
+      a {
+        color: white;
+        text-decoration: none;
+      }
+    }
+  }

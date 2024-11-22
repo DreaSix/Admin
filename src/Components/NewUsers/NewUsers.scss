@@ -1,0 +1,72 @@
+.user-table-container {
+    padding: 20px;
+    background-color: #001242; // Match the dark blue background
+  
+    .custom-table {
+      background-color: #001242;
+      color: #fff;
+  
+      .ant-table {
+        border-color: #fff;
+  
+        .ant-table-thead > tr > th {
+          background-color: #001242;
+          color: #FFCC00; // Yellow text for headers
+          text-align: center;
+          border-color: #fff;
+        }
+  
+        .ant-table-tbody > tr > td {
+          color: #fff; // White text for body cells
+          text-align: center;
+          border-color: #fff;
+  
+          .ant-btn-primary {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  
+    .custom-modal {
+      .ant-modal-content {
+        background-color: #fff;
+        border-radius: 8px;
+      }
+  
+      .ant-modal-header {
+        background-color: #fff;
+        border-bottom: none;
+        text-align: center;
+        font-weight: bold;
+        font-size: 18px;
+      }
+  
+      .ant-modal-title {
+        color: #000;
+      }
+  
+      .login-details {
+        p {
+          margin: 10px 0;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+  
+          strong {
+            color: #000;
+          }
+  
+          .copy-icon {
+            font-size: 16px;
+            cursor: pointer;
+          }
+        }
+  
+        button {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  

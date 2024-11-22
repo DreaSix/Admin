@@ -1,0 +1,73 @@
+.player-selection-container {
+    background-color:#0d1117 ;
+    padding: 20px;
+  
+    .ant-tabs {
+      .ant-tabs-tab {
+        color: #000;
+        font-weight: bold;
+        &.ant-tabs-tab-active {
+          background-color: #ffd700; // Yellow active tab
+        }
+      }
+    }
+  
+    .player-form {
+      margin-top: 20px;
+  
+      .player-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+  
+        .player-label {
+          flex: 1;
+          color: #fff; // Yellow text
+          font-weight: bold;
+        }
+  
+        .player-input {
+          flex: 3;
+          margin-right: 10px;
+          background-color: #112244;
+          border: none;
+          color: white;
+        }
+  
+        .upload-btn {
+          background-color: #112244;
+          border: none;
+          color: white;
+        }
+      }
+  
+      .save-btn {
+        width: 100%;
+        background-color: #ffd700;
+        color: #000;
+        font-weight: bold;
+      }
+    }
+  }
+  
+  /* Mobile Responsiveness */
+  @media (max-width: 768px) {
+    .player-row {
+      flex-direction: column;
+      align-items: flex-start;
+  
+      .player-input {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+  
+      .upload-btn {
+        width: 100%;
+      }
+    }
+  
+    .save-btn {
+      margin-top: 20px;
+    }
+  }
+  
