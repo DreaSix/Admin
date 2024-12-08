@@ -3,6 +3,9 @@ import { Form, Input, Button, Upload, Select, TimePicker } from "antd";
 import { UploadOutlined, ClockCircleOutlined } from "@ant-design/icons";
 import "./CreateMatch.scss";
 import { useNavigate } from "react-router-dom";
+import { matchDetails } from "../../Service/MatchDetailsService";
+import axios from "axios";
+import dayjs from "dayjs";
 
 const { Option } = Select;
 
@@ -10,14 +13,36 @@ const CreateMatch = () => {
 
     const navigate = useNavigate();  // Create navigate function
 
-  // Function to navigate to Create Match page
-  const handleCreateMatch = () => {
-    navigate('/create-teams');
+  const onFinish = (values) => {
+    console.log('values?.matchImage', values?.matchImage)
+
+    const dateStr = values?.countDownEndTime
+
+    const timeString = dayjs(dateStr.$d).format('YYYY-MM-DD HH:mm:ss');
+
+    const formData = new FormData()
+
+    formData.append("matchName", values?.matchName)
+    formData.append("matchTime", values?.matchTime)
+    formData.append("countDownEndTime", timeString)
+    formData.append("teamOneName", values?.teamOneName)
+    formData.append("teamTwoName", values?.teamTwoName)
+    formData.append("matchAction", values?.matchAction)
+    if (values?.matchImage?.length > 0) {
+      values?.matchImage?.forEach((file) => {
+        formData.append("matchImage", file.originFileObj);
+      });
+    }
+
+    matchDetails.createMatch(formData)
+      .then(response => {
+        console.log('response', response)
+        navigate(`/create-teams?match=${encodeURIComponent(JSON.stringify(response?.data))}`);
+      }).catch(error => {
+        console.log('error', error)
+      })
   };
 
-  const onFinish = (values) => {
-    console.log("Form values:", values);
-  };
 
   return (
     <div className="create-match-container">
@@ -67,7 +92,7 @@ const CreateMatch = () => {
         </Form.Item>
 
         {/* Countdown Start Time */}
-        <Form.Item
+        {/* <Form.Item
           label="Countdown Start Time"
           name="startTime"
           rules={[
@@ -79,12 +104,12 @@ const CreateMatch = () => {
             suffixIcon={<ClockCircleOutlined />}
             style={{ width: "100%", border:"0.5px solid white" }}
           />
-        </Form.Item>
+        </Form.Item> */}
 
         {/* Countdown End Time */}
         <Form.Item
           label="Countdown End Time"
-          name="endTime"
+          name="countDownEndTime"
           rules={[{ required: true, message: "Please select the end time" }]}
         >
           <TimePicker
@@ -97,7 +122,7 @@ const CreateMatch = () => {
         {/* Team-1 Name */}
         <Form.Item
           label="Team-1 Name"
-          name="team1Name"
+          name="teamOneName"
           rules={[{ required: true, message: "Please enter team-1 name" }]}
         >
           <Input style={{border:"1px solid white"}} placeholder="Team-1 name" />
@@ -106,7 +131,7 @@ const CreateMatch = () => {
         {/* Team-2 Name */}
         <Form.Item
           label="Team-2 Name"
-          name="team2Name"
+          name="teamTwoName"
           rules={[{ required: true, message: "Please enter team-2 name" }]}
         >
           <Input style={{border:"1px solid white"}} placeholder="Team-2 name" />
@@ -115,18 +140,18 @@ const CreateMatch = () => {
         {/* Match Auction */}
         <Form.Item
           label="Match Auction"
-          name="matchAuction"
+          name="matchAction"
           rules={[{ required: true, message: "Please select an auction type" }]}
         >
           <Select style={{border:"1px solid white"}} placeholder="Select an option">
-            <Option value="live"> Top Sixer </Option>
-            <Option value="closed"> Top Scorer </Option>
+            <Option value="topSixer"> Top Sixer </Option>
+            <Option value="topScorer"> Top Scorer </Option>
           </Select>
         </Form.Item>
 
         {/* Submit Button */}
         <Form.Item>
-          <Button type="primary" htmlType="submit" block onClick={handleCreateMatch}>
+          <Button htmlType="submit" block>
             Next
           </Button>
         </Form.Item>

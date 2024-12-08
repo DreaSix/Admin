@@ -3,6 +3,8 @@ import { Form, Input, Upload, Button } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import './AddPlayers.scss';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { matchDetails } from '../../Service/MatchDetailsService';
 
 const AddPlayer = () => {
     const navigate = useNavigate(); 
@@ -16,6 +18,23 @@ const AddPlayer = () => {
 
   const onFinish = (values) => {
     console.log('Form Values:', values);
+    const formData = new FormData()
+    formData.append("playerName", values?.playerName)
+    formData.append("countryName", values?.countryName)
+    if (values?.playerImage?.fileList?.length > 0) {
+      values?.playerImage?.fileList?.forEach((file) => {
+        console.log('file', file)
+        formData.append("playerImage", file.originFileObj);
+      });
+    }
+
+   matchDetails.createPlayer(formData)
+    .then(response => {
+      console.log('Success:', response.data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
   };
 
   return (
@@ -24,17 +43,18 @@ const AddPlayer = () => {
       <Form form={form} layout="vertical" onFinish={onFinish}>
         {/* Match Name */}
         <Form.Item
-          label="Match Name"
-          name="matchName"
+          label="Player Name"
+          name="playerName"
           rules={[{ required: true, message: 'Please enter a match name' }]}
         >
           <Input placeholder="Enter match name" />
         </Form.Item>
 
         {/* Upload Match Image */}
-        <Form.Item label="Upload Match Image" name="matchImage">
+        <Form.Item label="Upload Match Image" name="playerImage">
           <Upload
             listType="picture-card"
+            accept="image/*"
             maxCount={1}
             beforeUpload={() => false} // Disable automatic upload
           >
@@ -52,7 +72,7 @@ const AddPlayer = () => {
 
         {/* Save Button */}
         <Form.Item>
-          <Button type="primary" htmlType="submit" block onClick={handleNext}>
+          <Button type="primary" htmlType="submit">
             Save
           </Button>
         </Form.Item>

@@ -1,37 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Input } from 'antd';
 import { SearchOutlined, PlusOutlined } from '@ant-design/icons';
 import './CreatePlayers.scss';
 import { useNavigate } from "react-router-dom";
-
-const players = [
-  {
-    id: 1,
-    name: 'Andre Russell',
-    country: 'West Indies',
-    image: 'https://tse3.mm.bing.net/th?id=OIP.ktbiIEIctRXFepngg70D2QHaHt&pid=Api&P=0&h=180',
-  },
-  {
-    id: 2,
-    name: 'AB Devillers',
-    country: 'South Africa',
-    image: 'https://tse4.mm.bing.net/th?id=OIP.0W7NQk8ZMS4ipsLcS1oFVwHaFq&pid=Api&P=0&h=180',
-  },
-  {
-    id: 3,
-    name: 'MS Dhoni',
-    country: 'India',
-    image: 'https://tse1.mm.bing.net/th?id=OIP.hN5YRMgCPsgpVsuyzlPJQQHaJI&pid=Api&P=0&h=180',
-  },
-];
+import { matchDetails } from '../../Service/MatchDetailsService';  // Assuming this is your API service
 
 const CreatePlayers = () => {
-
+  const [players, setPlayers] = useState([]);  // State to store players fetched from the API
   const navigate = useNavigate(); 
 
+  // Fetch players from the API when the component mounts
+  useEffect(() => {
+    getPlayersDetails();
+  }, []);  // Empty dependency array means this runs once after the initial render
+
+  const getPlayersDetails = () => {
+    matchDetails.getAllPlayers()
+      .then(response => {
+        console.log('response', response)
+        setPlayers(response?.data)
+      }).catch(error => {
+        console.log('error', error)
+      })
+  }
+
   const handleNext = () => {
-      navigate("/add-players"); // Redirect to the home page
-    };
+    navigate("/add-players");  // Navigate to another page (e.g., Add Players page)
+  };
 
   return (
     <div className="player-list-container">
@@ -46,16 +41,20 @@ const CreatePlayers = () => {
         </div>
       </div>
       <div className="player-cards">
-        {players.map((player) => (
-          <div className="player-card" key={player.id}>
-            {/* Use `src` directly for external URLs */}
-            <img src={player.image} alt={player.name} className="player-image" />
-            <div className="player-details">
-              <span className="player-name">{player.name}</span>
-              <span className="player-country">#{player.country}</span>
+        {/* Render player cards dynamically based on fetched data */}
+        {players?.length > 0 ? (
+          players?.map((player) => (
+            <div className="player-card" key={player.playerId}>  {/* Assuming `playerId` is the unique identifier */}
+              <img src={`data:image/jpeg;base64,${player.playerImage}`} alt={player.playerName} className="player-image" />
+              <div className="player-details">
+                <span className="player-name">{player.playerName}</span>
+                <span className="player-country">#{player.countryName}</span>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <div>No players found</div>  // Display a message if no players are fetched
+        )}
       </div>
     </div>
   );
