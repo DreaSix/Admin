@@ -1,13 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table, Button, Modal } from 'antd';
+
 import './NewUsers.scss';
+import { getAllPlayers } from '../../Service/UsersService';
 
 const NewUsers = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [usersData, setUsersData] = useState([])
   const [loginDetails, setLoginDetails] = useState({
     username: '',
     password: '',
   });
+
+  useEffect(() => {
+    getplayers()
+  }, [])
+
+  const getplayers = () => {
+      getAllPlayers.getUsersList()
+          .then(response => {
+            setUsersData(response?.data)
+          }).catch(error => {
+            console.log('error', error)
+          })
+  }
 
   const data = [
     {
@@ -30,14 +46,14 @@ const NewUsers = () => {
   const columns = [
     {
       title: 'Full Name',
-      dataIndex: 'fullName',
-      key: 'fullName',
+      dataIndex: 'name',
+      key: 'name',
       align: 'center',
     },
     {
       title: 'Phone',
-      dataIndex: 'phone',
-      key: 'phone',
+      dataIndex: 'contactNo',
+      key: 'contactNo',
       align: 'center',
     },
     {
@@ -57,11 +73,14 @@ const NewUsers = () => {
   ];
 
   const handleGenerate = (record) => {
-    // Dummy login details for now
-    setLoginDetails({
-      username: `${record.fullName.toLowerCase().replace(' ', '')}@123`,
-      password: 'gdr735@',
-    });
+    console.log('record', record)
+    getAllPlayers.createUser(record?.userId)
+      .then(response => {
+        console.log('response', response)
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
     setIsModalVisible(true);
   };
 
@@ -72,7 +91,7 @@ const NewUsers = () => {
   return (
     <div className="user-table-container">
       <Table
-        dataSource={data}
+        dataSource={usersData}
         columns={columns}
         pagination={false}
         bordered

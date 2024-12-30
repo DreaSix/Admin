@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input, Table } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import "./Users.scss";
