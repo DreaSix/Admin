@@ -13,5 +13,5 @@ export const SAVE_TEAM_PLAYER_DETAILS = ADMIN_BASE_URL + "/api/player-details/sa
 //Users
 
 export const GET_USERS = ADMIN_BASE_URL + "/api/user/get";
-export const CREATE_USER = ADMIN_BASE_URL + "/api/user/";
-export const CREATE_USER_END_POINT = "/createUser";
+export const CREATE_USER = ADMIN_BASE_URL + "/api/user/createUser";
+export const GET_ALL_USERS = ADMIN_BASE_URL + "/api/user/get-users"

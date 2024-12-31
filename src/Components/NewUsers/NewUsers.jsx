@@ -25,24 +25,6 @@ const NewUsers = () => {
           })
   }
 
-  const data = [
-    {
-      key: '1',
-      fullName: 'Sreevardhan',
-      phone: '9515206990',
-    },
-    {
-      key: '2',
-      fullName: 'Elisha',
-      phone: '9754643232',
-    },
-    {
-      key: '3',
-      fullName: 'Sreenu',
-      phone: '8565757312',
-    },
-  ];
-
   const columns = [
     {
       title: 'Full Name',
@@ -73,10 +55,13 @@ const NewUsers = () => {
   ];
 
   const handleGenerate = (record) => {
-    console.log('record', record)
-    getAllPlayers.createUser(record?.userId)
+    const params = {
+      userId: record?.userId
+    }
+    getAllPlayers.createUser(params)
       .then(response => {
         console.log('response', response)
+        getplayers()
       })
       .catch(error => {
         console.log('error', error)

@@ -1,4 +1,4 @@
-import { CREATE_USER, CREATE_USER_END_POINT, GET_USERS } from "../Constants/Constants"
+import { CREATE_USER, CREATE_USER_END_POINT, GET_ALL_USERS, GET_USERS } from "../Constants/Constants"
 import { GetAPIRequest, PostAPIRequest } from "./Api"
 
 const getUsersList = () => {
@@ -7,13 +7,21 @@ const getUsersList = () => {
     })
 }
 
-const createUser = (userId) => {
+const createUser = (params) => {
     return PostAPIRequest({
-        url: CREATE_USER + userId + CREATE_USER_END_POINT
+        url: CREATE_USER,
+        params
+    })
+}
+
+const getAllUsers = () => {
+    return GetAPIRequest({
+        url: GET_ALL_USERS
     })
 }
 
 export const getAllPlayers = {
     getUsersList,
-    createUser
+    createUser,
+    getAllUsers
 }

@@ -1,26 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input, Table } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import "./Users.scss";
+import { getAllPlayers } from "../../Service/UsersService";
 
 const Users = () => {
-  // Table Data
-  const dataSource = [
-    {
-      key: "1",
-      username: "Kabali@123",
-      wallet: "₹436000",
-      password: "ka@12345",
-      mobileno:"9876789876"
-    },
-    {
-      key: "2",
-      username: "Sreenu6453",
-      wallet: "₹10000",
-      password: "sreee@7564",
-       mobileno:"987678976"
-    },
-  ];
+  const [dataSource, setDataSource] = useState([])
+
+  useEffect(() => {
+    getAllUsers()
+  }, [])
+ 
+  const getAllUsers = () => {
+    getAllPlayers.getAllUsers()
+      .then(response => {
+        console.log('response', response)
+        setDataSource(response?.data)
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
+  }
 
   // Table Columns
   const columns = [
@@ -32,8 +32,8 @@ const Users = () => {
 
     {
         title: "MobileNumber",
-        dataIndex: "mobileno",
-        key: "mobileno",
+        dataIndex: "contactNo",
+        key: "contactNo",
       },
     {
       title: "Password",
