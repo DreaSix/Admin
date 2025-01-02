@@ -11,6 +11,8 @@ import Deposite from "./Components/Deposite/Deposite";
 import Withdrawl from "./Components/WithDrawl/WithDrawl";
 import Users from "./Components/Users/Users";
 import NewUsers from "./Components/NewUsers/NewUsers";
+import "./App.css";
+import MatchDetails from "./Components/MatchDetails/MatchDetails";
 
 function App() {
 
@@ -29,6 +31,7 @@ function App() {
           <Route path="/deposite" element={<Deposite />} />
           <Route path="/withdrawl" element={<Withdrawl />} />
           <Route path="/new-users" element={<NewUsers />} />
+          <Route path="/match-details" element={<MatchDetails />} />
         </Routes>
       </Router>
     </div>

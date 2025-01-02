@@ -1,0 +1,161 @@
+.cricket-page-container {
+    margin-top: 90px;
+    margin-bottom: 70px;
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+   
+  
+    .match-info {
+      text-align: center;
+      margin: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+      border: 1px solid rgb(11, 0, 0);
+      border-radius: 10px;
+      
+  
+      .match-banner {
+        width: 120px;
+          height: 80px;
+        border-radius: 10px;
+        // object-fit: cover;
+        
+      }
+  
+      .bid-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        font-size: 16px;
+        color: white;
+  
+        .top-sixer {
+          background: linear-gradient(to right, rgb(26, 176, 235), rgb(242, 122, 142));
+          font-weight: bold;
+          color: white;
+          border-radius: 50px;
+          height: 30px;
+          width: 90px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 10px;
+        }
+  
+        .countdown {
+          font-size: 20px;
+          font-weight: bold;
+          color: red;
+        }
+      }
+    }
+  
+    .player-list-table {
+      width: 100%;
+      border-collapse: collapse;
+      /* Ensures borders are merged */
+      color: white;
+  
+    }
+  
+    .heading-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-right: 15px;
+      margin-left: 15px;
+      color:yellow;
+  
+    }
+  
+    .player-list-table th,
+    .player-list-table td {
+      border: 1px solid #090000;
+      /* Adds borders to cells */
+      padding: 8px;
+      /* Adds padding for spacing */
+      vertical-align: top;
+      /* Aligns content to the top */
+    }
+  
+    .player-list {
+      display: flex;
+      flex-direction: column;
+      /* Ensures players are stacked vertically */
+  
+    }
+  
+    .player-item {
+      display: flex;
+      align-items: center;
+      /* Centers the image and text */
+    }
+  
+    .player-icon {
+      width: 30px;
+      /* Adjust size as needed */
+      height: 30px;
+      /* Adjust size as needed */
+      margin-right: 8px;
+      /* Adds space between image and text */
+      border-radius: 50%;
+    }
+  
+    .header-name {
+      color: white;
+    }
+  
+  }
+  
+  /* Mobile Styles */
+  @media (max-width: 768px) {
+    .cricket-page-container {
+  
+      .match-info {
+        .match-banner {
+          width: 90px;
+          height: 50px;
+          border-radius: 10px;
+          width: 120px;
+          height: 80px;
+        }
+  
+        .bid-info {
+          flex-direction: column;
+          font-size: 14px;
+  
+          .countdown {
+            font-size: 18px;
+            color: red;
+          }
+        }
+      }
+  
+      .player-list-container {
+  
+        .player-list-header {
+          font-size: 16px;
+          padding: 5px 0;
+        }
+  
+        .player-list {
+          .player-item {
+            padding: 5px 0;
+  
+            .player-icon {
+              width: 40px;
+              height: 40px;
+            }
+  
+            span {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }

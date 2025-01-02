@@ -42,6 +42,14 @@ const HomePage = () => {
     navigate('/new-users');
   };
 
+  const handleCreateSquad = () => {
+    navigate('/create-teams');
+  };
+
+  const onClickMatchImage = () => {
+    navigate('/match-details');
+  };
+
   return (
     <div>
 
@@ -56,12 +64,12 @@ const HomePage = () => {
           <Title level={4} className="section-title">
             Matches
           </Title>
-          <Button className="create-button" onClick={handleCreateMatch}>
+          {/* <Button className="create-button" onClick={handleCreateMatch}>
               Create
-            </Button>
+            </Button> */}
         </Row>
         <Card className="match-card">
-          <img src={"https://i.pinimg.com/originals/a1/de/a2/a1dea2cf213703688b3d040e1c112a53.png"} alt="Match" className="match-image" />
+          <img onClick={onClickMatchImage} src={"https://i.pinimg.com/originals/a1/de/a2/a1dea2cf213703688b3d040e1c112a53.png"} alt="Match" className="match-image" />
           <Row justify="space-between" align="middle" className="match-info">
             <Text className="match-title">LSG vs RCB</Text>
             <Text className="match-timer">03 : 34 : 23</Text>
@@ -84,6 +92,44 @@ const HomePage = () => {
         </Row>
       </div>
 
+      <div className="section">
+        <Card className="players-card">
+          <Row align="middle">
+            <Col>
+              <img src={"https://img.freepik.com/premium-vector/team-background_144316-2569.jpg"} alt="Players" className="players-icon" />
+            </Col>
+            <Col>
+              <Text className="players-text">Create Match</Text>
+            </Col>
+            <Col flex="auto" />
+            <Col>
+              <Button type="text" className="arrow-button" onClick={handleCreateMatch}>
+                &gt;
+              </Button>
+            </Col>
+          </Row>
+        </Card>
+      </div>
+
+      <div className="section">
+        <Card className="players-card">
+          <Row align="middle">
+            <Col>
+              <img src={"https://img.freepik.com/premium-vector/team-background_144316-2569.jpg"} alt="Players" className="players-icon" />
+            </Col>
+            <Col>
+              <Text className="players-text">Create Squads</Text>
+            </Col>
+            <Col flex="auto" />
+            <Col>
+              <Button type="text" className="arrow-button" onClick={handleCreateSquad}>
+                &gt;
+              </Button>
+            </Col>
+          </Row>
+        </Card>
+      </div>
+
       {/* Create Players Section */}
       <div className="section">
         <Card className="players-card">
@@ -104,13 +150,32 @@ const HomePage = () => {
         </Card>
       </div>
 
+      <div className="section">
+        <Card className="players-card">
+          <Row align="middle">
+            <Col>
+              <img src={"https://img.freepik.com/premium-vector/team-background_144316-2569.jpg"} alt="Players" className="players-icon" />
+            </Col>
+            <Col>
+              <Text className="players-text">Create Winners</Text>
+            </Col>
+            <Col flex="auto" />
+            <Col>
+              <Button type="text" className="arrow-button" onClick={handleCreateWinners}>
+                &gt;
+              </Button>
+            </Col>
+          </Row>
+        </Card>
+      </div>
+
       {/* Winners Section */}
       <div className="section">
         <Row justify="space-between" align="middle">
           <Title level={4} className="section-title">
             Winners
           </Title>
-          <Button className="create-button" onClick={handleCreateWinners} >Create</Button>
+          {/* <Button className="create-button" onClick={handleCreateWinners} >Create</Button> */}
         </Row>
         <Card className="winner-card">
           <Row align="middle">
