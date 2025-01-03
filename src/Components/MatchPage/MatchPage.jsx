@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Tabs, Card } from "antd";
 import "./MatchPage.scss";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import { useNavigate } from "react-router-dom";
+import { matchDetails } from "../../Service/MatchDetailsService";
 
 
 const { TabPane } = Tabs;
@@ -12,8 +13,24 @@ const MatchPage = () => {
     const navigate = useNavigate();
 
     const onClickMatchImage = () => {
-        navigate('/create-teams');
-      };
+      navigate('/create-teams');
+    };
+
+    useEffect(() => {
+      getAllMatchDetails()
+    },[])
+
+    const getAllMatchDetails = () => {
+      matchDetails.getAllMatches()
+        .then(response => {
+          console.log('response', response)
+        })
+        .catch(error => {
+          console.log('error', error)
+        })
+    }
+
+
 
   const matches = [
     {
