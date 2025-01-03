@@ -32,7 +32,7 @@ const MatchDetails = () => {
 
   return (
     <div>
-      <div className="cricket-page-container">
+      <div className="cricket-page-container" >
 
         {/* Match Info */}
         {/* <div className="match-info">
@@ -51,7 +51,7 @@ const MatchDetails = () => {
         </div> */}
 
         {/* Player Lists */}
-        <div className="player-list-container">
+        <div className="player-list-container" style={{ background:"linear-gradient(to top, #99ccff 0%, #003366 100%)"}}>
           <div className='heading-container'>
             <h4> RCB vs CSK </h4>
             <p>Expected Players</p>

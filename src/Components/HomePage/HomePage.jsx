@@ -43,7 +43,7 @@ const HomePage = () => {
   };
 
   const handleCreateSquad = () => {
-    navigate('/create-teams');
+    navigate('/matchs-page');
   };
 
   const onClickMatchImage = () => {
@@ -81,13 +81,13 @@ const HomePage = () => {
       <div className="section buttons-section">
         <Row gutter={[16, 16]}>
           <Col span={8}>
-            <Button className="action-button deposit-button"   onClick={handleDeposite}>Deposit</Button>
+            <Button style={{backgroundColor:"green", color:"white"}} className="action-button deposit-button"   onClick={handleDeposite}>Deposit</Button>
           </Col>
           <Col span={8}>
-            <Button className="action-button withdraw-button"  onClick={handleWithdrawl} >Withdrawal</Button>
+            <Button style={{backgroundColor:"Red", color:"white"}} className="action-button withdraw-button"  onClick={handleWithdrawl} >Withdrawal</Button>
           </Col>
           <Col span={8}>
-            <Button className="action-button newuser-button" onClick={handleNewUsers}>New User</Button>
+            <Button style={{backgroundColor:"blue", color:"white"}} className="action-button newuser-button" onClick={handleNewUsers}>New User</Button>
           </Col>
         </Row>
       </div>
@@ -96,10 +96,10 @@ const HomePage = () => {
         <Card className="players-card">
           <Row align="middle">
             <Col>
-              <img src={"https://img.freepik.com/premium-vector/team-background_144316-2569.jpg"} alt="Players" className="players-icon" />
+              <img style={{borderRadius:""}} src={"https://cdn-icons-png.flaticon.com/512/1099/1099700.png"} alt="Players" className="players-icon" />
             </Col>
             <Col>
-              <Text className="players-text">Create Match</Text>
+              <Text  className="players-text">Create Match</Text>
             </Col>
             <Col flex="auto" />
             <Col>
@@ -115,7 +115,7 @@ const HomePage = () => {
         <Card className="players-card">
           <Row align="middle">
             <Col>
-              <img src={"https://img.freepik.com/premium-vector/team-background_144316-2569.jpg"} alt="Players" className="players-icon" />
+              <img src={"https://cdn2.iconfinder.com/data/icons/team-and-leadership/100/team_leader_leadership_colleagues_squad_company_-13-512.png"} alt="Players" className="players-icon" />
             </Col>
             <Col>
               <Text className="players-text">Create Squads</Text>
@@ -135,7 +135,7 @@ const HomePage = () => {
         <Card className="players-card">
           <Row align="middle">
             <Col>
-              <img src={"https://img.freepik.com/premium-vector/team-background_144316-2569.jpg"} alt="Players" className="players-icon" />
+              <img src={"https://cdn-icons-png.flaticon.com/512/5166/5166843.png"} alt="Players" className="players-icon" />
             </Col>
             <Col>
               <Text className="players-text">Create Players</Text>
@@ -154,7 +154,7 @@ const HomePage = () => {
         <Card className="players-card">
           <Row align="middle">
             <Col>
-              <img src={"https://img.freepik.com/premium-vector/team-background_144316-2569.jpg"} alt="Players" className="players-icon" />
+              <img src={"https://cdn-icons-png.flaticon.com/512/1021/1021220.png"} alt="Players" className="players-icon" />
             </Col>
             <Col>
               <Text className="players-text">Create Winners</Text>
