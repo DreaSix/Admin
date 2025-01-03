@@ -14,6 +14,7 @@ import NewUsers from "./Components/NewUsers/NewUsers";
 import "./App.css";
 import MatchDetails from "./Components/MatchDetails/MatchDetails";
 import MatchPage from "./Components/MatchPage/MatchPage";
+import LoginPage from "./Components/LoginPage/Login";
 
 function App() {
 
@@ -21,7 +22,7 @@ function App() {
     <div>
     <Router>
         <Routes>
-          <Route path="/" element={<HomePage />} />  
+          <Route path="homepage" element={<HomePage />} />  
           <Route path="/create-match" element={<CreateMatchPage />} />
           <Route path="/create-teams" element={<CreateTeams />} />
           <Route path="/create-winners" element={<CreateWinners />} />
@@ -34,6 +35,7 @@ function App() {
           <Route path="/new-users" element={<NewUsers />} />
           <Route path="/match-details" element={<MatchDetails />} />
           <Route path="/matchs-page" element={<MatchPage />} />
+          <Route path="/" element={<LoginPage />} />
         </Routes>
       </Router>
     </div>
