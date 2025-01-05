@@ -23,3 +23,5 @@ export const GET_ALL_USERS = ADMIN_BASE_URL + "/api/user/get-users"
 
 export const GET_MATCH_DETAILS = ADMIN_BASE_URL + "/api/match-details/get";
 export const GET_MATCH_DETAILS_BY_ID = ADMIN_BASE_URL + "/api/match-details/";
+
+export const GET_MATCH_PLAYER_DETAILS = ADMIN_BASE_URL + "/api/player-details/";
