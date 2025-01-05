@@ -11,7 +11,6 @@ const { TabPane } = Tabs;
 const CreateTeams = () => {
 
   const { matchId } = useParams();
-  console.log('matchId', matchId)
 
   const [matchData, setMatchDetails] = useState(null)
   const [players, setPlayers] = useState([]);
@@ -46,7 +45,6 @@ const CreateTeams = () => {
       .then(response => {
         setPlayersList(response?.data)
         if (selectedTab === "1") {
-          console.log('matchData', matchData)
           const filteredPlayers = response?.data?.filter(player => player?.teamName === matchData?.teamOneName)
           setSelectedPlayers(filteredPlayers)
         } else if (selectedTab === "2") {
@@ -66,7 +64,6 @@ const CreateTeams = () => {
   const getPlayersDetails = () => {
     matchDetails.getAllPlayers()
       .then(response => {
-        console.log('response', response)
         setPlayers(response?.data)
       }).catch(error => {
         console.log('error', error)

@@ -14,7 +14,6 @@ const CreateWinners = () => {
     const formData = new FormData();
     Object.entries(values).forEach(([key, value]) => {
       if (key !== "winnerImage") {
-        console.log("key", value, key);
         formData.append(key, value);
       }
     });

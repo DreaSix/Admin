@@ -1,12 +1,14 @@
-import React from "react";
-import { Card, Button, Row, Col, Typography } from "antd";
+import React, { useEffect, useState } from "react";
+import { Card, Button, Row, Col, Typography, Carousel } from "antd";
 import { useNavigate } from "react-router-dom";
 import './HomePage.scss';
 // import Header from "../Header/Header";
 import Footer from "../Footer/Footer"
+import { matchDetails } from "../../Service/MatchDetailsService";
 
 const HomePage = () => {
   const { Title, Text } = Typography;
+  const [matches, setMatches] = useState([])
 
   const navigate = useNavigate();  // Create navigate function
 
@@ -46,38 +48,70 @@ const HomePage = () => {
     navigate('/matchs-page');
   };
 
-  const onClickMatchImage = () => {
-    navigate('/match-details');
+  const onClickMatchImage = (matchId) => {
+    navigate(`/match-details/${matchId}`);
+  };
+  
+  useEffect(() => {
+    getAllMatches()
+  }, [])
+
+  const getAllMatches = () => {
+    matchDetails.getAllMatches()
+      .then(response => {
+        setMatches(response?.data)
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
+  }
+
+  const settings = {
+    autoplay: true,
+    autoplaySpeed: 5000, // 5 seconds
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
   };
 
   return (
     <div>
-
-   
     <div>
       {/* <Header/> */}
     </div>
     <div className="dashboard-container">
       {/* Matches Section */}
       <div className="section">
-        <Row justify="space-between" align="middle">
-          <Title level={4} className="section-title">
-            Matches
-          </Title>
-          {/* <Button className="create-button" onClick={handleCreateMatch}>
-              Create
-            </Button> */}
-        </Row>
-        <Card className="match-card">
-          <img onClick={onClickMatchImage} src={"https://i.pinimg.com/originals/a1/de/a2/a1dea2cf213703688b3d040e1c112a53.png"} alt="Match" className="match-image" />
-          <Row justify="space-between" align="middle" className="match-info">
-            <Text className="match-title">LSG vs RCB</Text>
-            <Text className="match-timer">03 : 34 : 23</Text>
-          </Row>
-        </Card>
-      </div>
+      <Row justify="space-between" align="middle">
+        <Title level={4} className="section-title">
+          Matches
+        </Title>
+      </Row>
+      <Carousel {...settings}>
+        {matches.map((match) => (
+          <Card key={match.matchId} className="match-card">
+            <img
+              onClick={() => onClickMatchImage(match.matchId)}
+              src= {match?.matchImage ? 
+                `data:image/jpeg;base64,${match?.matchImage}` : 
+                "https://i.pinimg.com/originals/a1/de/a2/a1dea2cf213703688b3d040e1c112a53.png"
+              }
+              alt="Match"
+              className="match-image"
+            />
+            <Row justify="space-between" align="middle" className="match-info">
+              <Text className="match-title">
+                {match.teamOneName} {match.teamTwoName ? `vs ${match.teamTwoName}` : ""}
+              </Text>
+              <Text className="match-timer">{match.countdownEndTime}</Text>
+            </Row>
+          </Card>
+        ))}
+      </Carousel>
+    </div>
 
-      {/* Deposit / Withdrawal / New User Buttons */}
       <div className="section buttons-section">
         <Row gutter={[16, 16]}>
           <Col span={8}>

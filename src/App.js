@@ -23,7 +23,8 @@ function App() {
   );
 
   return (
-    <Routes>
+    <Router>
+      <Routes>
       {!isAuthenticated && (
         <Route
           path="/"
@@ -41,9 +42,10 @@ function App() {
       <Route path="/deposite" element={<Deposite />} />
       <Route path="/withdrawl" element={<Withdrawl />} />
       <Route path="/new-users" element={<NewUsers />} />
-      <Route path="/match-details" element={<MatchDetails />} />
+      <Route path="/match-details/:matchId" element={<MatchDetails />} />
       <Route path="/matchs-page" element={<MatchPage />} />
     </Routes>
+    </Router>
   );
 }
 
