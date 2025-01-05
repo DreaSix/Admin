@@ -1,5 +1,6 @@
 
 import CreateMatchPage from "./Components/CreateMatch/CreateMatch";
+import Cookies from "js-cookie";
 import AddPlayer from "./Components/CreatePlayers/AddPlayer";
 import CreatePlayers from "./Components/CreatePlayers/CreatePlayers";
 import CreateTeams from "./Components/CreateTeams/CreateTeams";
@@ -15,16 +16,22 @@ import "./App.css";
 import MatchDetails from "./Components/MatchDetails/MatchDetails";
 import MatchPage from "./Components/MatchPage/MatchPage";
 import LoginPage from "./Components/LoginPage/Login";
+import { useState } from "react";
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(Cookies.get("jwtToken"))  
+
 
   return (
     <div>
     <Router>
         <Routes>
-          <Route path="homepage" element={<HomePage />} />  
+        {!isAuthenticated && (
+            <Route path="/" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />} />
+        )}
+          <Route path="/homepage" element={<HomePage />} />  
           <Route path="/create-match" element={<CreateMatchPage />} />
-          <Route path="/create-teams" element={<CreateTeams />} />
+          <Route path="/create-teams/:matchId" element={<CreateTeams />} />
           <Route path="/create-winners" element={<CreateWinners />} />
           <Route path="/create-players" element={<CreatePlayers/>} />
           <Route path="/add-players" element={<AddPlayer/>} />
@@ -35,7 +42,6 @@ function App() {
           <Route path="/new-users" element={<NewUsers />} />
           <Route path="/match-details" element={<MatchDetails />} />
           <Route path="/matchs-page" element={<MatchPage />} />
-          <Route path="/" element={<LoginPage />} />
         </Routes>
       </Router>
     </div>

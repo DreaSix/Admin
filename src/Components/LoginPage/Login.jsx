@@ -1,18 +1,25 @@
 import React from "react";
+import Cookies from "js-cookie";
+
 import { Form, Input, Button } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.scss";
 import Logo from "../../assets/logo.jpeg";
+import { authService } from "../../Service/Auth";
 
-const LoginPage = () => {
+const LoginPage = ({setIsAuthenticated}) => {
   const navigate = useNavigate();
 
-  const handleLoginClick = () => {
-    navigate("/homepage"); // Navigates to the login page
-  };
-
   const onFinish = (values) => {
-    console.log("Success:", values);
+    authService.loginUser(values)
+      .then(response => {
+        Cookies.set("jwtToken", response?.jwtToken)
+        setIsAuthenticated(response?.jwtToken)
+        navigate("/homepage")
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -59,7 +66,6 @@ const LoginPage = () => {
             type="primary"
             htmlType="submit"
             className="login-button"
-            onClick={handleLoginClick}
           >
             Login
           </Button>

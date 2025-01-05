@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs, Card } from "antd";
 import "./MatchPage.scss";
 import Footer from "../Footer/Footer";
@@ -10,10 +10,11 @@ import { matchDetails } from "../../Service/MatchDetailsService";
 const { TabPane } = Tabs;
 
 const MatchPage = () => {
+  const [matchData, setMatchData] = useState([])
     const navigate = useNavigate();
 
-    const onClickMatchImage = () => {
-      navigate('/create-teams');
+    const onClickMatchImage = (matchId) => {
+      navigate(`/create-teams/${matchId}`);
     };
 
     useEffect(() => {
@@ -23,60 +24,31 @@ const MatchPage = () => {
     const getAllMatchDetails = () => {
       matchDetails.getAllMatches()
         .then(response => {
-          console.log('response', response)
+          setMatchData(response?.data)
         })
         .catch(error => {
           console.log('error', error)
         })
     }
 
-
-
-  const matches = [
-    {
-      team1: "RCB",
-      team2: "CSK",
-      img: "https://img.jagranjosh.com/images/2024/April/242024/RCB-vs-LSG-today.jpg",
-      countdown: "03:34:23",
-    },
-    {
-      team1: "IND",
-      team2: "AUS",
-      img: "https://img.jagranjosh.com/images/2024/March/2932024/KKR-vs-RCB-tODAY.jpg",
-      countdown: "03:34:23",
-    },
-    {
-      team1: "RCB",
-      team2: "CSK",
-      img: "https://st1.latestly.com/wp-content/uploads/2018/04/M27-IPL-CSK-vs-MI-Live-Update-781x441.jpg",
-      countdown: "03:34:23",
-    },
-    {
-      team1: "IND",
-      team2: "AUS",
-      img: "https://sm.ign.com/t/ign_in/screenshot/default/template-1-ipl_3m2z.1200.png",
-      countdown: "03:34:23",
-    },
-  ];
-
   const tabItems = [
     {
       key: "1",
       label: "Today Matches",
       content:
-        matches && matches.length > 0 ? (
-          matches.map((match, index) => (
-            <Card key={index} hoverable className="match-card">
+        matchData && matchData.length > 0 ? (
+          matchData.map((match, index) => (
+            <Card key={match?.matchId} hoverable className="match-card">
               <img
-               onClick={onClickMatchImage}
-                src={match.img}
-                alt={`${match.team1} vs ${match.team2}`}
+              src={`data:image/jpeg;base64,${match?.image}`}
+              alt={`Match ${match.matchId}`}
+              onClick={() => onClickMatchImage(match?.matchId)}
               />
               <div className="match-info">
                 <h3>
-                  {match.team1} vs {match.team2}
+                  {match?.teamOneName} vs {match?.teamTwoName}
                 </h3>
-                <p>{match.countdown}</p>
+                <p>{match?.countdownEndTime}</p>
               </div>
             </Card>
           ))

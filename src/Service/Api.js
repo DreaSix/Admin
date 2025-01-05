@@ -1,11 +1,21 @@
 
 import axios from "axios";
+import Cookies from "js-cookie";
+
+
+const accessToken = Cookies.get("jwtToken")
+
+const redirectToLogin = () => {
+    window.location.href = "/";
+  };
+
 
 const request = async function (options) {
+    console.log('accessToken', accessToken)
     const client = axios.create({
-    // withCredentials: false,
+    withCredentials: false,
     headers: {
-        // Authorization: accessToken ? `Bearer ${accessToken}` : undefined,
+        Authorization: accessToken ? `Bearer ${accessToken}` : undefined,
     },
     });
 
@@ -51,14 +61,19 @@ const request = async function (options) {
 };
 
 export const GetAPIRequest = (options) => {
-    const { url, ...otherOptions } = options;
-
-    return request({
-    url: url,
-    method: "GET",
-    ...otherOptions,
-    });
-};
+    const { url, service, ...otherOptions } = options;
+  
+    if (accessToken) {
+      return request({
+        url: url,
+        withCredentials: false,
+        method: "GET",
+        ...otherOptions,
+      }, service);
+    } else {
+      redirectToLogin();
+    }
+  };
 
 export const PostAPIRequest = (options) => {
     const { url, ...otherOptions } = options;

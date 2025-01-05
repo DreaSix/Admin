@@ -1,4 +1,4 @@
-import { CREATE_MATCH_URL, CREATE_PLAYER, GET_MATCH_DETAILS, GET_PLAYERS, SAVE_TEAM_PLAYER_DETAILS } from "../Constants/Constants";
+import { CREATE_MATCH_URL, CREATE_PLAYER, GET_MATCH_DETAILS, GET_MATCH_DETAILS_BY_ID, GET_PLAYERS, SAVE_TEAM_PLAYER_DETAILS } from "../Constants/Constants";
 import { GetAPIRequest, PostAPIRequest } from "./Api";
 
 const createMatch = (payload) => {
@@ -34,10 +34,17 @@ const getAllMatches = () => {
     })
 }
 
+const getMtachDetailsById = (matchId) => {
+    return GetAPIRequest({
+        url: GET_MATCH_DETAILS_BY_ID + "/" + matchId
+    })
+}
+
 export const matchDetails = {
     createMatch,
     createPlayer,
     getAllPlayers,
     saveTeamPlayerDetails,
-    getAllMatches
+    getAllMatches,
+    getMtachDetailsById
 }

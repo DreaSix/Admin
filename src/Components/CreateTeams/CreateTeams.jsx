@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Tabs, Form, Input, Button, Upload, Avatar, List } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import "./CreateTeams.scss";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { matchDetails } from "../../Service/MatchDetailsService";
+import { matchScreen } from "antd/es/_util/responsiveObserver";
 
 const { TabPane } = Tabs;
 
 const CreateTeams = () => {
+
+  const { matchId } = useParams();
+
   const [players, setPlayers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -16,7 +20,21 @@ const CreateTeams = () => {
   const [team1Players, setTeam1Players] = useState(Array(6).fill(""));
   const [team2Players, setTeam2Players] = useState(Array(6).fill(""));
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    if (matchId){
+      getMatchDetailsById()
+    }
+  }, [])
+
+  const getMatchDetailsById = () => {
+    matchDetails.getMtachDetailsById(matchId)
+      .then(response => {
+        console.log('response', response)
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
+  }
 
   useEffect(() => {
     getPlayersDetails();
@@ -32,12 +50,6 @@ const CreateTeams = () => {
       })
   }
 
-  const location = useLocation();
-
-  const params = new URLSearchParams(location.search);
-  const matchData = params.get('match');
-
-  console.log('matchData', matchData)
 
   const handlePlayerChange = (team, index, value) => {
     if (team === "team1") {
@@ -52,21 +64,19 @@ const CreateTeams = () => {
   };
 
   const addTeam1Players = () => {
-    console.log('matchData', matchData.teamOneName)
-    console.log('first', matchData?.matchId)
-    const payload = {
-      teamName: matchData?.teamOneName,
-      matchId: matchData?.matchId,
-      playerIds: selectedPlayers?.map(player => player?.playerId)
-    }
+    // const payload = {
+    //   teamName: matchData?.teamOneName,
+    //   matchId: matchData?.matchId,
+    //   playerIds: selectedPlayers?.map(player => player?.playerId)
+    // }
 
-    matchDetails.saveTeamPlayerDetails(payload)
-      .then(response =>{
-        console.log('response', response)
-      })
-      .catch(error =>{
-        console.log('error', error)
-      })
+    // matchDetails.saveTeamPlayerDetails(payload)
+    //   .then(response =>{
+    //     console.log('response', response)
+    //   })
+    //   .catch(error =>{
+    //     console.log('error', error)
+    //   })
   }
 
   const handleSearchChange = (value) => {
@@ -79,14 +89,12 @@ const CreateTeams = () => {
 
   const handleAddPlayer = (player) => {
     if (!selectedPlayers.some((p) => p.playerId === player.playerId)) {
-      console.log('player', player)
       setSelectedPlayers([...selectedPlayers, player]);
     }
     setSearchTerm('');
     setFilteredPlayers(players);
   };
 
-  console.log('selectedPlayers', selectedPlayers)
 
   const renderPlayerInputs = (team, players) => {
     return (

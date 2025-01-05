@@ -41,10 +41,9 @@ const CreatePlayers = () => {
         </div>
       </div>
       <div className="player-cards">
-        {/* Render player cards dynamically based on fetched data */}
         {players?.length > 0 ? (
           players?.map((player) => (
-            <div className="player-card" key={player.playerId}>  {/* Assuming `playerId` is the unique identifier */}
+            <div className="player-card" key={player.playerId}>
               <img src={`data:image/jpeg;base64,${player.playerImage}`} alt={player.playerName} className="player-image" />
               <div className="player-details">
                 <span className="player-name">{player.playerName}</span>
@@ -53,7 +52,7 @@ const CreatePlayers = () => {
             </div>
           ))
         ) : (
-          <div>No players found</div>  // Display a message if no players are fetched
+          <div>No players found</div>  
         )}
       </div>
     </div>
