@@ -2,20 +2,37 @@ import React from "react";
 import { Form, Input, Upload, Button, Select } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import "./CreateWinner.scss";
-import { useNavigate } from "react-router-dom";
+import { matchDetails } from "../../Service/MatchDetailsService";
+import { useNavigate } from "react-router";
 
 const CreateWinners = () => {
-
-    const navigate = useNavigate(); 
-
-    const handleNext = () => {
-        navigate("/"); // Redirect to the home page
-      };
-
+  const navigate = useNavigate();
   const [form] = Form.useForm();
 
   const handleSubmit = (values) => {
     console.log("Form Values: ", values);
+    const formData = new FormData();
+    Object.entries(values).forEach(([key, value]) => {
+      if (key !== "winnerImage") {
+        console.log("key", value, key);
+        formData.append(key, value);
+      }
+    });
+    if (values?.winnerImage?.length > 0) {
+      values?.matchImage?.forEach((file) => {
+        formData.append("winnerImage", file.originFileObj);
+      });
+    }
+    formData.append("playerId", 123);
+    console.log("formData", formData);
+    matchDetails
+      .createWinner(formData)
+      .then((response) => {
+        console.log("response", response);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
   };
 
   return (
@@ -44,14 +61,14 @@ const CreateWinners = () => {
         </Form.Item>
 
         <Form.Item
-          name="image"
+          name="winnerImage"
           label="Upload Image"
           valuePropName="fileList"
           getValueFromEvent={(e) => (Array.isArray(e) ? e : e?.fileList)}
           rules={[{ required: true, message: "Please upload an image" }]}
         >
           <Upload
-            name="image"
+            name="winnerImage"
             listType="picture"
             beforeUpload={() => false} // Prevent automatic upload
           >
@@ -82,8 +99,8 @@ const CreateWinners = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="done-button" onClick={handleNext}>
-            Done
+          <Button type="primary" htmlType="submit" className="done-button">
+            Create
           </Button>
         </Form.Item>
       </Form>
