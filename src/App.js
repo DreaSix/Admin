@@ -1,4 +1,3 @@
-
 import CreateMatchPage from "./Components/CreateMatch/CreateMatch";
 import Cookies from "js-cookie";
 import AddPlayer from "./Components/CreatePlayers/AddPlayer";
@@ -6,7 +5,7 @@ import CreatePlayers from "./Components/CreatePlayers/CreatePlayers";
 import CreateTeams from "./Components/CreateTeams/CreateTeams";
 import CreateWinners from "./Components/CreateWinner/CreateWinner";
 import HomePage from "./Components/HomePage/HomePage";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Transactions from "./Components/Transactions/Transactions";
 import Deposite from "./Components/Deposite/Deposite";
 import Withdrawl from "./Components/WithDrawl/WithDrawl";
@@ -19,32 +18,32 @@ import LoginPage from "./Components/LoginPage/Login";
 import { useState } from "react";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(Cookies.get("jwtToken"))  
-
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    Cookies.get("jwtToken")
+  );
 
   return (
-    <div>
-    <Router>
-        <Routes>
-        {!isAuthenticated && (
-            <Route path="/" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />} />
-        )}
-          <Route path="/homepage" element={<HomePage />} />  
-          <Route path="/create-match" element={<CreateMatchPage />} />
-          <Route path="/create-teams/:matchId" element={<CreateTeams />} />
-          <Route path="/create-winners" element={<CreateWinners />} />
-          <Route path="/create-players" element={<CreatePlayers/>} />
-          <Route path="/add-players" element={<AddPlayer/>} />
-          <Route path="/users" element={<Users />} />
-          <Route path="/transactions" element={<Transactions />} />
-          <Route path="/deposite" element={<Deposite />} />
-          <Route path="/withdrawl" element={<Withdrawl />} />
-          <Route path="/new-users" element={<NewUsers />} />
-          <Route path="/match-details" element={<MatchDetails />} />
-          <Route path="/matchs-page" element={<MatchPage />} />
-        </Routes>
-      </Router>
-    </div>
+    <Routes>
+      {!isAuthenticated && (
+        <Route
+          path="/"
+          element={<LoginPage setIsAuthenticated={setIsAuthenticated} />}
+        />
+      )}
+      <Route path="/homepage" element={<HomePage />} />
+      <Route path="/create-match" element={<CreateMatchPage />} />
+      <Route path="/create-teams/:matchId" element={<CreateTeams />} />
+      <Route path="/create-winners" element={<CreateWinners />} />
+      <Route path="/create-players" element={<CreatePlayers />} />
+      <Route path="/add-players" element={<AddPlayer />} />
+      <Route path="/users" element={<Users />} />
+      <Route path="/transactions" element={<Transactions />} />
+      <Route path="/deposite" element={<Deposite />} />
+      <Route path="/withdrawl" element={<Withdrawl />} />
+      <Route path="/new-users" element={<NewUsers />} />
+      <Route path="/match-details" element={<MatchDetails />} />
+      <Route path="/matchs-page" element={<MatchPage />} />
+    </Routes>
   );
 }
 
