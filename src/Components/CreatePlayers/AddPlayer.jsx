@@ -30,7 +30,7 @@ const AddPlayer = () => {
 
    matchDetails.createPlayer(formData)
     .then(response => {
-      console.log('Success:', response.data);
+      navigate("/create-players")
     })
     .catch(error => {
       console.error('Error:', error);

@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Button, Upload, Select, TimePicker } from "antd";
+import { Form, Input, Button, Upload, Select, TimePicker, message } from "antd";
 import { UploadOutlined, ClockCircleOutlined } from "@ant-design/icons";
 import "./CreateMatch.scss";
 import { useNavigate } from "react-router-dom";
@@ -36,8 +36,8 @@ const CreateMatch = () => {
 
     matchDetails.createMatch(formData)
       .then(response => {
-        console.log('response', response)
-        navigate(`/create-teams?match=${encodeURIComponent(JSON.stringify(response?.data))}`);
+        message.success("Match created successfully")
+        navigate("/homepage")
       }).catch(error => {
         console.log('error', error)
       })
