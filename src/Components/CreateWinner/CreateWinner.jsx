@@ -34,19 +34,19 @@ const CreateWinners = () => {
       });
   };
 
-  useEffect(() => {
-    getAllMatches()
-  }, [])
+  // useEffect(() => {
+  //   getAllMatches()
+  // }, [])
 
-  const getAllMatches = () => {
-    matchDetails.getAllMatches()
-      .then(response => {
-        setMatches(response?.data)
-      })
-      .catch(error => {
-        console.log('error', error)
-      })
-  }
+  // const getAllMatches = () => {
+  //   matchDetails.getAllMatches()
+  //     .then(response => {
+  //       setMatches(response?.data)
+  //     })
+  //     .catch(error => {
+  //       console.log('error', error)
+  //     })
+  // }
 
   return (
     <div className="create-winners-container">

@@ -31,7 +31,7 @@ function App() {
           element={<LoginPage setIsAuthenticated={setIsAuthenticated} />}
         />
       )} */}
-      <Route path="/homepage" element={<HomePage />} />
+      <Route path="/" element={<HomePage />} />
       <Route path="/create-match" element={<CreateMatchPage />} />
       <Route path="/create-teams/:matchId" element={<CreateTeams />} />
       <Route path="/create-winners" element={<CreateWinners />} />

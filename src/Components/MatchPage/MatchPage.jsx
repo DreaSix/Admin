@@ -17,19 +17,19 @@ const MatchPage = () => {
       navigate(`/create-teams/${matchId}`);
     };
 
-    useEffect(() => {
-      getAllMatchDetails()
-    },[])
+    // useEffect(() => {
+    //   getAllMatchDetails()
+    // },[])
 
-    const getAllMatchDetails = () => {
-      matchDetails.getAllMatches()
-        .then(response => {
-          setMatchData(response?.data)
-        })
-        .catch(error => {
-          console.log('error', error)
-        })
-    }
+    // const getAllMatchDetails = () => {
+    //   matchDetails.getAllMatches()
+    //     .then(response => {
+    //       setMatchData(response?.data)
+    //     })
+    //     .catch(error => {
+    //       console.log('error', error)
+    //     })
+    // }
 
   const tabItems = [
     {
