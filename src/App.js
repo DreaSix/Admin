@@ -25,12 +25,12 @@ function App() {
   return (
     <Router>
       <Routes>
-      {!isAuthenticated && (
+      {/* {!isAuthenticated && (
         <Route
           path="/"
           element={<LoginPage setIsAuthenticated={setIsAuthenticated} />}
         />
-      )}
+      )} */}
       <Route path="/homepage" element={<HomePage />} />
       <Route path="/create-match" element={<CreateMatchPage />} />
       <Route path="/create-teams/:matchId" element={<CreateTeams />} />

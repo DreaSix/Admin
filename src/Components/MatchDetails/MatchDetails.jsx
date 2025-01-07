@@ -41,17 +41,20 @@ const MatchDetails = () => {
       matchDetails.getMtachDetailsById(matchId)
         .then(response => {
           setMatchData(response?.data)
-          getPlayerDetailsByMatchId()
         })
         .catch(error => {
           console.log('error', error)
         })
     }
 
+    useEffect(() => {
+      getPlayerDetailsByMatchId()
+
+    }, [matchData])
+
     const getPlayerDetailsByMatchId = () => {
         matchDetails.getMatchPlayerDetails(matchId)
           .then(response => {
-            console.log('response', response)
             const teamOneData = response?.data?.filter(player => player?.teamName === matchData?.teamOneName)
             const teamTwoData = response?.data?.filter(player => player?.teamName === matchData?.teamTwoName)
             setPlayersTeam1(teamOneData)
@@ -83,8 +86,8 @@ const MatchDetails = () => {
                   <div className="player-list">
                     {playersTeam1.map((player, index) => (
                       <div key={index} className="player-item">
-                        <img src={player.image} alt={player.name} className="player-icon" />
-                        <span>{player.name}</span>
+                        <img src={`data:image/jpeg;base64,${player?.playerImage}`} alt={player.name} className="player-icon" />
+                        <span>{player.playerName}</span>
                       </div>
                     ))}
                   </div>
@@ -93,8 +96,8 @@ const MatchDetails = () => {
                   <div className="player-list">
                     {playersTeam2.map((player, index) => (
                       <div key={index} className="player-item">
-                        <img src={player.image} alt={player.name} className="player-icon" />
-                        <span>{player.name}</span>
+                        <img src={`data:image/jpeg;base64,${player?.playerImage}`} alt={player.name} className="player-icon" />
+                        <span>{player.playerName}</span>
                       </div>
                     ))}
                   </div>
@@ -102,8 +105,6 @@ const MatchDetails = () => {
               </tr>
             </tbody>
           </table>
-
-
         </div>
       </div>
       <Footer/>

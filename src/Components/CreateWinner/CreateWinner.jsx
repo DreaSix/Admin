@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Input, Upload, Button, Select } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import "./CreateWinner.scss";
 import { matchDetails } from "../../Service/MatchDetailsService";
 import { useNavigate } from "react-router";
+import { Option } from "antd/es/mentions";
 
 const CreateWinners = () => {
   const navigate = useNavigate();
+  const [matches, setMatches] = useState([])
   const [form] = Form.useForm();
 
   const handleSubmit = (values) => {
@@ -22,8 +24,6 @@ const CreateWinners = () => {
         formData.append("winnerImage", file.originFileObj);
       });
     }
-    formData.append("playerId", 123);
-    console.log("formData", formData);
     matchDetails
       .createWinner(formData)
       .then((response) => {
@@ -33,6 +33,20 @@ const CreateWinners = () => {
         console.log("error", error);
       });
   };
+
+  useEffect(() => {
+    getAllMatches()
+  }, [])
+
+  const getAllMatches = () => {
+    matchDetails.getAllMatches()
+      .then(response => {
+        setMatches(response?.data)
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
+  }
 
   return (
     <div className="create-winners-container">
@@ -52,11 +66,15 @@ const CreateWinners = () => {
         </Form.Item>
 
         <Form.Item
-          name="matchName"
+          name="matchId"
           label="Match Name"
           rules={[{ required: true, message: "Please enter match name" }]}
         >
-          <Input placeholder="Enter Match Name" />
+          <Select>
+            {matches?.map(match => (
+              <Option value={match?.matchId}>{match?.matchName}</Option>
+            ))}
+          </Select>
         </Form.Item>
 
         <Form.Item
@@ -67,19 +85,17 @@ const CreateWinners = () => {
           rules={[{ required: true, message: "Please upload an image" }]}
         >
           <Upload
-            name="winnerImage"
+            name="logo"
             listType="picture"
-            beforeUpload={() => false} // Prevent automatic upload
+            maxCount={1}
+            accept="image/*"
           >
-            <div className="upload-container">
-              <UploadOutlined />
-              <p>Upload Image</p>
-            </div>
+            <Button icon={<UploadOutlined />}>Upload</Button>
           </Upload>
         </Form.Item>
 
         <Form.Item
-          name="winningAmount"
+          name="winnerAmount"
           label="Winning Amount"
           rules={[{ required: true, message: "Please enter winning amount" }]}
         >

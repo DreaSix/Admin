@@ -33,12 +33,15 @@ const CreateTeams = () => {
     matchDetails.getMtachDetailsById(matchId)
       .then(response => {
         setMatchDetails(response?.data)
-        getPlayerDetailsByMatchId()
       })
       .catch(error => {
         console.log('error', error)
       })
   }
+
+  useEffect(() => {
+    getPlayerDetailsByMatchId()
+  }, [matchData])
 
   const getPlayerDetailsByMatchId = () => {
     matchDetails.getMatchPlayerDetails(matchId)
