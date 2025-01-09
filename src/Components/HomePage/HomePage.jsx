@@ -34,11 +34,11 @@ const HomePage = () => {
   };
 
   const handleDeposite = () => {
-    navigate('/deposite');
+    navigate('/deposite-page');
   };
 
   const handleWithdrawl = () => {
-    navigate('/withdrawl');
+    navigate('/withdrawl-page');
   };
 
   const handleNewUsers = () => {

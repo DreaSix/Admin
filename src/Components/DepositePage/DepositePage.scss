@@ -1,0 +1,86 @@
+.deposit-container {
+    padding: 20px;
+  
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #f8fafb;
+    }
+  
+    .ant-table {
+      background-color: white;
+      border-radius: 8px;
+  
+      .ant-table-thead > tr > th {
+        background-color: #e6f7ff;
+        text-align: center;
+        font-weight: bold;
+        color: #333;
+      }
+  
+      .ant-table-tbody > tr > td {
+        text-align: center;
+  
+        .action-buttons {
+          display: flex;
+          justify-content: space-around;
+  
+          .accept-btn {
+            background-color: #52c41a;
+            color: white;
+            border: none;
+  
+            &:hover {
+              background-color: #389e0d;
+            }
+          }
+  
+          .reject-btn {
+            background-color: #ff4d4f;
+            color: white;
+            border: none;
+  
+            &:hover {
+              background-color: #d9363e;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .modal-image-container {
+    text-align: center;
+    margin-top: 20px;
+  
+    .uploaded-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid #d9d9d9;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .deposit-container {
+      padding: 10px;
+  
+      .ant-table {
+        font-size: 12px;
+  
+        .ant-table-thead > tr > th,
+        .ant-table-tbody > tr > td {
+          padding: 8px;
+        }
+      }
+    }
+  
+    .modal-image-container {
+      .uploaded-image {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+  }
+  

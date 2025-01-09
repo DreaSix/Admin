@@ -67,11 +67,11 @@ const Transactions = () => {
       dataIndex: "amount",
       key: "amount",
     },
-    {
-      title: "UTR / Trans ID",
-      dataIndex: "transactionId",
-      key: "transactionId",
-    },
+    // {
+    //   title: "UTR / Trans ID",
+    //   dataIndex: "transactionId",
+    //   key: "transactionId",
+    // },
   ];
 
   return (
