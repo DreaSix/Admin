@@ -12,20 +12,12 @@ const CreateWinners = () => {
   const [form] = Form.useForm();
 
   const handleSubmit = (values) => {
-    console.log("Form Values: ", values);
-    const formData = new FormData();
-    Object.entries(values).forEach(([key, value]) => {
-      if (key !== "winnerImage") {
-        formData.append(key, value);
-      }
-    });
-    if (values?.winnerImage?.length > 0) {
-      values?.matchImage?.forEach((file) => {
-        formData.append("winnerImage", file.originFileObj);
-      });
+    const payload = {
+      ...values
     }
+    console.log('payload', payload)
     matchDetails
-      .createWinner(formData)
+      .createWinner(payload)
       .then((response) => {
         console.log("response", response);
       })
@@ -34,19 +26,19 @@ const CreateWinners = () => {
       });
   };
 
-  // useEffect(() => {
-  //   getAllMatches()
-  // }, [])
+  useEffect(() => {
+    getAllMatches()
+  }, [])
 
-  // const getAllMatches = () => {
-  //   matchDetails.getAllMatches()
-  //     .then(response => {
-  //       setMatches(response?.data)
-  //     })
-  //     .catch(error => {
-  //       console.log('error', error)
-  //     })
-  // }
+  const getAllMatches = () => {
+    matchDetails.getAllMatches()
+      .then(response => {
+        setMatches(response?.data)
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
+  }
 
   return (
     <div className="create-winners-container">
@@ -77,7 +69,7 @@ const CreateWinners = () => {
           </Select>
         </Form.Item>
 
-        <Form.Item
+        {/* <Form.Item
           name="winnerImage"
           label="Upload Image"
           valuePropName="fileList"
@@ -92,7 +84,7 @@ const CreateWinners = () => {
           >
             <Button icon={<UploadOutlined />}>Upload</Button>
           </Upload>
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item
           name="winnerAmount"

@@ -53,19 +53,19 @@ const HomePage = () => {
     navigate(`/match-details/${matchId}`);
   };
   
-  // useEffect(() => {
-  //   getAllMatches()
-  // }, [])
+  useEffect(() => {
+    getAllMatches()
+  }, [])
 
-  // const getAllMatches = () => {
-  //   matchDetails.getAllMatches()
-  //     .then(response => {
-  //       setMatches(response?.data)
-  //     })
-  //     .catch(error => {
-  //       console.log('error', error)
-  //     })
-  // }
+  const getAllMatches = () => {
+    matchDetails.getAllMatches()
+      .then(response => {
+        setMatches(response?.data)
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
+  }
 
   const settings = {
     autoplay: true,

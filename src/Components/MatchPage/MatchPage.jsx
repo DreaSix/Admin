@@ -17,19 +17,19 @@ const MatchPage = () => {
       navigate(`/create-teams/${matchId}`);
     };
 
-    // useEffect(() => {
-    //   getAllMatchDetails()
-    // },[])
+    useEffect(() => {
+      getAllMatchDetails()
+    },[])
 
-    // const getAllMatchDetails = () => {
-    //   matchDetails.getAllMatches()
-    //     .then(response => {
-    //       setMatchData(response?.data)
-    //     })
-    //     .catch(error => {
-    //       console.log('error', error)
-    //     })
-    // }
+    const getAllMatchDetails = () => {
+      matchDetails.getAllMatches()
+        .then(response => {
+          setMatchData(response?.data)
+        })
+        .catch(error => {
+          console.log('error', error)
+        })
+    }
 
   const tabItems = [
     {
@@ -40,7 +40,7 @@ const MatchPage = () => {
           matchData.map((match, index) => (
             <Card key={match?.matchId} hoverable className="match-card">
               <img
-              src={`data:image/jpeg;base64,${match?.image}`}
+              src={`data:image/jpeg;base64,${match?.matchImage}`}
               alt={`Match ${match.matchId}`}
               onClick={() => onClickMatchImage(match?.matchId)}
               />

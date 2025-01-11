@@ -15,7 +15,7 @@ const LoginPage = ({setIsAuthenticated}) => {
       .then(response => {
         Cookies.set("jwtToken", response?.jwtToken)
         setIsAuthenticated(response?.jwtToken)
-        navigate("/homepage")
+        navigate("/")
       })
       .catch(error => {
         console.log('error', error)

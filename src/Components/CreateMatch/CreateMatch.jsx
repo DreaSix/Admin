@@ -37,7 +37,7 @@ const CreateMatch = () => {
     matchDetails.createMatch(formData)
       .then(response => {
         message.success("Match created successfully")
-        navigate("/homepage")
+        navigate("/")
       }).catch(error => {
         console.log('error', error)
       })

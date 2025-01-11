@@ -2,7 +2,7 @@ import CreateMatchPage from "./Components/CreateMatch/CreateMatch";
 import Cookies from "js-cookie";
 import AddPlayer from "./Components/CreatePlayers/AddPlayer";
 import CreatePlayers from "./Components/CreatePlayers/CreatePlayers";
-import CreateTeams from "./Components/CreateTeams/CreateTeams";
+import CreateTeams from "./Components/CreateSquad/CreateTeams";
 import CreateWinners from "./Components/CreateWinner/CreateWinner";
 import HomePage from "./Components/HomePage/HomePage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -27,12 +27,12 @@ function App() {
   return (
     <Router>
       <Routes>
-      {/* {!isAuthenticated && (
+      {!isAuthenticated && (
         <Route
           path="/"
           element={<LoginPage setIsAuthenticated={setIsAuthenticated} />}
         />
-      )} */}
+      )}
       <Route path="/" element={<HomePage />} />
       <Route path="/create-match" element={<CreateMatchPage />} />
       <Route path="/create-teams/:matchId" element={<CreateTeams />} />

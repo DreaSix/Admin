@@ -60,7 +60,7 @@ const NewUsers = () => {
     }
     getAllPlayers.createUser(params)
       .then(response => {
-        console.log('response', response)
+        setLoginDetails(response)
         getplayers()
       })
       .catch(error => {
