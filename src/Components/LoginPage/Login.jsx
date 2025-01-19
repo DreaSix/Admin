@@ -11,7 +11,11 @@ const LoginPage = ({setIsAuthenticated}) => {
   const navigate = useNavigate();
 
   const onFinish = (values) => {
-    authService.loginUser(values)
+    const payload = {
+      ...values,
+      role: "ADMIN"
+    }
+    authService.loginUser(payload)
       .then(response => {
         Cookies.set("jwtToken", response?.jwtToken)
         setIsAuthenticated(response?.jwtToken)

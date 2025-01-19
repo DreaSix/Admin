@@ -1,62 +1,50 @@
-import React, { useState } from "react";
-import { Table, Button, Modal, Input } from "antd";
+import React, { useEffect, useState } from "react";
+import { Table, Button, Modal, Input, message } from "antd";
 import { EyeOutlined, SearchOutlined } from "@ant-design/icons";
 import "./DepositePage.scss";
+import { transactionService } from "../../Service/TransactionService";
 
 const DepositePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [allDeposites, setAllDeposites] = useState([])
   const [selectedTransaction, setSelectedTransaction] = useState(null);
 
-  const depositData = [
-    {
-      key: "1",
-      username: "Kabali@123",
-      amount: "₹2000",
-      transactionId: "912345678912",
-      screenshotimg: "https://4.bp.blogspot.com/-1xqajupQ9_Q/WEsJZ6uRbYI/AAAAAAAAmWE/0vWkrR3fYOcMSrsQXue0MAtmlXBy_yTGACEw/s1600/Screenshot_2016-12-02-22-51-28-891_com.phonepe.app.png",
-    },
-    {
-      key: "2",
-      username: "Sreenu6453",
-      amount: "₹1000",
-      transactionId: "sreenu@ybl",
-      screenshotimg: "https://3.bp.blogspot.com/-wKLNcT_PmU8/WEsJanUxEgI/AAAAAAAAmWM/-U3m_l5BBhgEkFK8CbuCSU4_smgSb-SpgCEw/s1600/Screenshot_2016-12-10-00-57-42-738_com.phonepe.app%257E01.png",
-    },
-    {
-        key: "2",
-        username: "Sreenu6453",
-        amount: "₹1000",
-        transactionId: "sreenu@ybl",
-        screenshotimg: "https://via.placeholder.com/300x200",
-      },
-      {
-        key: "1",
-        username: "Kabali@123",
-        amount: "₹2000",
-        transactionId: "912345678912",
-        screenshotimg: "https://4.bp.blogspot.com/-1xqajupQ9_Q/WEsJZ6uRbYI/AAAAAAAAmWE/0vWkrR3fYOcMSrsQXue0MAtmlXBy_yTGACEw/s1600/Screenshot_2016-12-02-22-51-28-891_com.phonepe.app.png",
-      },
-      {
-        key: "1",
-        username: "Kabali@123",
-        amount: "₹2000",
-        transactionId: "912345678912",
-        screenshotimg: "https://4.bp.blogspot.com/-1xqajupQ9_Q/WEsJZ6uRbYI/AAAAAAAAmWE/0vWkrR3fYOcMSrsQXue0MAtmlXBy_yTGACEw/s1600/Screenshot_2016-12-02-22-51-28-891_com.phonepe.app.png",
-      },
-      {
-        key: "1",
-        username: "Kabali@123",
-        amount: "₹2000",
-        transactionId: "912345678912",
-        screenshotimg: "https://4.bp.blogspot.com/-1xqajupQ9_Q/WEsJZ6uRbYI/AAAAAAAAmWE/0vWkrR3fYOcMSrsQXue0MAtmlXBy_yTGACEw/s1600/Screenshot_2016-12-02-22-51-28-891_com.phonepe.app.png",
-      },
-  ];
+  useEffect(() => {
+      getDepositTransactions()
+    }, [])
+  
+    const getDepositTransactions = () => {
+      transactionService.getAllTransactions()
+        .then(response => {
+          const deposites = response?.data?.filter(deposit => deposit?.paymentOption === "Deposit" && !deposit?.status)
+          setAllDeposites(deposites)
+        })
+        .catch(error => {
+          console.log('error', error)
+        })
+    }
+
+    const handleClickAccept = (record) => {
+      console.log('record', record)
+      const params = {
+        status: true,
+        userId: record?.userId
+      }
+      transactionService.updateTransactions(record?.id, params)
+        .then(response => {
+          getDepositTransactions()
+          message.success("Transaction updated successfully")
+        })
+        .catch(error => {
+          console.log('error', error)
+        })
+    }
 
   const columns = [
     {
       title: "Username",
-      dataIndex: "username",
-      key: "username",
+      dataIndex: "userName",
+      key: "userName",
     },
     {
       title: "Amount",
@@ -77,9 +65,9 @@ const DepositePage = () => {
     {
       title: "Actions",
       key: "actions",
-      render: () => (
+      render: (_, record) => (
         <div className="action-buttons">
-          <Button type="primary" className="accept-btn">
+          <Button type="primary" onClick={() => handleClickAccept(record)} className="accept-btn">
             Accept
           </Button>
           <Button type="danger" className="reject-btn">
@@ -111,7 +99,7 @@ const DepositePage = () => {
         />
       </div>
       <Table
-        dataSource={depositData}
+        dataSource={allDeposites}
         columns={columns}
         pagination={false}
         bordered
@@ -128,13 +116,13 @@ const DepositePage = () => {
             </Button>,
           ]}
         >
-          <p><strong>Username:</strong> {selectedTransaction.username}</p>
+          <p><strong>Username:</strong> {selectedTransaction.userName}</p>
           <p><strong>Amount:</strong> {selectedTransaction.amount}</p>
-          <p><strong>UTR / Trans ID:</strong> {selectedTransaction.transactionId}</p>
+          <p><strong>UTR / Trans ID:</strong> {selectedTransaction.utrNumber}</p>
           <div className="modal-image-container">
             <strong>Uploaded Image:</strong>
             <img
-              src={selectedTransaction.screenshotimg}
+              src={`data:image/jpeg;base64,${selectedTransaction.uploadedProof}`}
               alt="Uploaded Screenshot"
               className="uploaded-image"
             />

@@ -48,8 +48,6 @@ function App() {
       <Route path="/matchs-page" element={<MatchPage />} />
       <Route path="/deposite-page" element={<DepositePage />} />
       <Route path="/withdrawl-page" element={<WithdrawalPage />} />
-
-
     </Routes>
     </Router>
   );

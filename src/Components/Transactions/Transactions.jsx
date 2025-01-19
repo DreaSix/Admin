@@ -1,66 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input, Table, Button } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import "./Transactions.scss";
+import { transactionService } from "../../Service/TransactionService";
 
 const Transactions = () => {
   const [activeTab, setActiveTab] = useState("All");
+  const [allTransactions, setAllTransactions] = useState([])
 
-  // Combined Table Data
-  const dataSource = [
-    {
-      key: "1",
-      username: "Kabali@123",
-      amount: "₹2000",
-      transactionId: "912345678912",
-      type: "Deposit",
-    },
-    {
-      key: "2",
-      username: "Sreenu6453",
-      amount: "₹1000",
-      transactionId: "sreenu@ybl",
-      type: "Deposit",
-    },
-    {
-      key: "3",
-      username: "Ram@567",
-      amount: "₹1500",
-      transactionId: "ram@ybl",
-      type: "Withdrawal",
-    },
-    {
-      key: "4",
-      username: "Krish@901",
-      amount: "₹800",
-      transactionId: "krish@upi",
-      type: "Withdrawal",
-    },
-  ];
+  useEffect(() => {
+    getAllTransactions()
+  }, [])
 
-  // Filter data based on active tab
+  const getAllTransactions = () => {
+    transactionService.getAllTransactions()
+      .then(response => {
+        const transactions = response?.data?.filter(deposit => deposit?.status)
+        setAllTransactions(transactions)
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
+  }
+
   const filteredData =
     activeTab === "All"
-      ? dataSource
-      : dataSource.filter((item) => item.type === activeTab);
+      ? allTransactions
+      : allTransactions.filter((item) => item.paymentOption === activeTab);
 
   // Table Columns
   const columns = [
     {
       title: "Type",
-      dataIndex: "type",
-      key: "type",
-      render: (type) =>
-        type === "Deposit" ? (
-          <span style={{ color: "green" }}>{type}</span>
+      dataIndex: "paymentOption",
+      key: "paymentOption",
+      render: (paymentOption) =>
+        paymentOption === "Deposit" ? (
+          <span style={{ color: "green" }}>{paymentOption}</span>
         ) : (
-          <span style={{ color: "red" }}>{type}</span>
+          <span style={{ color: "red" }}>{paymentOption}</span>
         ),
     },
     {
       title: "Username",
-      dataIndex: "username",
-      key: "username",
+      dataIndex: "userName",
+      key: "userName",
     },
     {
       title: "Amount",

@@ -1,38 +1,48 @@
-import React, { useState } from "react";
-import { Table, Button, Modal, Input } from "antd";
+import React, { useEffect, useState } from "react";
+import { Table, Button, Modal, Input, message } from "antd";
 import { EyeOutlined, SearchOutlined } from "@ant-design/icons";
 import "./WithdrawlPage.scss";
+import { transactionService } from "../../Service/TransactionService";
 
 const WithdrawlPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [allWithdraws, setAllWithdraws] = useState([])
   const [selectedTransaction, setSelectedTransaction] = useState(null);
 
-  const withdrawlData = [
-    {
-      key: "1",
-      username: "Ravi@2023",
-      amount: "₹5000",
-      accountNumber: "123456789012",
-      accountHolderName: "Ravi Kumar",
-      ifscCode: "SBIN0000123",
-      upiId: "ravi@ybl",
-    },
-    {
-      key: "2",
-      username: "Sneha_22",
-      amount: "₹3000",
-      accountNumber: "987654321098",
-      accountHolderName: "Sneha Das",
-      ifscCode: "HDFC0000456",
-      upiId: "sneha@hdfc",
-    },
-  ];
+  useEffect(() => {
+    getWithdrawTransactions()
+  }, [])
+
+  const getWithdrawTransactions = () => {
+    transactionService.getAllTransactions()
+      .then(response => {
+        const withdraws = response?.data?.filter(deposit => deposit?.paymentOption === "Withdraw" && !deposit?.status)
+        setAllWithdraws(withdraws)
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
+  }
+
+  const handleClickAccept = (id) => {
+    const params = {
+      status: true
+    }
+    transactionService.updateTransactions(id, params)
+      .then(response => {
+        getWithdrawTransactions()
+        message.success("Transaction updated successfully")
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
+  }
 
   const columns = [
     {
       title: "Username",
-      dataIndex: "username",
-      key: "username",
+      dataIndex: "userName",
+      key: "userName",
     },
     {
       title: "Amount",
@@ -53,9 +63,9 @@ const WithdrawlPage = () => {
     {
       title: "Actions",
       key: "actions",
-      render: () => (
+      render: (_, record) => (
         <div className="action-buttons">
-          <Button type="primary" className="accept-btn">
+          <Button type="primary" onClick={() => handleClickAccept(record?.id)} className="accept-btn">
             Accept
           </Button>
           <Button type="danger" className="reject-btn">
@@ -87,7 +97,7 @@ const WithdrawlPage = () => {
         />
       </div>
       <Table
-        dataSource={withdrawlData}
+        dataSource={allWithdraws}
         columns={columns}
         pagination={false}
         bordered
@@ -105,7 +115,7 @@ const WithdrawlPage = () => {
           ]}
         >
           <p>
-            <strong>Username:</strong> {selectedTransaction.username}
+            <strong>Username:</strong> {selectedTransaction.userName}
           </p>
           <p>
             <strong>Amount:</strong> {selectedTransaction.amount}
