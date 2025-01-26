@@ -27,7 +27,7 @@ export const GET_MATCH_PLAYER_DETAILS = ADMIN_BASE_URL + "/api/player-details/";
 
 //match Winner
 
-export const CREATE_MATCH_WINNER = ADMIN_BASE_URL + "/api/winner-details";
+export const MATCH_WINNER = ADMIN_BASE_URL + "/api/winner-details";
 
 //transactions
 

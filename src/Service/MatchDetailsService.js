@@ -1,10 +1,10 @@
 import {
   CREATE_MATCH_URL,
-  CREATE_MATCH_WINNER,
   CREATE_PLAYER,
   GET_MATCH_DETAILS,
   GET_MATCH_DETAILS_BY_ID, GET_MATCH_PLAYER_DETAILS,
   GET_PLAYERS,
+  MATCH_WINNER,
   SAVE_TEAM_PLAYER_DETAILS,
 } from "../Constants/Constants";
 import { FileUploadPostAPIRequest, GetAPIRequest, PostAPIRequest } from "./Api";
@@ -37,9 +37,15 @@ const saveTeamPlayerDetails = (payload) => {
 };
 
 const createWinner = (payload) => {
-  return FileUploadPostAPIRequest({
-    url: CREATE_MATCH_WINNER,
+  return PostAPIRequest({
+    url: MATCH_WINNER,
     data: payload,
+  });
+};
+
+const getWinners = () => {
+  return GetAPIRequest({
+    url: MATCH_WINNER,
   });
 };
 

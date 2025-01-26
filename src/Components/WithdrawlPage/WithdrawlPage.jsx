@@ -24,11 +24,12 @@ const WithdrawlPage = () => {
       })
   }
 
-  const handleClickAccept = (id) => {
+  const handleClickAccept = (record) => {
     const params = {
-      status: true
+      status: true,
+      userId: record?.userId
     }
-    transactionService.updateTransactions(id, params)
+    transactionService.updateTransactions(record?.id, params)
       .then(response => {
         getWithdrawTransactions()
         message.success("Transaction updated successfully")
@@ -65,7 +66,7 @@ const WithdrawlPage = () => {
       key: "actions",
       render: (_, record) => (
         <div className="action-buttons">
-          <Button type="primary" onClick={() => handleClickAccept(record?.id)} className="accept-btn">
+          <Button type="primary" onClick={() => handleClickAccept(record)} className="accept-btn">
             Accept
           </Button>
           <Button type="danger" className="reject-btn">
