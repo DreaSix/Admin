@@ -18,6 +18,8 @@ import LoginPage from "./Components/LoginPage/Login";
 import { useState } from "react";
 import DepositePage from "./Components/DepositePage/DepositePage";
 import WithdrawalPage from "./Components/WithdrawlPage/WithdrawlPage";
+import CreateAccount from "./Components/CreateAccount/CreateAccount";
+import PaymentList from "./Components/AccountDetails/AccountDetails";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -40,10 +42,12 @@ function App() {
       <Route path="/create-players" element={<CreatePlayers />} />
       <Route path="/add-players" element={<AddPlayer />} />
       <Route path="/users" element={<Users />} />
+      <Route path="/create-account" element={<CreateAccount />} />
       <Route path="/transactions" element={<Transactions />} />
       {/* <Route path="/deposite" element={<Deposite />} />
       <Route path="/withdrawl" element={<Withdrawl />} /> */}
       <Route path="/new-users" element={<NewUsers />} />
+      <Route path="/payment-details" element={<PaymentList /> } />
       <Route path="/match-details/:matchId" element={<MatchDetails />} />
       <Route path="/matchs-page" element={<MatchPage />} />
       <Route path="/deposite-page" element={<DepositePage />} />

@@ -96,6 +96,7 @@ const CreateTeams = () => {
     matchDetails.saveTeamPlayerDetails(payload)
       .then(response => {
         message.success("Players added successfully")
+        getMatchDetailsById()
       })
       .catch(error => {
         console.log('error', error)
@@ -112,6 +113,7 @@ const CreateTeams = () => {
     matchDetails.saveTeamPlayerDetails(payload)
       .then(response => {
         message.success("Players added successfully")
+        getMatchDetailsById()
       })
       .catch(error => {
         console.log('error', error)

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Card, Button, Row, Col, Typography, Carousel } from "antd";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
+import { TransactionOutlined } from "@ant-design/icons";
+
 import './HomePage.scss';
 // import Header from "../Header/Header";
 import Footer from "../Footer/Footer"
@@ -65,6 +67,10 @@ const HomePage = () => {
       .catch(error => {
         console.log('error', error)
       })
+  }
+
+  const handleCreateAccount = () => {
+    navigate("/payment-details")
   }
 
   const settings = {
@@ -197,6 +203,25 @@ const HomePage = () => {
             <Col flex="auto" />
             <Col>
               <Button type="text" className="arrow-button" onClick={handleCreateWinners}>
+                &gt;
+              </Button>
+            </Col>
+          </Row>
+        </Card>
+      </div>
+
+      <div className="section">
+        <Card className="players-card">
+          <Row align="middle">
+            <Col>
+            <TransactionOutlined style={{fontSize:"25px", color:"white"}}/>
+            </Col>
+            <Col>
+              <Text className="players-text">Account details</Text>
+            </Col>
+            <Col flex="auto" />
+            <Col>
+              <Button type="text" className="arrow-button" onClick={handleCreateAccount}>
                 &gt;
               </Button>
             </Col>
