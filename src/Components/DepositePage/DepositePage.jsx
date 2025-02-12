@@ -16,7 +16,7 @@ const DepositePage = () => {
     const getDepositTransactions = () => {
       transactionService.getAllTransactions()
         .then(response => {
-          const deposites = response?.data?.filter(deposit => deposit?.paymentOption === "Deposit" && !deposit?.status)
+          const deposites = response?.data?.filter(deposit => deposit?.transactionType === "DEPOSIT" && deposit?.approvalStatus === "PENDING")
           setAllDeposites(deposites)
         })
         .catch(error => {
@@ -27,10 +27,9 @@ const DepositePage = () => {
     const handleClickAccept = (record) => {
       console.log('record', record)
       const params = {
-        status: true,
-        userId: record?.userId
+        approvalStatus: "Approved"
       }
-      transactionService.updateTransactions(record?.id, params)
+      transactionService.approveTransaction(record?.id, params)
         .then(response => {
           getDepositTransactions()
           message.success("Transaction updated successfully")
@@ -116,13 +115,13 @@ const DepositePage = () => {
             </Button>,
           ]}
         >
-          <p><strong>Username:</strong> {selectedTransaction.userName}</p>
-          <p><strong>Amount:</strong> {selectedTransaction.amount}</p>
-          <p><strong>UTR / Trans ID:</strong> {selectedTransaction.utrNumber}</p>
+          <p><strong>Username:</strong> {selectedTransaction?.userName}</p>
+          <p><strong>Amount:</strong> {selectedTransaction?.amount}</p>
+          <p><strong>UTR / Trans ID:</strong> {selectedTransaction?.utr}</p>
           <div className="modal-image-container">
             <strong>Uploaded Image:</strong>
             <img
-              src={`data:image/jpeg;base64,${selectedTransaction.uploadedProof}`}
+              src={`data:image/jpeg;base64,${selectedTransaction?.transactionImage}`}
               alt="Uploaded Screenshot"
               className="uploaded-image"
             />

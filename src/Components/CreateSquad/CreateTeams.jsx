@@ -46,13 +46,16 @@ const CreateTeams = () => {
   const getPlayerDetailsByMatchId = () => {
     matchDetails.getMatchPlayerDetails(matchId)
       .then(response => {
+
         setPlayersList(response?.data)
         if (selectedTab === "1") {
-          const filteredPlayers = response?.data?.filter(player => player?.teamName === matchData?.teamOneName)
-          setSelectedPlayers(filteredPlayers)
+          const data = response?.data?.filter(item => item?.teamName === matchData?.teamOneName)
+          const flattenedPlayers = data?.flatMap(item => item?.playerDetailsResponseList);
+          setSelectedPlayers(flattenedPlayers)
         } else if (selectedTab === "2") {
-          const filteredPlayers = response?.data?.filter(player => player?.teamName === matchData?.teamTwoName)
-          setSelectedPlayers(filteredPlayers)
+          const data = response?.data?.filter(item => item?.teamName === matchData?.teamTwoName)
+          const flattenedPlayers = data?.flatMap(item => item?.playerDetailsResponseList);
+          setSelectedPlayers(flattenedPlayers)
         }
       })
       .catch(error => {
@@ -179,17 +182,21 @@ const CreateTeams = () => {
     setFilteredPlayers([]);
     setSelectedPlayers([]);
     if (value === "1") {
-      const filteredPlayers = playersList?.filter(player => player?.teamName === matchData?.teamOneName)
-      setSelectedPlayers(filteredPlayers)
+      const data = playersList.filter(item => item?.teamName === matchData?.teamOneName)
+      const flattenedPlayers = data?.flatMap(item => item?.playerDetailsResponseList);      
+      setSelectedPlayers(flattenedPlayers)
     } else if (value === "2") {
-      const filteredPlayers = playersList.filter(player => player?.teamName === matchData?.teamTwoName)
-      setSelectedPlayers(filteredPlayers)
+      const data = playersList.filter(item => item?.teamName === matchData?.teamTwoName)
+      const flattenedPlayers = data?.flatMap(item => item?.playerDetailsResponseList);      
+      setSelectedPlayers(flattenedPlayers)
     }
   };
 
   const handleRemovePlayer = (playerId) => {
     setSelectedPlayers(selectedPlayers.filter((player) => player.playerId !== playerId));
   };
+
+  console.log('selectedPlayers', selectedPlayers)
 
 
   return (

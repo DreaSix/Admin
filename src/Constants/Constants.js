@@ -31,7 +31,8 @@ export const  MATCH_WINNER = ADMIN_BASE_URL + "/api/winner-details";
 
 //transactions
 
-export const GET_ALL_TRANSACTIONS = ADMIN_BASE_URL + "/api/transaction"
+export const GET_ALL_TRANSACTIONS = ADMIN_BASE_URL + "/api/transactions";
+export const APPROVE_TRANSACTION_END_POINT = "/approval-status";
 
 //payments
 

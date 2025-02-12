@@ -9,7 +9,6 @@ import Footer from "../Footer/Footer"
 import { matchDetails } from "../../Service/MatchDetailsService";
 
 const HomePage = () => {
-  console.log('leela')
   const { Title, Text } = Typography;
   const [matches, setMatches] = useState([])
 
