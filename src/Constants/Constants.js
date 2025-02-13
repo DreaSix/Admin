@@ -16,7 +16,7 @@ export const SAVE_TEAM_PLAYER_DETAILS =
 
 export const GET_USERS = ADMIN_BASE_URL + "/api/user/get";
 export const CREATE_USER = ADMIN_BASE_URL + "/api/user/createUser";
-export const GET_ALL_USERS = ADMIN_BASE_URL + "/api/user/get-users";
+export const GET_ALL_USERS = ADMIN_BASE_URL + "/api/user/list";
 
 //match details
 

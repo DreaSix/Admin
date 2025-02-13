@@ -16,8 +16,8 @@ const WithdrawlPage = () => {
   const getWithdrawTransactions = () => {
     transactionService.getAllTransactions()
       .then(response => {
-        const withdraws = response?.data?.filter(deposit => deposit?.paymentOption === "Withdraw" && !deposit?.status)
-        setAllWithdraws(withdraws)
+        const deposites = response?.data?.filter(deposit => deposit?.transactionType === "WITHDRAW" && deposit?.approvalStatus === "PENDING")
+          setAllWithdraws(deposites)
       })
       .catch(error => {
         console.log('error', error)

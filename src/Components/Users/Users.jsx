@@ -10,12 +10,11 @@ const Users = () => {
   useEffect(() => {
     getAllUsers()
   }, [])
- 
+
   const getAllUsers = () => {
     getAllPlayers.getAllUsers()
       .then(response => {
-        console.log('response', response)
-        setDataSource(response?.data)
+        setDataSource(response?.totalContent)
       })
       .catch(error => {
         console.log('error', error)
@@ -26,29 +25,29 @@ const Users = () => {
   const columns = [
     {
       title: "Username",
-      dataIndex: "username",
-      key: "username",
+      dataIndex: "name",
+      key: "name",
     },
 
     {
-        title: "MobileNumber",
-        dataIndex: "contactNo",
-        key: "contactNo",
-      },
+      title: "MobileNumber",
+      dataIndex: "phoneNumber",
+      key: "phoneNumber",
+    },
     {
       title: "Password",
       dataIndex: "password",
       key: "password",
     },
-      {
-        title: "Wallet",
-        dataIndex: "wallet",
-        key: "wallet",
-      },
+    {
+      title: "Wallet",
+      dataIndex: "wallet",
+      key: "wallet",
+    },
   ];
 
   return (
-    <div className="user-table-container" style={{ background:"linear-gradient(to top, #99ccff 0%, #003366 100%)"}}>
+    <div className="user-table-container" style={{ background: "linear-gradient(to top, #99ccff 0%, #003366 100%)" }}>
       <div className="search-bar">
         <Input
           placeholder="Search User Name / ID"

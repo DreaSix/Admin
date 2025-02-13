@@ -15,7 +15,15 @@ const Transactions = () => {
   const getAllTransactions = () => {
     transactionService.getAllTransactions()
       .then(response => {
-        const transactions = response?.data?.filter(deposit => deposit?.status)
+        let transactions;
+        if (activeTab === "All"){
+          transactions = response?.data?.filter(deposit => deposit?.approvalStatus === "APPROVED")
+        }else if (activeTab === "DEPOSIT"){
+          transactions = response?.data?.filter(deposit => deposit?.approvalStatus === "APPROVED" && deposit?.transactionType === "DEPOSIT")
+        }else{
+          transactions = response?.data?.filter(deposit => deposit?.approvalStatus === "APPROVED" && deposit?.transactionType === "WITHDRAW")
+
+        }
         setAllTransactions(transactions)
       })
       .catch(error => {
@@ -26,16 +34,16 @@ const Transactions = () => {
   const filteredData =
     activeTab === "All"
       ? allTransactions
-      : allTransactions.filter((item) => item.paymentOption === activeTab);
+      : allTransactions.filter((item) => item.transactionType === activeTab && item?.approvalStatus === "APPROVED");
 
   // Table Columns
   const columns = [
     {
       title: "Type",
-      dataIndex: "paymentOption",
-      key: "paymentOption",
+      dataIndex: "transactionType",
+      key: "transactionType",
       render: (paymentOption) =>
-        paymentOption === "Deposit" ? (
+        paymentOption === "DEPOSIT" ? (
           <span style={{ color: "green" }}>{paymentOption}</span>
         ) : (
           <span style={{ color: "red" }}>{paymentOption}</span>
@@ -69,14 +77,14 @@ const Transactions = () => {
           All
         </Button>
         <Button
-          className={activeTab === "Deposit" ? "active-tab" : ""}
-          onClick={() => setActiveTab("Deposit")}
+          className={activeTab === "DEPOSIT" ? "active-tab" : ""}
+          onClick={() => setActiveTab("DEPOSIT")}
         >
           Deposit
         </Button>
         <Button
-          className={activeTab === "Withdrawal" ? "active-tab" : ""}
-          onClick={() => setActiveTab("Withdrawal")}
+          className={activeTab === "WITHDRAW" ? "active-tab" : ""}
+          onClick={() => setActiveTab("WITHDRAW")}
         >
           Withdrawal
         </Button>
