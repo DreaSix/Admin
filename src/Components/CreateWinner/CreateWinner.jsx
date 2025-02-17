@@ -15,11 +15,11 @@ const CreateWinners = () => {
     const payload = {
       ...values
     }
-    console.log('payload', payload)
     matchDetails
       .createWinner(payload)
       .then((response) => {
         console.log("response", response);
+        navigate("/")
       })
       .catch((error) => {
         console.log("error", error);
