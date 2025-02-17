@@ -53,7 +53,7 @@ const MatchDetails = () => {
   return (
     <div>
       <div className="cricket-page-container" >
-        <div className="player-list-container" style={{ background:"linear-gradient(to top, #99ccff 0%, #003366 100%)"}}>
+        <div className="player-list-container">
           <div className='heading-container'>
             <h4> {matchData?.teamOneName} vs {matchData?.teamTwoName}</h4>
             <p>Expected Players</p>

@@ -21,6 +21,7 @@ import WithdrawalPage from "./Components/WithdrawlPage/WithdrawlPage";
 import CreateAccount from "./Components/CreateAccount/CreateAccount";
 import PaymentList from "./Components/AccountDetails/AccountDetails";
 import Auction from "./Components/AuctionPage/AuctionPage";
+import Footer from "./Components/Footer/Footer";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(

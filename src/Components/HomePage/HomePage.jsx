@@ -91,9 +91,6 @@ const HomePage = () => {
       {/* Matches Section */}
       <div className="section">
       <Row justify="space-between" align="middle">
-        <Title level={4} className="section-title">
-          Matches
-        </Title>
       </Row>
       <Carousel {...settings}>
         {matches.map((match) => (
