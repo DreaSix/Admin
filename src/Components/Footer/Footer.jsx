@@ -18,8 +18,8 @@ const Footer = () => {
             <p>Users</p>
           </Link>
         </div>
-        <div className="nav-item">
-          <Link to="/auction">
+        <div className="nav-item">  
+          <Link to="/auction-page">
             <TrophyOutlined style={{ fontSize: '24px' }} />
             <p>Auction</p>
           </Link>

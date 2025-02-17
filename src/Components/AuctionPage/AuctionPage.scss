@@ -1,0 +1,256 @@
+.auction-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    min-height: 100vh;
+  
+    .header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #1C3A56;
+      color: white;
+      padding: 12px 16px;
+      border-radius: 8px;
+      
+      .admin-info {
+        display: flex;
+        align-items: center;
+  
+        .admin-name {
+          font-weight: bold;
+          margin-left: 10px;
+        }
+  
+        .status {
+          margin-left: 10px;
+          padding: 4px 8px;
+          font-size: 12px;
+          border-radius: 12px;
+  
+          &.online {
+            background-color: green;
+            color: white;
+          }
+        }
+      }
+  
+      .toggle-switch {
+        background-color: white;
+        color: #f8f9fb;
+      }
+    }
+  
+    .players-section {
+      width: 100%;
+      margin-top:60px;
+      text-align: center;
+  
+      .dropdown-btn {
+        width: 100%;
+        max-width: 300px;
+        background-color: #1C3A56;
+        color: white;
+        border-radius: 8px;
+        font-size: 16px;
+        padding: 8px;
+        cursor: pointer;
+  
+        &:hover {
+          background-color: #162a3d;
+        }
+      }
+  
+      .next-players {
+        margin-top: 12px;
+        
+        h3 {
+          color: #fcfdfd;
+          font-size: 18px;
+          margin-bottom: 12px;
+        }
+  
+        .players {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+          gap: 12px;
+          justify-content: center;
+  
+          .player-card {
+            border-radius: 8px;
+            padding: 8px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.2s ease-in-out;
+  
+            &:hover {
+              transform: scale(1.05);
+            }
+  
+            .player-img {
+              width: 80px;
+              height: 80px;
+              border-radius: 50%;
+              object-fit: cover;
+            }
+  
+            .player-name {
+              margin-top: 6px;
+              font-weight: bold;
+              font-size: 14px;
+              color: #fbfcfc;
+            }
+          }
+        }
+      }
+    }
+  
+    .bids-section {
+      width: 100%;
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 8px;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  
+      .bid-card {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+  
+        .bid-user {
+          width: 32px;
+          height: 32px;
+          background: #b30883;
+          color: white;
+          font-weight: bold;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 50%;
+          margin-right: 10px;
+        }
+  
+        .bid-info {
+          display: flex;
+          flex-direction: column;
+  
+          .bid-name {
+            font-weight: bold;
+            color: #fafbfc;
+          }
+  
+          .bid-amount {
+            font-size: 14px;
+            color: #f8e811;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+    .player-info {
+        display: flex;
+        justify-content: space-between; // Align image and text on opposite ends
+        align-items: center;
+        padding: 8px;
+        width: 100%;
+      
+        .player-img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      
+        .player-details {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end; // Align text to the right
+          flex-grow: 1;
+          margin-left: 10px;
+        }
+      
+        .player-name {
+          font-weight: bold;
+          font-size: 14px;
+          color: #000;
+        }
+      
+        .starting-price {
+          font-size: 12px;
+          color: #555;
+        }
+      }
+      
+  
+    .actions {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 20px;
+  
+      .action-btn {
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+  
+        &.unsold {
+          background-color: #dc3545;
+          color: white;
+        }
+  
+        &.any-one {
+          background-color: #ffc107;
+          color: black;
+        }
+  
+        &.last-chance {
+          background-color: #17a2b8;
+          color: white;
+        }
+  
+        &.all-drop {
+          background-color: #6c757d;
+          color: white;
+        }
+      }
+    }
+  }
+  
+  /* Mobile Responsiveness */
+  @media (max-width: 768px) {
+    .auction-container {
+      padding: 10px;
+  
+      .header {
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+      }
+  
+      .players-section {
+        .players {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+  
+      .actions {
+        flex-wrap: wrap;
+        justify-content: center;
+        
+        .action-btn {
+          width: 100%;
+          max-width: 150px;
+        }
+      }
+    }
+  }
+  
