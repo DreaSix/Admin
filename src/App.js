@@ -22,6 +22,7 @@ import CreateAccount from "./Components/CreateAccount/CreateAccount";
 import PaymentList from "./Components/AccountDetails/AccountDetails";
 import Auction from "./Components/AuctionPage/AuctionPage";
 import Footer from "./Components/Footer/Footer";
+import Header from "./Components/Header/Header";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -30,32 +31,40 @@ function App() {
 
   return (
     <Router>
-      <Routes>
-      {!isAuthenticated && (
-        <Route
-          path="/"
-          element={<LoginPage setIsAuthenticated={setIsAuthenticated} />}
-        />
-      )}
-      <Route path="/" element={<HomePage />} />
-      <Route path="/create-match" element={<CreateMatchPage />} />
-      <Route path="/create-teams/:matchId" element={<CreateTeams />} />
-      <Route path="/create-winners" element={<CreateWinners />} />
-      <Route path="/create-players" element={<CreatePlayers />} />
-      <Route path="/add-players" element={<AddPlayer />} />
-      <Route path="/users" element={<Users />} />
-      <Route path="/create-account" element={<CreateAccount />} />
-      <Route path="/transactions" element={<Transactions />} />
-      {/* <Route path="/deposite" element={<Deposite />} />
+      {!isAuthenticated ? (
+        <Routes>
+          <Route
+            path="/"
+            element={<LoginPage setIsAuthenticated={setIsAuthenticated} />}
+          />
+        </Routes>
+      ) : (
+        <>
+          <Header />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/create-match" element={<CreateMatchPage />} />
+            <Route path="/create-teams/:matchId" element={<CreateTeams />} />
+            <Route path="/create-winners" element={<CreateWinners />} />
+            <Route path="/create-players" element={<CreatePlayers />} />
+            <Route path="/add-players" element={<AddPlayer />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/create-account" element={<CreateAccount />} />
+            <Route path="/transactions" element={<Transactions />} />
+            {/* <Route path="/deposite" element={<Deposite />} />
       <Route path="/withdrawl" element={<Withdrawl />} /> */}
-      <Route path="/new-users" element={<NewUsers />} />
-      <Route path="/payment-details" element={<PaymentList /> } />
-      <Route path="/match-details/:matchId" element={<MatchDetails />} />
-      <Route path="/matchs-page" element={<MatchPage />} />
-      <Route path="/deposite-page" element={<DepositePage />} />
-      <Route path="/withdrawl-page" element={<WithdrawalPage />} />
-      <Route path="/auction-page" element={<Auction/>} />
-    </Routes>
+            <Route path="/new-users" element={<NewUsers />} />
+            <Route path="/payment-details" element={<PaymentList />} />
+            <Route path="/match-details/:matchId" element={<MatchDetails />} />
+            <Route path="/matchs-page" element={<MatchPage />} />
+            <Route path="/deposite-page" element={<DepositePage />} />
+            <Route path="/withdrawl-page" element={<WithdrawalPage />} />
+            <Route path="/auction-page" element={<Auction />} />
+          </Routes>
+          <Footer />
+        </>
+      )}
+
     </Router>
   );
 }

@@ -43,6 +43,7 @@ const createWinner = (payload) => {
   });
 };
 
+
 const getWinners = () => {
   return GetAPIRequest({
     url: MATCH_WINNER,
@@ -76,4 +77,5 @@ export const matchDetails = {
   getMtachDetailsById, 
     getMatchPlayerDetails,
   createWinner,
+  getWinners
 };

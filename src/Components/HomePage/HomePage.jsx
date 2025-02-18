@@ -11,6 +11,21 @@ import { matchDetails } from "../../Service/MatchDetailsService";
 const HomePage = () => {
   const { Title, Text } = Typography;
   const [matches, setMatches] = useState([])
+  const [winnersList, setWinnersList] = useState([])
+
+  useEffect(() => {
+    getWinnersList()
+  }, [])
+
+  const getWinnersList = () => {
+    matchDetails.getWinners()
+      .then(response => {
+        setWinnersList(response?.data)
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
+  }
 
   const navigate = useNavigate();  // Create navigate function
 
@@ -83,7 +98,8 @@ const HomePage = () => {
   };
 
   return (
-    <div>
+    <main>
+      <div>
     <div>
       {/* <Header/> */}
     </div>
@@ -233,7 +249,8 @@ const HomePage = () => {
           </Title>
           {/* <Button className="create-button" onClick={handleCreateWinners} >Create</Button> */}
         </Row>
-        <Card className="winner-card">
+        {winnersList?.map(winner => (
+          <Card className="winner-card">
           <Row align="middle">
             <Col>
               <div className="winner-badge">
@@ -241,22 +258,24 @@ const HomePage = () => {
               </div>
             </Col>
             <Col>
-              <Text className="winner-name">Aditya Chatterjee</Text>
+              <Text className="winner-name">{winner?.winnerName}</Text>
               <br />
-              <Text className="winner-match">ENG vs IND</Text>
+              <Text className="winner-match">{winner?.matchDetails?.matchName}</Text>
             </Col>
             <Col flex="auto" />
             <Col>
-              <Text className="winner-prize">₹ 45,000</Text>
+              <Text className="winner-prize">₹ {winner?.winnerAmount}</Text>
               <br />
-              <Button className="top-sixer-button">Top Sixer</Button>
+              <Button className="top-sixer-button">{winner?.matchDetails?.matchAction}</Button>
             </Col>
           </Row>
         </Card>
+        ))}
       </div>
     </div>
     <Footer/>
     </div>
+    </main>
   );
 };
 
