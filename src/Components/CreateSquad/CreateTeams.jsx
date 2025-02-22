@@ -17,11 +17,11 @@ const CreateTeams = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const [filteredPlayers, setFilteredPlayers] = useState(players);
-  const [selectedPlayers, setSelectedPlayers] = useState([]);
+  const [selectedPlayers, setSelectedPlayers] = useState({});
   const [team1Players, setTeam1Players] = useState(Array(6).fill(""));
   const [team2Players, setTeam2Players] = useState(Array(6).fill(""));
   const [selectedTab, setSelectedTab] = useState("1")
-  const [playersList, setPlayersList] = useState([])
+  const [playersList, setPlayersList] = useState({})
 
   useEffect(() => {
     if (matchId) {
@@ -49,13 +49,18 @@ const CreateTeams = () => {
 
         setPlayersList(response?.data)
         if (selectedTab === "1") {
-          const data = response?.data?.filter(item => item?.teamName === matchData?.teamOneName)
-          const flattenedPlayers = data?.flatMap(item => item?.playerDetailsResponseList);
-          setSelectedPlayers(flattenedPlayers)
+          const teamOneData = response?.data?.find(
+            (player) => player?.teamName === matchData?.teamOneName
+          );
+          const flattenedPlayers1 = teamOneData?.playersDtoMap;
+
+          setSelectedPlayers(flattenedPlayers1)
         } else if (selectedTab === "2") {
-          const data = response?.data?.filter(item => item?.teamName === matchData?.teamTwoName)
-          const flattenedPlayers = data?.flatMap(item => item?.playerDetailsResponseList);
-          setSelectedPlayers(flattenedPlayers)
+          const teamTwoData = response?.data?.find(
+            (player) => player?.teamName === matchData?.teamTwoName
+          );
+          const flattenedPlayers2 = teamTwoData?.playersDtoMap;
+          setSelectedPlayers(flattenedPlayers2)
         }
       })
       .catch(error => {
@@ -90,10 +95,11 @@ const CreateTeams = () => {
   };
 
   const addTeam1Players = () => {
+    console.log('selectedPlayers', Object.keys(selectedPlayers))
     const payload = {
       teamName: matchData?.teamOneName,
       matchId: matchData?.matchId,
-      playerIds: selectedPlayers?.map(player => player?.playerId)
+      playerIds: Object.keys(selectedPlayers)
     }
 
     matchDetails.saveTeamPlayerDetails(payload)
@@ -110,7 +116,7 @@ const CreateTeams = () => {
     const payload = {
       teamName: matchData?.teamTwoName,
       matchId: matchData?.matchId,
-      playerIds: selectedPlayers?.map(player => player?.playerId)
+      playerIds:  Object.keys(selectedPlayers)
     }
 
     matchDetails.saveTeamPlayerDetails(payload)
@@ -132,9 +138,22 @@ const CreateTeams = () => {
   };
 
   const handleAddPlayer = (player) => {
-    if (!selectedPlayers.some((p) => p.playerId === player.playerId)) {
-      setSelectedPlayers([...selectedPlayers, player]);
+    console.log('selectedPlayers', selectedPlayers)
+    if (selectedPlayers === null || selectedPlayers === undefined){
+      console.log('player', player)
+      setSelectedPlayers((prevPlayers) => ({
+        ...prevPlayers, // Keep existing players
+        [player.playerId]: player, // Add new player with playerId as the key
+      }));
+    } else if (!Object.keys(selectedPlayers).includes(player?.playerId)) {
+      console.log('player', player)
+      setSelectedPlayers((prevPlayers) => ({
+        ...prevPlayers, // Keep existing players
+        [player.playerId]: player, // Add new player with playerId as the key
+      }));
     }
+    console.log('selectedPlayers', selectedPlayers)
+
     setSearchTerm('');
     setFilteredPlayers(players);
   };
@@ -182,13 +201,17 @@ const CreateTeams = () => {
     setFilteredPlayers([]);
     setSelectedPlayers([]);
     if (value === "1") {
-      const data = playersList.filter(item => item?.teamName === matchData?.teamOneName)
-      const flattenedPlayers = data?.flatMap(item => item?.playerDetailsResponseList);      
-      setSelectedPlayers(flattenedPlayers)
+      const teamOneData = playersList.find(
+        (player) => player?.teamName === matchData?.teamOneName
+      );      
+      const flattenedPlayers1 = teamOneData?.playersDtoMap;
+      setSelectedPlayers(flattenedPlayers1)
     } else if (value === "2") {
-      const data = playersList.filter(item => item?.teamName === matchData?.teamTwoName)
-      const flattenedPlayers = data?.flatMap(item => item?.playerDetailsResponseList);      
-      setSelectedPlayers(flattenedPlayers)
+      const teamTwoData = playersList?.find(
+        (player) => player?.teamName === matchData?.teamTwoName
+      );
+      const flattenedPlayers2 = teamTwoData?.playersDtoMap;
+      setSelectedPlayers(flattenedPlayers2)
     }
   };
 
@@ -200,38 +223,44 @@ const CreateTeams = () => {
 
 
   return (
-    <div className="player-selection-container">
+    <main>
+      <div className="player-selection-container">
       <Tabs defaultActiveKey="1" onChange={handleTabChange}>
         <TabPane tab={matchData?.teamOneName} key="1">
           <Form onFinish={addTeam1Players} layout="vertical" className="player-form">
             {renderPlayerInputs("team1", team1Players)}
             <h3>Selected Players:</h3>
-            <List
-              itemLayout="horizontal"
-              dataSource={selectedPlayers}
-              renderItem={(player) => (
-                <List.Item
-                  actions={[
-                    <Button
-                      type="text"
-                      onClick={() => handleRemovePlayer(player.playerId)}
-                      style={{ color: "red" }}
-                      icon={<CloseOutlined />}
-                    />
-                  ]}
-                >
-                  <List.Item.Meta
-                    avatar={
-                      <Avatar
-                        src={`data:image/jpeg;base64,${player?.playerImage}`}
-                        style={{ backgroundColor: "#d6d3d3" }}
+            {selectedPlayers !== null && selectedPlayers !== undefined && Object.keys(selectedPlayers).length > 0 ? (
+              <List
+                itemLayout="horizontal"
+                dataSource={Object.entries(selectedPlayers)} // Convert object to array
+                renderItem={([playerId, player]) => (
+                  <List.Item
+                    actions={[
+                      <Button
+                        type="text"
+                        onClick={() => handleRemovePlayer(playerId)}
+                        style={{ color: "red" }}
+                        icon={<CloseOutlined />}
                       />
-                    }
-                    title={player.playerName}
-                  />
-                </List.Item>
-              )}
-            />
+                    ]}
+                  >
+                    <List.Item.Meta
+                      avatar={
+                        <Avatar
+                          src={`data:image/jpeg;base64,${player?.playerImage}`}
+                          style={{ backgroundColor: "#d6d3d3" }}
+                        />
+                      }
+                      title={player.playerName}
+                    />
+                  </List.Item>
+                )}
+              />
+            ) : (
+              <p>No players selected.</p>
+            )}
+
             <Button type="primary" htmlType="submit" className="save-btn">
               Save
             </Button>
@@ -241,32 +270,37 @@ const CreateTeams = () => {
           <Form onFinish={addTeam2Players} layout="vertical" className="player-form">
             {renderPlayerInputs("team2", team2Players)}
             <h3>Selected Players:</h3>
-            <List
-              itemLayout="horizontal"
-              dataSource={selectedPlayers}
-              renderItem={(player) => (
-                <List.Item
-                  actions={[
-                    <Button
-                      type="text"
-                      onClick={() => handleRemovePlayer(player.playerId)}
-                      style={{ color: "red" }}
-                      icon={<CloseOutlined />}
-                    />
-                  ]}
-                >
-                  <List.Item.Meta
-                    avatar={
-                      <Avatar
-                        src={`data:image/jpeg;base64,${player?.playerImage}`}
-                        style={{ backgroundColor: "#d6d3d3" }}
+            {selectedPlayers !== null && selectedPlayers !== undefined && Object.keys(selectedPlayers).length > 0 ? (
+              <List
+                itemLayout="horizontal"
+                dataSource={Object.entries(selectedPlayers)} // Convert object to array
+                renderItem={([playerId, player]) => (
+                  <List.Item
+                    actions={[
+                      <Button
+                        type="text"
+                        onClick={() => handleRemovePlayer(playerId)}
+                        style={{ color: "red" }}
+                        icon={<CloseOutlined />}
                       />
-                    }
-                    title={player.playerName}
-                  />
-                </List.Item>
-              )}
-            />
+                    ]}
+                  >
+                    <List.Item.Meta
+                      avatar={
+                        <Avatar
+                          src={`data:image/jpeg;base64,${player?.playerImage}`}
+                          style={{ backgroundColor: "#d6d3d3" }}
+                        />
+                      }
+                      title={player.playerName}
+                    />
+                  </List.Item>
+                )}
+              />
+            ) : (
+              <p>No players selected.</p>
+            )}
+
             <Button type="primary" htmlType="submit" className="save-btn">
               Save
             </Button>
@@ -274,6 +308,7 @@ const CreateTeams = () => {
         </TabPane>
       </Tabs>
     </div>
+    </main>
 
   );
 };

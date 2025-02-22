@@ -3,6 +3,7 @@ import {
   CREATE_PLAYER,
   GET_MATCH_DETAILS,
   GET_MATCH_DETAILS_BY_ID, GET_MATCH_PLAYER_DETAILS,
+  GET_MATCH_PLAYER_DETAILS_END_POINT,
   GET_PLAYERS,
   MATCH_WINNER,
   SAVE_TEAM_PLAYER_DETAILS,
@@ -64,7 +65,7 @@ const getMtachDetailsById = (matchId) => {
 
 const getMatchPlayerDetails = (matchId) => {
     return GetAPIRequest({
-        url: GET_MATCH_PLAYER_DETAILS + matchId,
+        url: GET_MATCH_PLAYER_DETAILS + matchId + GET_MATCH_PLAYER_DETAILS_END_POINT
   });
 };
 

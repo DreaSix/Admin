@@ -24,6 +24,7 @@ export const GET_MATCH_DETAILS = ADMIN_BASE_URL + "/api/match-details";
 export const GET_MATCH_DETAILS_BY_ID = ADMIN_BASE_URL + "/api/match-details/";
 
 export const GET_MATCH_PLAYER_DETAILS = ADMIN_BASE_URL + "/api/player-details/";
+export const GET_MATCH_PLAYER_DETAILS_END_POINT = "/matchDetails";
 
 //match Winner
 
@@ -37,4 +38,8 @@ export const APPROVE_TRANSACTION_END_POINT = "/approval-status";
 //payments
 
 export const PAYMENTS = ADMIN_BASE_URL + "/api/payments"
+
+//bid
+
+export const CREATE_BID = ADMIN_BASE_URL + "/api/chat/createBid"
 

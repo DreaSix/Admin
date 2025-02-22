@@ -19,7 +19,7 @@ const Footer = () => {
           </Link>
         </div>
         <div className="nav-item">  
-          <Link to="/auction-page">
+          <Link to="/match-list">
             <TrophyOutlined style={{ fontSize: '24px' }} />
             <p>Auction</p>
           </Link>

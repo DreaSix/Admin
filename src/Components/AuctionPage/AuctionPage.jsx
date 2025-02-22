@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Button, Switch, Menu } from "antd";
 import "./AuctionPage.scss";
 import Footer from "../Footer/Footer";
-
+import { useParams } from "react-router";
+import { matchDetails } from "../../Service/MatchDetailsService";
 
 const players = [
   {
@@ -23,28 +24,69 @@ const players = [
   },
 ];
 
-const soldPlayers = [
-  {
-    name: "Devillers",
-    img: "https://static.cricketaddictor.com/wp-content/uploads/2021/03/AB-de-Villiers.png?q=80",
-  },
-  {
-    name: "Maxwell",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcqyHRRD0u_3GmE89M8-Gk_zLwlObLE63HOA&s",
-  },
-  {
-    name: "Dhoni",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4wGYdrRQsCseDMXG_OpyGnzPzRhZzbPV2Yw&s",
-  },
-  {
-    name: "Kohli",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmvgF1br3j0w6pHctdBKbZdURoU1zVylWqwTgaH4o3ZgfYVHYeyltUVlYOYcqfOtBovwM&usqp=CAU",
-  },
-];
-
 const Auction = () => {
+  const { matchId } = useParams();
   const [showNextPlayers, setShowNextPlayers] = useState(false);
-  const [showSoldPlayers, setShowSoldPlayers] = useState(false);
+  const [matchData, setMatchDetails] = useState(null);
+  const [nextPlayers, setNextPlayers] = useState([]);
+  const [soldPlayers, setSoldPlayers] = useState([]);
+  const [selectedPlayer, setSelectedPlayer] = useState()
+
+  useEffect(() => {
+    if (matchId) {
+      getMatchDetailsById();
+    }
+  }, [matchId]);
+
+  const getMatchDetailsById = () => {
+    matchDetails
+      .getMtachDetailsById(matchId)
+      .then((response) => {
+        setMatchDetails(response?.data);
+      })
+      .catch((error) => {
+        console.log("Error fetching match details:", error);
+      });
+  };
+
+  useEffect(() => {
+    if (matchId) {
+      getPlayerDetailsByMatchId();
+    }
+  }, [matchData]);
+
+  const getPlayerDetailsByMatchId = () => {
+    matchDetails
+      .getMatchPlayerDetails(matchId)
+      .then((response) => {
+        if (!response?.data) {
+          console.log("No match data found");
+          return;
+        }
+
+        const unSoldPlayers = response.data.flatMap((match) =>
+          Object.values(match?.playersDtoMap || {}).filter(
+            (player) => player?.status === "UNSOLD"
+          )
+        );
+
+        const soldPlayers = response.data.flatMap((match) =>
+          Object.values(match?.playersDtoMap || {}).filter(
+            (player) => player?.status === "SOLD"
+          )
+        );
+
+        setNextPlayers(unSoldPlayers);
+        setSoldPlayers(soldPlayers);
+      })
+      .catch((error) => {
+        console.log("Error fetching player details:", error);
+      });
+  };
+
+  const handlePlayerSelect = (player) => {
+    setSelectedPlayer(player)
+  }
 
   return (
     <main>
@@ -52,7 +94,11 @@ const Auction = () => {
         <div className="header">
           <div className="admin-info">
             <div style={{ display: "flex" }}>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD00QC79nDx3sIKpgB0UJxudJ9qLv7f4a5ZQ&s" className="matchImage" alt="Match Image" />
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD00QC79nDx3sIKpgB0UJxudJ9qLv7f4a5ZQ&s"
+                className="matchImage"
+                alt="Match Image"
+              />
               <div className="admin-name">Admin</div>
             </div>
             <div>
@@ -60,7 +106,6 @@ const Auction = () => {
             </div>
             <Button>Done</Button>
           </div>
-
         </div>
 
         {/* Next Players Section */}
@@ -76,16 +121,17 @@ const Auction = () => {
             <div className="next-players">
               <h3>Next Players</h3>
               <div className="players">
-                {players.map((player) => (
-                  <div className="player-card" key={player.name}>
-                    <img
-                      src={player.img}
-                      alt={player.name}
-                      className="player-img"
-                    />
-                    <div className="player-name">{player.name}</div>
-                  </div>
-                ))}
+                {Array.isArray(nextPlayers) &&
+                  nextPlayers?.map((player) => (
+                    <div className="player-card" onClick={() => handlePlayerSelect(player)} key={player.playerName}>
+                      <img
+                        src={`data:image/jpeg;base64,${player?.playerImage}`}
+                        alt={player.playerName}
+                        className="player-img"
+                      />
+                      <div className="player-name">{player.playerName}</div>
+                    </div>
+                  ))}
               </div>
             </div>
           )}
@@ -96,36 +142,39 @@ const Auction = () => {
             <div className="next-players">
               <h3>Sold Players</h3>
               <div className="players">
-                {players.map((player) => (
-                  <div className="player-card" key={player.name}>
-                    <img
-                      src={player.img}
-                      alt={player.name}
-                      className="player-img"
-                    />
-                    <div className="player-name">{player.name}</div>
-                  </div>
-                ))}
+                {Array.isArray(soldPlayers) &&
+                  soldPlayers?.map((player) => (
+                    <div className="player-card" key={player.playerName}>
+                      <img
+                        src={`data:image/jpeg;base64,${player?.playerImage}`}
+                        alt={player.playerName}
+                        className="player-img"
+                      />
+                      <div className="player-name">{player.playerName}</div>
+                    </div>
+                  ))}
               </div>
             </div>
           )}
         </div>
 
-        <div className="player-info">
+        {selectedPlayer && (
+          <div className="player-info">
           <img
             src={
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS98HGbTrDUJJhQfg-96uxoG2Xk5sgOBIlReg&s"
+              `data:image/jpeg;base64,${selectedPlayer?.playerImage}`
             }
-            alt="Virat kohli"
+            alt={selectedPlayer?.playerName}
             className="player-img"
           />
           <div className="player-details">
-            <span className="player-name">Virat Kohli</span>
+            <span className="player-name">{selectedPlayer?.playerName}</span>
             <span className="starting-price">
-              Starting Price: <strong>Rs. 1000</strong>
+              Starting Price: <strong>Rs. {selectedPlayer?.basePrice}</strong>
             </span>
           </div>
         </div>
+        )}
 
         {/* Bids Section */}
         <div className="bids-section">
@@ -164,7 +213,6 @@ const Auction = () => {
         </div>
       </div>
     </main>
-
   );
 };
 

@@ -20,9 +20,10 @@ import DepositePage from "./Components/DepositePage/DepositePage";
 import WithdrawalPage from "./Components/WithdrawlPage/WithdrawlPage";
 import CreateAccount from "./Components/CreateAccount/CreateAccount";
 import PaymentList from "./Components/AccountDetails/AccountDetails";
-import Auction from "./Components/AuctionPage/AuctionPage";
 import Footer from "./Components/Footer/Footer";
 import Header from "./Components/Header/Header";
+import MatchViewDetails from "./Components/MatchViewDetails/MatchViewDetails";
+import Auction from "./Components/AuctionPage/AuctionPage";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -59,7 +60,8 @@ function App() {
             <Route path="/matchs-page" element={<MatchPage />} />
             <Route path="/deposite-page" element={<DepositePage />} />
             <Route path="/withdrawl-page" element={<WithdrawalPage />} />
-            <Route path="/auction-page" element={<Auction />} />
+            <Route path="/match-list" element={<MatchViewDetails />} />
+            <Route path="/auction-page/:matchId" element={<Auction />} />
           </Routes>
           <Footer />
         </>
