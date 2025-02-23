@@ -4,6 +4,7 @@ import "./AuctionPage.scss";
 import Footer from "../Footer/Footer";
 import { useParams } from "react-router";
 import { matchDetails } from "../../Service/MatchDetailsService";
+import { bidService } from "../../Service/BidService";
 
 const players = [
   {
@@ -30,7 +31,7 @@ const Auction = () => {
   const [matchData, setMatchDetails] = useState(null);
   const [nextPlayers, setNextPlayers] = useState([]);
   const [soldPlayers, setSoldPlayers] = useState([]);
-  const [selectedPlayer, setSelectedPlayer] = useState()
+  const [selectedPlayer, setSelectedPlayer] = useState();
 
   useEffect(() => {
     if (matchId) {
@@ -70,6 +71,14 @@ const Auction = () => {
           )
         );
 
+        const biddingPlayer = response.data.flatMap((match) =>
+          Object.values(match?.playersDtoMap || {}).filter(
+            (player) => player?.status === "BIDDING"
+          )
+        );
+
+        setSelectedPlayer(biddingPlayer[0]);
+
         const soldPlayers = response.data.flatMap((match) =>
           Object.values(match?.playersDtoMap || {}).filter(
             (player) => player?.status === "SOLD"
@@ -85,8 +94,21 @@ const Auction = () => {
   };
 
   const handlePlayerSelect = (player) => {
-    setSelectedPlayer(player)
-  }
+    console.log("player", player);
+    const params = {
+      playerId: player?.playerId,
+      matchId: matchId,
+    };
+    bidService
+      .createBid(params)
+      .then((response) => {
+        console.log("response", response);
+        setSelectedPlayer(player);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  };
 
   return (
     <main>
@@ -95,7 +117,7 @@ const Auction = () => {
           <div className="admin-info">
             <div style={{ display: "flex" }}>
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD00QC79nDx3sIKpgB0UJxudJ9qLv7f4a5ZQ&s"
+                src={`data:image/jpeg;base64,${matchData?.matchImage}`}
                 className="matchImage"
                 alt="Match Image"
               />
@@ -123,7 +145,11 @@ const Auction = () => {
               <div className="players">
                 {Array.isArray(nextPlayers) &&
                   nextPlayers?.map((player) => (
-                    <div className="player-card" onClick={() => handlePlayerSelect(player)} key={player.playerName}>
+                    <div
+                      className="player-card"
+                      onClick={() => handlePlayerSelect(player)}
+                      key={player.playerName}
+                    >
                       <img
                         src={`data:image/jpeg;base64,${player?.playerImage}`}
                         alt={player.playerName}
@@ -160,20 +186,18 @@ const Auction = () => {
 
         {selectedPlayer && (
           <div className="player-info">
-          <img
-            src={
-              `data:image/jpeg;base64,${selectedPlayer?.playerImage}`
-            }
-            alt={selectedPlayer?.playerName}
-            className="player-img"
-          />
-          <div className="player-details">
-            <span className="player-name">{selectedPlayer?.playerName}</span>
-            <span className="starting-price">
-              Starting Price: <strong>Rs. {selectedPlayer?.basePrice}</strong>
-            </span>
+            <img
+              src={`data:image/jpeg;base64,${selectedPlayer?.playerImage}`}
+              alt={selectedPlayer?.playerName}
+              className="player-img"
+            />
+            <div className="player-details">
+              <span className="player-name">{selectedPlayer?.playerName}</span>
+              <span className="starting-price">
+                Starting Price: <strong>Rs. {selectedPlayer?.basePrice}</strong>
+              </span>
+            </div>
           </div>
-        </div>
         )}
 
         {/* Bids Section */}
