@@ -216,10 +216,15 @@ const CreateTeams = () => {
   };
 
   const handleRemovePlayer = (playerId) => {
-    setSelectedPlayers(selectedPlayers.filter((player) => player.playerId !== playerId));
+  
+    const updatedPlayers = { ...selectedPlayers };
+  
+    delete updatedPlayers[playerId];
+  
+    setSelectedPlayers(updatedPlayers);
   };
+  
 
-  console.log('selectedPlayers', selectedPlayers)
 
 
   return (
