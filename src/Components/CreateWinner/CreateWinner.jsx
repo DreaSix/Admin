@@ -41,6 +41,7 @@ const CreateWinners = () => {
   }
 
   return (
+    <main>
     <div className="create-winners-container">
       <h2>Create Winners</h2>
       <Form
@@ -112,6 +113,7 @@ const CreateWinners = () => {
         </Form.Item>
       </Form>
     </div>
+    </main>
   );
 };
 

@@ -19,6 +19,7 @@ const Deposite = () => {
       })
   }
   return (
+    <main>
     <div className="add-user-amount-container">
       <h2>Add User Amount</h2>
 
@@ -41,6 +42,7 @@ const Deposite = () => {
         Done
       </Button>
     </div>
+    </main>
   );
 };
 

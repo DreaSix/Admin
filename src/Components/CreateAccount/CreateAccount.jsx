@@ -20,6 +20,7 @@ const CreateAccount = () => {
   };
 
   return (
+    <main>
     <div className="max-w-md mx-auto p-4">
       <Card className="accountBody">
       <Form
@@ -147,6 +148,7 @@ const CreateAccount = () => {
 
       </Card>
     </div>
+    </main>
   );
 };
 

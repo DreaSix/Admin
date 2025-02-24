@@ -10,6 +10,7 @@ const Withdrawl = () => {
   };
 
   return (
+    <main>
     <div className="bank-form-container">
       <Tabs defaultActiveKey="1" centered className="tab-container">
         {/* Bank Tab */}
@@ -107,6 +108,7 @@ const Withdrawl = () => {
         </TabPane>
       </Tabs>
     </div>
+    </main>
   );
 };
 

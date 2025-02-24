@@ -64,6 +64,7 @@ const MatchPage = () => {
   ];
 
   return (
+    <main>
     <div className="match-page">
       <Tabs
         defaultActiveKey="1"
@@ -77,6 +78,7 @@ const MatchPage = () => {
       />
       <Footer />
     </div>
+    </main>
   );
 };
 

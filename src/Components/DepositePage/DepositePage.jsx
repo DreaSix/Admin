@@ -88,6 +88,7 @@ const DepositePage = () => {
   };
 
   return (
+    <main>
     <div className="deposit-container">
       <h2>Deposit Transactions</h2>
       <div className="search-bar">
@@ -129,6 +130,7 @@ const DepositePage = () => {
         </Modal>
       )}
     </div>
+    </main>
   );
 };
 

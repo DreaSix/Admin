@@ -45,6 +45,7 @@ const CreateMatch = () => {
 
 
   return (
+    <main>
     <div className="create-match-container">
       <h2>Create Match</h2>
       <Form
@@ -157,6 +158,7 @@ const CreateMatch = () => {
         </Form.Item>
       </Form>
     </div>
+    </main>
   );
 };
 

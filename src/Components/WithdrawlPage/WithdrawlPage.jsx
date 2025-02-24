@@ -88,6 +88,7 @@ const WithdrawlPage = () => {
   };
 
   return (
+    <main>
     <div className="withdrawl-container">
       <h2>Withdrawl Transactions</h2>
       <div className="search-bar">
@@ -137,6 +138,7 @@ const WithdrawlPage = () => {
         </Modal>
       )}
     </div>
+    </main>
   );
 };
 

@@ -31,6 +31,7 @@ const PaymentList = () => {
   }
 
   return (
+    <main>
     <div className="p-4 max-w-md mx-auto">
       <div className=" items-center mb-4" style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
         <h2 className="text-lg font-semibold">Payments</h2>
@@ -85,6 +86,7 @@ const PaymentList = () => {
       ))}
     </div>
     </div>
+    </main>
   );
 };
 

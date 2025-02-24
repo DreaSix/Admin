@@ -47,6 +47,7 @@ const Users = () => {
   ];
 
   return (
+    <main>
     <div className="user-table-container" style={{ background: "linear-gradient(to top, #99ccff 0%, #003366 100%)" }}>
       <div className="search-bar">
         <Input
@@ -61,6 +62,7 @@ const Users = () => {
         bordered
       />
     </div>
+    </main>
   );
 };
 
