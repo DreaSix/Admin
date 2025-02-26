@@ -109,40 +109,52 @@ const HomePage = () => {
       <Row justify="space-between" align="middle">
       </Row>
       <Carousel {...settings}>
-        {matches.map((match) => (
-          <Card key={match.matchId} className="match-card">
-            <img
-              onClick={() => onClickMatchImage(match.matchId)}
-              src= {match?.matchImage ? 
-                `data:image/jpeg;base64,${match?.matchImage}` : 
-                "https://i.pinimg.com/originals/a1/de/a2/a1dea2cf213703688b3d040e1c112a53.png"
-              }
-              alt="Match"
-              className="match-image"
-            />
-            <Row justify="space-between" align="middle" className="match-info">
-              <Text className="match-title">
-                {match.teamOneName} {match.teamTwoName ? `vs ${match.teamTwoName}` : ""}
-              </Text>
-              <Text className="match-timer">{match.countdownEndTime}</Text>
-            </Row>
-          </Card>
-        ))}
-      </Carousel>
+  {matches.map((match) => (
+    <Card key={match.matchId} className="match-card">
+      <img
+        onClick={() => onClickMatchImage(match.matchId)}
+        src={match?.matchImage ? 
+          `data:image/jpeg;base64,${match?.matchImage}` : 
+          "https://i.pinimg.com/originals/a1/de/a2/a1dea2cf213703688b3d040e1c112a53.png"
+        }
+        alt="Match"
+        className="match-image"
+      />
+      <div className="match-info">
+        <Text className="match-title">
+          {match.teamOneName} {match.teamTwoName ? `vs ${match.teamTwoName}` : ""}
+        </Text>
+        <Text className="match-timer">{match.countdownEndTime}</Text>
+      </div>
+    </Card>
+  ))}
+</Carousel>
+
     </div>
 
       <div className="section buttons-section">
-        <Row gutter={[16, 16]}>
-          <Col span={8}>
-            <Button style={{backgroundColor:"green", color:"white"}} className="action-button deposit-button"   onClick={handleDeposite}>Deposit</Button>
-          </Col>
-          <Col span={8}>
-            <Button style={{backgroundColor:"Red", color:"white"}} className="action-button withdraw-button"  onClick={handleWithdrawl} >Withdrawal</Button>
-          </Col>
-          <Col span={8}>
-            <Button style={{backgroundColor:"blue", color:"white"}} className="action-button newuser-button" onClick={handleNewUsers}>New User</Button>
-          </Col>
-        </Row>
+      <Row justify="center" className="buttons-container">
+            <Col>
+              <Button
+                className="deposit-button green-button"
+                onClick={handleDeposite}
+              >
+                Deposit
+              </Button>
+              <Button
+                className="withdraw-button red-button"
+                onClick={handleWithdrawl}
+              >
+                Withdraw
+              </Button>
+              {/* <Button
+                className="updates-button blue-button"
+                onClick={ handleNewUsers}
+              >
+                New Users
+              </Button> */}
+            </Col>
+          </Row>
       </div>
 
       <div className="section">
@@ -226,10 +238,10 @@ const HomePage = () => {
         <Card className="players-card">
           <Row align="middle">
             <Col>
-            <TransactionOutlined style={{fontSize:"25px", color:"white"}}/>
+            <TransactionOutlined style={{fontSize:"25px", color:"black"}}/>
             </Col>
             <Col>
-              <Text className="players-text">Account details</Text>
+              <Text className="players-text"> Create Accounts</Text>
             </Col>
             <Col flex="auto" />
             <Col>

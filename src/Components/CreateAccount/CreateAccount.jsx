@@ -132,7 +132,7 @@ const CreateAccount = () => {
 
           {/* Submit Button */}
           <Form.Item>
-            <Button type="primary" htmlType="submit" className="w-full mt-4">
+            <Button style={{ background: "#ffcc00", border:"10px", color:"black", fontWeight:"bold"}} htmlType="submit" className="w-full mt-4">
               Submit
             </Button>
           </Form.Item>

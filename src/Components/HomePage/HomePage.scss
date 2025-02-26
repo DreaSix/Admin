@@ -1,5 +1,5 @@
 .dashboard-container {
-  padding: 20px;
+  padding: 7px;
 
   .section {
     margin-bottom: 20px;
@@ -17,61 +17,87 @@
     }
 
     .match-card {
-      background-color: #161b22;
-      border-radius: 10px;
-      overflow: hidden;
+      border: 1px solid black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 5px; // Reduced padding
+      text-align: center;
+      width: 100%;
+    
       .match-image {
         width: 100%;
-        height: auto;
-        border-bottom: 2px solid #24292f;
+        height: 220px; // Adjusted height
+        object-fit: cover; // Ensures image fits properly
+        border-radius: 8px;
+        margin-bottom: 5px; // Reduced space below image
       }
+    
       .match-info {
-        padding: 10px;
+        margin-top: 5px; // Reduced spacing
+    
         .match-title {
-          color: #ffffff;
+          font-size: 14px;
+          font-weight: bold;
+          color: #070707;
+          margin-bottom: 3px; // Reduced spacing
         }
+    
         .match-timer {
+          font-size: 12px;
           color: #ff4d4f;
           font-weight: bold;
         }
       }
     }
+    
 
-    .buttons-section {
-      .action-button {
-        width: 100%;
+    .buttons-container {
+      text-align: center;
+    
+      button {
+        margin:3px;
+        width: 120px;
         height: 40px;
+        font-size: 16px;
         font-weight: bold;
-        border-radius: 8px;
+        border-radius: 5px;
 
-        &.deposit-button {
-          background-color: #52c41a;
-          color: #fff;
-        }
-
-        &.withdraw-button {
-          background-color: #ff4d4f;
-          color: #fff;
-        }
-
-        &.newuser-button {
-          background-color: #faad14;
-          color: #fff;
-        }
+      }
+    
+      .green-button {
+        background-color: #2ca430;
+        color: white;
+        border: 0.5px solid white;
+      }
+    
+      .red-button {
+        background-color: #e23125;
+        color: white;
+        border: 0.5px solid white;
+      }
+    
+      .blue-button {
+        background-color: #43a1ee;
+        color: white;
+        border: 0.5px solid white;
+      }
+    
+      button:hover {
+        opacity: 0.9;
       }
     }
 
     .players-card {
-      background-color: #161b22;
       border-radius: 10px;
-
+      border:0.5px solid black;
       .players-icon {
         width: 40px;
         height: 40px;
       }
 
       .players-text {
-        color: #ffffff;
+        color: #070707;
         font-weight: bold;
         font-size: 16px;
         margin-left:10px;
@@ -79,7 +105,8 @@
 
       .arrow-button {
         font-size: 20px;
-        color: #ffffff;
+        background-color: yellow;
+        color: #040404;
       }
     }
 

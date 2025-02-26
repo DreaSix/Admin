@@ -1,0 +1,73 @@
+.payment-container {
+    max-width: 600px;
+    margin-top: 70px;
+    padding: 16px;
+  
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+  
+      .add-account-btn {
+        background-color: yellow;
+        border: none;
+        font-weight: bold;
+      }
+    }
+  
+    .payment-list {
+  
+      .payment-card {
+        border: 1px solid #d9d9d9;
+        border-radius: 8px;
+        padding: 16px;
+        margin-bottom: 12px;
+        background-color: #f9f9f9;
+        transition: transform 0.2s ease-in-out;
+  
+        &:hover {
+          transform: scale(1.02);
+        }
+  
+        .payment-info {
+          font-size: 14px;
+          color: #333;
+          margin-bottom: 8px;
+        }
+
+        .bold-heading {
+            font-weight: bold;
+            font-size: 16px;
+            color: #000;
+            margin-bottom: 6px;
+          }
+  
+        .qr-code {
+          width: 80px;
+          height: 80px;
+          border-radius: 4px;
+          margin-top: 8px;
+        }
+  
+        .action-buttons {
+          display: flex;
+          gap: 8px;
+          margin-top: 12px;
+  
+          .edit-btn {
+            background-color: #1890ff;
+            color: white;
+            border: none;
+          }
+  
+          .delete-btn {
+            background-color: #ff4d4f;
+            color: white;
+            border: none;
+          }
+        }
+      }
+    }
+  }
+  

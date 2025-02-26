@@ -3,88 +3,79 @@ import { Card, Button } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { paymentService } from "../../Service/PaymentService";
 import { useNavigate } from "react-router";
-
+import "./AccountDetails.scss"; // Import SCSS file
 
 const PaymentList = () => {
-    const navigate = useNavigate();
-    const [accountDetails, setAccoutDetails] = useState([])
+  const navigate = useNavigate();
+  const [accountDetails, setAccountDetails] = useState([]);
 
   useEffect(() => {
-    getAccountDetails()
-  },[])
+    getAccountDetails();
+  }, []);
 
   const getAccountDetails = () => {
-    paymentService.getAllPayments()
-        .then(response => {
-            setAccoutDetails(response?.data)
-        })
-        .catch(error => {
-            console.log('error', error)
-        })
-  }
+    paymentService
+      .getAllPayments()
+      .then((response) => {
+        setAccountDetails(response?.data);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  };
 
   const onEdit = (payment) => {
-  }
+    console.log("Edit:", payment);
+  };
 
   const onDelete = (id) => {
-    console.log('id', id)
-  }
+    console.log("Delete ID:", id);
+  };
 
   return (
-    <main>
-    <div className="p-4 max-w-md mx-auto">
-      <div className=" items-center mb-4" style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
-        <Button style={{backgroundColor:"yellow"}} icon={<PlusCircleOutlined />} onClick={() => navigate("/create-account")}>
+    <main className="payment-container">
+      <div className="header-container">
+        <Button
+          className="add-account-btn"
+          icon={<PlusCircleOutlined />}
+          onClick={() => navigate("/create-account")}
+        >
           Add Account
         </Button>
       </div>
 
-      <div className="space-y-4">
-      {accountDetails.map((payment) => (
-        <Card key={payment.id} className="p-4 rounded-lg shadow">
-          <div className="flex justify-between items-start">
-
+      <div className="payment-list">
+        {accountDetails.map((payment) => (
+          <Card key={payment.id} className="payment-card">
+            <div className="payment-info">
               {payment.paymentMethod === "UPI" ? (
-                <div className="mt-2 text-sm">
+                <>
                   <p>UPI ID: {payment.upiId}</p>
                   <p>Phone: {payment.upiPhone}</p>
                   <img
                     src={payment.qrCodeUrl}
                     alt="QR Code"
-                    className="w-20 h-20 mt-2 rounded"
+                    className="qr-code"
                   />
-                </div>
+                </>
               ) : (
-                <div className="mt-2 text-sm">
-                  <p>Account Name: {payment.accountName}</p>
-                  <p>Account No: {payment.accountNumber}</p>
-                  <p>IFSC Code: {payment.ifscCode}</p>
-                  <p>Bank: {payment.bankName}</p>
-                </div>
+                <>
+                  <p><span style={{fontWeight:"bold"}}>Account Name : </span> {payment.accountName}</p>
+                  <p><span style={{fontWeight:"bold"}}>Account Number : </span>{payment.accountNumber}</p>
+                  <p><span style={{fontWeight:"bold"}}>IFSC Code : </span>{payment.ifscCode}</p>
+                  <p><span style={{fontWeight:"bold"}}>Bank : </span>{payment.bankName}</p>
+                </>
               )}
             </div>
 
-            {/* Action Buttons */}
-            <div className="space-x-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => onEdit(payment)}
-              >
-                Edit
-              </Button>
-              <Button
-                variant="destructive"
-                size="sm"
-                onClick={() => onDelete(payment.id)}
-              >
+            <div className="action-buttons">
+              <Button className="delete-btn" onClick={() => onDelete(payment.id)}>
                 Delete
               </Button>
             </div>
-        </Card>
-      ))}
-    </div>
-    </div>
+          </Card>
+        ))}
+      </div>
     </main>
   );
 };
