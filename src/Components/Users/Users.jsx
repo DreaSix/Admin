@@ -48,7 +48,7 @@ const Users = () => {
 
   return (
     <main>
-    <div className="user-table-container" style={{ background: "linear-gradient(to top, #99ccff 0%, #003366 100%)" }}>
+    <div className="user-table-container">
       <div className="search-bar">
         <Input
           placeholder="Search User Name / ID"
