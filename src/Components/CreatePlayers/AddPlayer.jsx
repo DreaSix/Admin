@@ -38,6 +38,7 @@ const AddPlayer = () => {
   };
 
   return (
+    <main>
     <div className="create-player-container">
       <h1>Create Player</h1>
       <Form form={form} layout="vertical" onFinish={onFinish}>
@@ -78,6 +79,7 @@ const AddPlayer = () => {
         </Form.Item>
       </Form>
     </div>
+    </main>
   );
 };
 

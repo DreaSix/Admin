@@ -67,6 +67,7 @@ const Transactions = () => {
   ];
 
   return (
+    <main>
     <div className="deposit-withdraw-container">
       {/* Tabs */}
       <div className="tab-buttons">
@@ -106,6 +107,7 @@ const Transactions = () => {
         bordered
       />
     </div>
+    </main>
   );
 };
 

@@ -31,11 +31,11 @@ const PaymentList = () => {
   }
 
   return (
+    <main>
     <div className="p-4 max-w-md mx-auto">
       <div className=" items-center mb-4" style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
-        <h2 className="text-lg font-semibold">Payments</h2>
-        <Button type="primary" icon={<PlusCircleOutlined />} onClick={() => navigate("/create-account")}>
-          Add Payment
+        <Button style={{backgroundColor:"yellow"}} icon={<PlusCircleOutlined />} onClick={() => navigate("/create-account")}>
+          Add Account
         </Button>
       </div>
 
@@ -85,6 +85,7 @@ const PaymentList = () => {
       ))}
     </div>
     </div>
+    </main>
   );
 };
 

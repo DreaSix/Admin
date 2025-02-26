@@ -56,6 +56,7 @@ const MatchDetails = () => {
   };
 
   return (
+    <main>
     <div>
       <div className="cricket-page-container">
         <div className="player-list-container">
@@ -118,6 +119,7 @@ const MatchDetails = () => {
       </div>
       <Footer />
     </div>
+    </main>
   );
 };
 

@@ -20,7 +20,8 @@ const CreateAccount = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-4">
+    <main>
+    <div className="max-w-md mx-auto p-50">
       <Card className="accountBody">
       <Form
           name="paymentForm"
@@ -29,7 +30,7 @@ const CreateAccount = () => {
             paymentMethod: "BANK",
           }}
         >
-          <h2 className="text-xl font-bold mb-4">Payment Details</h2>
+          <h2 className="text-xl font-bold mb-4">Account Details</h2>
 
           {/* Payment Method Selection */}
           <Form.Item name="paymentMethod" label="Select Payment Method" className="mb-4">
@@ -94,7 +95,7 @@ const CreateAccount = () => {
 
               <Form.Item
                 name="upiPhone"
-                label="UPI Phone"
+                label="Mobile Number "
                 rules={[
                   {
                     required: true,
@@ -127,15 +128,7 @@ const CreateAccount = () => {
               </Form.Item>
             </>
           )}
-
-          {/* Amount */}
-          <Form.Item
-            name="amount"
-            label="Amount"
-            rules={[{ required: true, message: "Please input the amount!" }]}
-          >
-            <Input type="number" />
-          </Form.Item>
+          
 
           {/* Submit Button */}
           <Form.Item>
@@ -147,6 +140,7 @@ const CreateAccount = () => {
 
       </Card>
     </div>
+    </main>
   );
 };
 

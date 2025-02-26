@@ -1,6 +1,7 @@
 .user-table-container {
     padding: 20px;
     color: white;
+    background: linear-gradient(to right, #1c3a56, #005f73);
   
     .search-bar {
       margin-bottom: 20px;
@@ -14,7 +15,7 @@
         color: #000000;
   
         &:focus {
-          border-color: #1890ff; // Blue border on focus
+          border-color: #00050a; // Blue border on focus
           box-shadow: 0 0 5px rgba(24, 144, 255, 0.5);
         }
   
@@ -29,30 +30,29 @@
     }
   
     .ant-table {
-      background-color: #002140; // Table background
+     
       border-radius: 8px;
       overflow: hidden;
   
       .ant-table-thead > tr > th {
-        background-color: #003a6c; // Header background
-        color: white;
+        background-color: #00606c; // Header background
+        color: rgb(9, 0, 0);
         font-size: 16px;
         text-align: center;
       }
   
       .ant-table-tbody > tr > td {
-        color: white;
+        border:1px solid #130b0b;
+        color: rgb(254, 254, 254);
         font-size: 14px;
         text-align: center;
-        border-color: #003a6c;
+        background: linear-gradient(to right, #1c3a56, #005f73);
+
   
-        &:hover {
-          background-color: #004d80; // Hover effect for rows
-        }
       }
   
       .ant-table-bordered {
-        border-color: #003a6c;
+        border-color: #060606;
       }
     }
   }

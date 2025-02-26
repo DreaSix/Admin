@@ -29,6 +29,7 @@ const CreatePlayers = () => {
   };
 
   return (
+    <main>
     <div className="player-list-container">
       <div className="search-bar">
         <Input
@@ -56,6 +57,7 @@ const CreatePlayers = () => {
         )}
       </div>
     </div>
+    </main>
   );
 };
 
