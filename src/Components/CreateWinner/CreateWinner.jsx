@@ -5,10 +5,13 @@ import "./CreateWinner.scss";
 import { matchDetails } from "../../Service/MatchDetailsService";
 import { useNavigate } from "react-router";
 import { Option } from "antd/es/mentions";
+import { all } from "axios";
 
 const CreateWinners = () => {
   const navigate = useNavigate();
   const [matches, setMatches] = useState([])
+  const [selectedMatchId, setSelectedMatchId] = useState()
+  const [playerDetails, setPlayerDetails] = useState([])
   const [form] = Form.useForm();
 
   const handleSubmit = (values) => {
@@ -40,6 +43,30 @@ const CreateWinners = () => {
       })
   }
 
+  useEffect(() => {
+      getPlayerDetailsByMatchId();
+    }, [selectedMatchId]);
+  
+    const getPlayerDetailsByMatchId = () => {
+      matchDetails
+        .getMatchPlayerDetails(selectedMatchId)
+        .then((response) => {
+          const allPlayers = response.data.flatMap(match => 
+            Object.values(match?.playersDtoMap || {})
+          );
+
+          setPlayerDetails(allPlayers)
+      
+        })
+        .catch((error) => {
+          console.log("error", error);
+        });
+    };
+
+    const handleMatchChange = (value) => {
+      setSelectedMatchId(value)
+    }
+
   return (
     <div className="create-winners-container">
       <h2>Create Winners</h2>
@@ -60,31 +87,26 @@ const CreateWinners = () => {
         <Form.Item
           name="matchId"
           label="Match Name"
-          rules={[{ required: true, message: "Please enter match name" }]}
+          rules={[{ required: true, message: "Please select match" }]}
         >
-          <Select>
+          <Select onChange={handleMatchChange}>
             {matches?.map(match => (
               <Option value={match?.matchId}>{match?.matchName}</Option>
             ))}
           </Select>
         </Form.Item>
 
-        {/* <Form.Item
-          name="winnerImage"
-          label="Upload Image"
-          valuePropName="fileList"
-          getValueFromEvent={(e) => (Array.isArray(e) ? e : e?.fileList)}
-          rules={[{ required: true, message: "Please upload an image" }]}
+        <Form.Item
+          name="playerId"
+          label="Player Name"
+          rules={[{ required: true, message: "Please select player" }]}
         >
-          <Upload
-            name="logo"
-            listType="picture"
-            maxCount={1}
-            accept="image/*"
-          >
-            <Button icon={<UploadOutlined />}>Upload</Button>
-          </Upload>
-        </Form.Item> */}
+          <Select>
+            {playerDetails?.map(player => (
+              <Option value={player?.playerId}>{player?.playerName}</Option>
+            ))}
+          </Select>
+        </Form.Item>
 
         <Form.Item
           name="winnerAmount"
