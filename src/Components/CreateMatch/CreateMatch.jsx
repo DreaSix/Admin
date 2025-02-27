@@ -59,7 +59,7 @@ const CreateMatch = () => {
           name="matchName"
           rules={[{ required: true, message: "Please enter the match name" }]}
         >
-          <Input style={{border:"1px solid white"}} placeholder="Enter match name" />
+          <Input style={{border:"0.5px solid black"}}  placeholder="Enter match name" />
         </Form.Item>
 
         {/* Upload Match Image */}
@@ -75,22 +75,22 @@ const CreateMatch = () => {
             maxCount={1}
             accept="image/*"
           >
-            <Button icon={<UploadOutlined />}>Upload</Button>
+            <Button style={{border:"0.5px solid black"}}  icon={<UploadOutlined />}>Upload</Button>
           </Upload>
         </Form.Item>
 
         {/* Match Time */}
-        <Form.Item
+        {/* <Form.Item
           label="Match Time"
           name="matchTime"
           rules={[{ required: true, message: "Please select a match time" }]}
         >
-          <Select style={{border:"0.5px solid white"}} placeholder="Select an option">
+          <Select style={{border:"0.5px solid black"}}  placeholder="Select an option">
             <Option value="morning">Morning</Option>
             <Option value="afternoon">Afternoon</Option>
             <Option value="evening">Evening</Option>
           </Select>
-        </Form.Item>
+        </Form.Item> */}
 
         {/* Countdown Start Time */}
         {/* <Form.Item
@@ -116,7 +116,7 @@ const CreateMatch = () => {
           <TimePicker
             placeholder="Select end time"
             suffixIcon={<ClockCircleOutlined />}
-            style={{ width: "100%" , border:"0.5px solid white" }}
+            style={{ width: "100%" , border:"0.5px solid black" }}
           />
         </Form.Item>
 
@@ -126,7 +126,7 @@ const CreateMatch = () => {
           name="teamOneName"
           rules={[{ required: true, message: "Please enter team-1 name" }]}
         >
-          <Input style={{border:"1px solid white"}} placeholder="Team-1 name" />
+          <Input style={{border:"0.5px solid black"}} placeholder="Team-1 name" />
         </Form.Item>
 
         {/* Team-2 Name */}
@@ -135,7 +135,7 @@ const CreateMatch = () => {
           name="teamTwoName"
           rules={[{ required: true, message: "Please enter team-2 name" }]}
         >
-          <Input style={{border:"1px solid white"}} placeholder="Team-2 name" />
+          <Input style={{border:"0.5px solid black"}}  placeholder="Team-2 name" />
         </Form.Item>
 
         {/* Match Auction */}
@@ -144,7 +144,7 @@ const CreateMatch = () => {
           name="matchAction"
           rules={[{ required: true, message: "Please select an auction type" }]}
         >
-          <Select style={{border:"1px solid white"}} placeholder="Select an option">
+          <Select style={{border:"0.5px solid black"}}  placeholder="Select an option">
             <Option value="topSixer"> Top Sixer </Option>
             <Option value="topScorer"> Top Scorer </Option>
           </Select>

@@ -14,15 +14,14 @@
     .create-match-form {
       .ant-form-item-label {
         label {
-          color: white;
+          color: rgb(11, 11, 11);
         }
       }
   
       .ant-input,
       .ant-select-selector,
       .ant-picker {
-        background-color: #102942;
-        color: white;
+        color: rgb(3, 3, 3);
         border: none;
       }
   
