@@ -1,10 +1,17 @@
 .withdrawl-container {
     padding: 20px;
+    margin-top: 0px;;
   
     h2 {
       text-align: center;
       margin-bottom: 20px;
-      color: #f6f7f9;
+      color: #030303;
+ background-color: hwb(59 30% 0%);
+ width:300px;
+ border-radius: 5px;
+ margin-left: 50px;
+ 
+    
     }
   
     .ant-table {

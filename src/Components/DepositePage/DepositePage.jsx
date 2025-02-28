@@ -90,7 +90,7 @@ const DepositePage = () => {
   return (
     <main>
     <div className="deposit-container">
-      <h2>Deposit Transactions</h2>
+      <h2>Deposite Transactions</h2>
       <div className="search-bar">
         <Input
         style={{marginBottom:"13px"}}

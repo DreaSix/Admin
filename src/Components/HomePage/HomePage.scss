@@ -24,10 +24,14 @@
       padding: 5px; // Reduced padding
       text-align: center;
       width: 100%;
+
+      .ant-card-body {
+        padding: 0; // This removes default padding of Ant Design Card body
+      }
     
       .match-image {
         width: 100%;
-        height: 220px; // Adjusted height
+        height: 400px; // Adjusted height
         object-fit: cover; // Ensures image fits properly
         border-radius: 8px;
         margin-bottom: 5px; // Reduced space below image
