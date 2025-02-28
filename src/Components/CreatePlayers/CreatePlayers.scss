@@ -1,5 +1,4 @@
 .player-list-container {
-    background-color: #0a192f;
     padding: 20px;
     min-height: 100vh;
     color: #fff;
@@ -13,12 +12,11 @@
       .search-input {
         flex: 1;
         margin-right: 10px;
-        background-color: #112b43;
-        color: #fff;
+       border:0.5px solid black;
         border-radius: 8px;
   
         input {
-          color: #fff;
+          color:black;
         }
   
         .ant-input-prefix {

@@ -2,18 +2,17 @@
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #141414; // Dark background
-    color: #fff;
+ 
+    color: #000000;
     border-radius: 10px;
   
     h1 {
-      text-align: center;
-      color: #ffd700; // Gold color
+      color: #050505; // Gold color
       font-size: 1.5rem; // Scales for smaller screens
     }
   
     .ant-form-item-label > label {
-      color: #fff; // White text for labels
+      color: #010101; // White text for labels
     }
   
     .ant-upload.ant-upload-select-picture-card {
@@ -29,7 +28,11 @@
   
     .ant-btn-primary {
       background-color: #ffd700; // Gold button
-      border-color: #ffd700;
+      border-color: #000000;
+      padding:10px;
+      margin-top: 10px;
+     display: flex;
+      align-items:center ;
   
       &:hover {
         background-color: #e6be00;

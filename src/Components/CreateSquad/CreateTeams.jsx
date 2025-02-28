@@ -164,6 +164,7 @@ const CreateTeams = () => {
       <div className="player-row">
         <div className="player-label">Player</div>
         <Input.Search
+         style={{border:"0.5px solid gray"}}
           placeholder="Enter Player Name"
           value={searchTerm}
           onChange={(e) => handleSearchChange(e.target.value)}
@@ -230,7 +231,7 @@ const CreateTeams = () => {
   return (
     <main>
       <div className="player-selection-container">
-      <Tabs defaultActiveKey="1" onChange={handleTabChange}>
+      <Tabs defaultActiveKey="1" className="custom-tabs " onChange={handleTabChange}>
         <TabPane tab={matchData?.teamOneName} key="1">
           <Form onFinish={addTeam1Players} layout="vertical" className="player-form">
             {renderPlayerInputs("team1", team1Players)}

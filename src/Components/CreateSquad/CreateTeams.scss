@@ -1,12 +1,25 @@
 .player-selection-container {
     padding: 20px;
+
+    .custom-tabs {
+      .ant-tabs-nav {
+        justify-content: center;
   
-    .ant-tabs {
-      .ant-tabs-tab {
-        color: #000;
-        font-weight: bold;
-        &.ant-tabs-tab-active {
-          background-color: #ffd700; // Yellow active tab
+        .ant-tabs-tab {
+          border-radius: 4px;
+          transition: background-color 0.3s, color 0.3s;
+  
+          &.ant-tabs-tab-active {
+            background-color: #f7eb0f;
+            padding: 10px;
+            border-radius: 5px;
+            border: 0.5px solid black;
+          }
+  
+          .ant-tabs-tab-btn {
+            font-weight: bold;
+            color: rgb(14, 14, 14);
+          }
         }
       }
     }

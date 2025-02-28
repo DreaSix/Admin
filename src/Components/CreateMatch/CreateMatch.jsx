@@ -47,7 +47,6 @@ const CreateMatch = () => {
   return (
     <main>
     <div className="create-match-container">
-      <h2>Create Match</h2>
       <Form
         layout="vertical"
         onFinish={onFinish}

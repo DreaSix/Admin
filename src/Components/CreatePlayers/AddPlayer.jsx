@@ -40,7 +40,7 @@ const AddPlayer = () => {
   return (
     <main>
     <div className="create-player-container">
-      <h1>Create Player</h1>
+      {/* <h1>Create Player</h1> */}
       <Form form={form} layout="vertical" onFinish={onFinish}>
         {/* Match Name */}
         <Form.Item
@@ -48,19 +48,20 @@ const AddPlayer = () => {
           name="playerName"
           rules={[{ required: true, message: 'Please enter a match name' }]}
         >
-          <Input placeholder="Enter match name" />
+          <Input style={{border:"0.5px solid gray"}} placeholder="Enter match name" />
         </Form.Item>
 
         {/* Upload Match Image */}
-        <Form.Item label="Upload Match Image" name="playerImage">
+        <Form.Item  label="Upload Match Image" name="playerImage">
           <Upload
             listType="picture-card"
             accept="image/*"
             maxCount={1}
             beforeUpload={() => false} // Disable automatic upload
+
           >
-            <div>
-              <UploadOutlined />
+            <div >
+              <UploadOutlined  style={{border:"0.5px solid gray", padding:"10px"}} />
               <p>Click to upload</p>
             </div>
           </Upload>
@@ -68,7 +69,7 @@ const AddPlayer = () => {
 
         {/* Country / Francis Name */}
         <Form.Item label="Country / Francis Name (Optional)" name="countryName">
-          <Input placeholder="Enter country or Francis name" />
+          <Input style={{border:"0.5px solid gray"}} placeholder="Enter country or Francis name" />
         </Form.Item>
 
         {/* Save Button */}
