@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, Button } from "antd";
+import { Card, Button, message } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { paymentService } from "../../Service/PaymentService";
 import { useNavigate } from "react-router";
@@ -29,7 +29,14 @@ const PaymentList = () => {
   };
 
   const onDelete = (id) => {
-    console.log("Delete ID:", id);
+    paymentService.deletePayment(id)
+      .then(response => {
+        message.success("Account deleted successfully")
+        getAccountDetails()
+      })
+      .catch(error => {
+        message.error("Error while deleting account")
+      })
   };
 
   return (
