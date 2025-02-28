@@ -1,27 +1,16 @@
 .create-winners-container {
     color: #fff;
     max-width: 400px;
-    margin: 50px auto;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  
-    h2 {
-      text-align: center;
-      color: #ffd700;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
   
     .create-winners-form {
       .ant-form-item-label > label {
-        color: #fff;
+        color: #080808;
       }
   
       .ant-input,
       .ant-select-selector {
-        background-color: #112b43;
-        color: #fff;
       }
   
       .ant-input::placeholder,
