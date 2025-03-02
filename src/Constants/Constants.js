@@ -1,8 +1,10 @@
 export const ADMIN_BASE_URL = "http://localhost:8080";
+// export const BASE_URL = "https://ec2-13-60-233-23.eu-north-1.compute.amazonaws.com:8082";
+
 
 export const LOGIN_URL = ADMIN_BASE_URL + "/api/auth/login";
 
-//Create Match
+//Create Match  
 export const CREATE_MATCH_URL = ADMIN_BASE_URL + "/api/match-details";
 
 export const GET_PLAYERS = ADMIN_BASE_URL + "/api/player-details/get";
