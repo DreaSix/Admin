@@ -1,4 +1,4 @@
-import { APPROVE_TRANSACTION_END_POINT, GET_ALL_TRANSACTIONS } from "../Constants/Constants"
+import { ACCEPT_WITHDRAW, APPROVE_TRANSACTION_END_POINT, GET_ALL_TRANSACTIONS } from "../Constants/Constants"
 import { GetAPIRequest, PostAPIRequest, PutAPIRequest } from "./Api"
 
 const getAllTransactions = () => {
@@ -7,10 +7,10 @@ const getAllTransactions = () => {
     })
 }
 
-const updateTransactions = (id, params) => {
-    return PostAPIRequest({
-        url: GET_ALL_TRANSACTIONS + "/" + id,
-        params
+const updateTransactions = (payload) => {
+    return PutAPIRequest({
+        url: GET_ALL_TRANSACTIONS + ACCEPT_WITHDRAW,
+        data: payload
     })
 }
 
@@ -20,6 +20,7 @@ const approveTransaction = (id, params) => {
         params
     })
 }
+
 
 export const transactionService = {
     getAllTransactions,

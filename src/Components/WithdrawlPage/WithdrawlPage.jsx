@@ -25,11 +25,11 @@ const WithdrawlPage = () => {
   }
 
   const handleClickAccept = (record) => {
-    const params = {
-      status: true,
-      userId: record?.userId
+    const payload = {
+      approvalStatus: "APPROVED",
+      transactionId: record?.id
     }
-    transactionService.updateTransactions(record?.id, params)
+    transactionService.updateTransactions(payload)
       .then(response => {
         getWithdrawTransactions()
         message.success("Transaction updated successfully")
