@@ -132,9 +132,9 @@ const WithdrawlPage = () => {
           <p>
             <strong>IFSC Code:</strong> {selectedTransaction.ifscCode}
           </p>
-          <p>
+          {/* <p>
             <strong>UPI ID:</strong> {selectedTransaction.upiId}
-          </p>
+          </p> */}
         </Modal>
       )}
     </div>
