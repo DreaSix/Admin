@@ -5,6 +5,7 @@ import Footer from "../Footer/Footer";
 import { useParams } from "react-router";
 import { matchDetails } from "../../Service/MatchDetailsService";
 import { bidService } from "../../Service/BidService";
+import ChatBox from "../Chatbox/Chatbox";
 
 const players = [
   {
@@ -200,8 +201,7 @@ const Auction = () => {
           </div>
         )}
 
-        {/* Bids Section */}
-        <div className="bids-section">
+        {/* <div className="bids-section">
           {[
             { name: "Raju", bid: 1100 },
             { name: "Elisha", bid: 1200 },
@@ -218,9 +218,11 @@ const Auction = () => {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
 
-        <div className="actions-footer">
+        <ChatBox />
+
+        {/* <div className="actions-footer">
           <div className="actions">
             <Button className="action-btn unsold">1</Button>
             <Button className="action-btn any-one">2</Button>
@@ -230,7 +232,7 @@ const Auction = () => {
             <Button className="action-btn unsold">Sold</Button>
             <Button className="action-btn unsold">Unsold</Button>
           </div>
-        </div>
+        </div> */}
 
         <div>
           <Footer />

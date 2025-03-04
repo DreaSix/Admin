@@ -195,50 +195,7 @@
     
       
   
-    .actions-footer {
-      padding: 10px;
-      text-align: center;
-      background-color: #090909;
-      box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .actions {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-
-    .action-btn {
-      padding: 10px;
-      font-size: 14px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      width: 100%;
-      max-width: 150px;
-  
-      &.unsold {
-        background-color: #dc3545; /* Red */
-        color: white;
-      }
-  
-      &.any-one {
-        background-color: #ffc107; /* Yellow */
-        color: black;
-      }
-  
-      &.last-chance {
-        background-color: #17a2b8; /* Blue */
-        color: white;
-      }
-  
-      &.all-drop {
-        background-color: #6c757d; /* Gray */
-        color: white;
-      }
-    }
+    
   }
   
   /* Mobile Responsiveness */

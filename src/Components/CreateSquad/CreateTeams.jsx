@@ -224,9 +224,6 @@ const CreateTeams = () => {
   
     setSelectedPlayers(updatedPlayers);
   };
-  
-
-
 
   return (
     <main>

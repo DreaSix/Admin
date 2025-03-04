@@ -1,0 +1,175 @@
+.chat-container {
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: 100%;
+    max-width: 400px;
+    // background: #fff;
+    border-radius: 5px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+
+  .send-btn {
+    background-color: #ffeb3b;
+    border: none;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 50%;
+  }
+  
+  h3 {
+    margin: 0 0 10px;
+  }
+  
+  .chat-box {
+    height: 250px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 5px;
+    background: linear-gradient(to right, #1c3a56, #005f73);
+  }
+  
+  .chat-message {
+    padding: 5px;
+    margin: 5px 0;
+    background: linear-gradient(to right, #1c3a56, #005f73);
+    border-radius: 5px;
+  }
+  
+  .chat-message.own {
+    background: #d1f0ff;
+    text-align: right;
+  }
+  
+  .chat-input {
+    display: flex;
+    gap: 5px;
+  }
+  
+  input {
+    flex: 1;
+    padding: 5px;
+  }
+  
+  button {
+    padding: 5px;
+    cursor: pointer;
+  }
+
+  .bids-section {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+
+    .bid-card {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      padding: 8px;
+      border-bottom: 1px solid #ddd;
+
+      .bid-user {
+        width: 32px;
+        height: 32px;
+        background: #b30883;
+        color: white;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+
+      .bid-info {
+        display: flex;
+        flex-direction: column;
+
+        .bid-name {
+          font-weight: bold;
+          color: #fafbfc;
+        }
+
+        .bid-amount {
+          font-size: 14px;
+          color: #f8e811;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  .bidding-footer {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+
+    button {
+      background-color: #ffd700;
+      color: #000;
+      font-weight: bold;
+    }
+  }
+
+  .actions-footer {
+    padding: 10px;
+    text-align: center;
+    background-color: #090909;
+    box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .actions {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  .action-btn {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    max-width: 150px;
+
+    &.unsold {
+      background-color: #dc3545; /* Red */
+      color: white;
+    }
+
+    &.any-one {
+      background-color: #ffc107; /* Yellow */
+      color: black;
+    }
+
+    &.last-chance {
+      background-color: #17a2b8; /* Blue */
+      color: white;
+    }
+
+    &.all-drop {
+      background-color: #6c757d; /* Gray */
+      color: white;
+    }
+  }
+
+
+  @media (max-width: 768px) {
+    .chat-container {
+  
+      .actions {
+        flex-wrap: wrap;
+        justify-content: center;
+        
+        .action-btn {
+          width: 100%;
+          max-width: 150px;
+        }
+      }
+    }
+  }
+  
