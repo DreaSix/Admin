@@ -55,12 +55,13 @@ const ChatBox = ({ currentBidId }) => {
         messageContent: message.toString(),
       };
 
+      console.log('messageData', messageData)
+
       client.publish({
         destination: "/app/chat/sendMessage",
         body: JSON.stringify(messageData),
       });
 
-      // Append the new message to the state
       setMessages([
         ...messages,
         { username, messageContent: message.toString() },
@@ -77,13 +78,13 @@ const ChatBox = ({ currentBidId }) => {
       <body className="chat-container">
         <div className="bids-section">
           {messages.map((bid, index) =>
-            bid?.username?.username === username ? (
-              <div className="bid-card" key={index}>
-                <div className="bid-user">{bid?.name?.charAt(0)}</div>
+            bid?.username === username ? (
+              <div className="own-bid-card" key={index}>
                 <div className="bid-info">
                   <span className="bid-name">{bid?.name}</span>
                   <span className="bid-amount">{bid?.message}</span>
                 </div>
+                <div className="bid-user">{bid?.name?.charAt(0)}</div>
               </div>
             ) : (
               <div className="bid-card" key={index}>

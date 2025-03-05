@@ -33,6 +33,7 @@ const Auction = () => {
   const [nextPlayers, setNextPlayers] = useState([]);
   const [soldPlayers, setSoldPlayers] = useState([]);
   const [selectedPlayer, setSelectedPlayer] = useState();
+  const [bidId, setBidId] = useState()
 
   useEffect(() => {
     if (matchId) {
@@ -104,6 +105,7 @@ const Auction = () => {
       .createBid(params)
       .then((response) => {
         console.log("response", response);
+        setBidId(response?.id)
         setSelectedPlayer(player);
       })
       .catch((error) => {
@@ -201,38 +203,7 @@ const Auction = () => {
           </div>
         )}
 
-        {/* <div className="bids-section">
-          {[
-            { name: "Raju", bid: 1100 },
-            { name: "Elisha", bid: 1200 },
-            { name: "Ramesh", bid: 1300 },
-            { name: "Khayum", bid: 1400 },
-            { name: "Pavan", bid: 1500 },
-            { name: "Elisha", bid: 1600 },
-          ].map((bid, index) => (
-            <div className="bid-card" key={index}>
-              <div className="bid-user">{bid.name.charAt(0)}</div>
-              <div className="bid-info">
-                <span className="bid-name">{bid.name}</span>
-                <span className="bid-amount">{bid.bid}</span>
-              </div>
-            </div>
-          ))}
-        </div> */}
-
-        <ChatBox />
-
-        {/* <div className="actions-footer">
-          <div className="actions">
-            <Button className="action-btn unsold">1</Button>
-            <Button className="action-btn any-one">2</Button>
-            <Button className="action-btn any-one">Any One</Button>
-            <Button className="action-btn last-chance">Last Chance</Button>
-            <Button className="action-btn all-drop">All Drop ?</Button>
-            <Button className="action-btn unsold">Sold</Button>
-            <Button className="action-btn unsold">Unsold</Button>
-          </div>
-        </div> */}
+        <ChatBox currentBidId={bidId} />
 
         <div>
           <Footer />
