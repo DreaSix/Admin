@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Client } from "@stomp/stompjs";
+import axios from "axios";
 import SockJS from "sockjs-client";
 import Cookies from "js-cookie";
 import { Button } from "antd"; // Using Ant Design buttons
@@ -10,6 +11,35 @@ const ChatBox = ({ currentBidId }) => {
   const [messages, setMessages] = useState([]);
   const [username, setUsername] = useState(Cookies.get("username"));
   const [client, setClient] = useState(null);
+
+  console.log('currentBidId', currentBidId)
+
+  useEffect(() => {
+    if (!currentBidId) return; 
+    const accessToken = Cookies.get("jwtToken")
+    const fetchOldMessages = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/api/chat/chat/getMatchMessages/${currentBidId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`, // Add access token to headers
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log('response?.data', response?.data?.data)
+        const sortedMessages = response?.data?.data?.responseDTOList.sort(
+          (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
+        );
+        console.log('sortedMessages', sortedMessages)
+        setMessages(sortedMessages);
+      } catch (error) {
+        console.error("Error fetching old messages:", error);
+      }
+    };
+
+    fetchOldMessages();
+  }, [currentBidId]);
 
   useEffect(() => {
     const socket = new SockJS("http://localhost:8080/ws");

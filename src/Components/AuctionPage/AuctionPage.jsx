@@ -80,6 +80,8 @@ const Auction = () => {
         );
 
         setSelectedPlayer(biddingPlayer[0]);
+        setBidId(biddingPlayer[0]?.bidId)
+
 
         const soldPlayers = response.data.flatMap((match) =>
           Object.values(match?.playersDtoMap || {}).filter(
