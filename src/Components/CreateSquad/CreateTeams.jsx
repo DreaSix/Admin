@@ -162,7 +162,7 @@ const CreateTeams = () => {
   const renderPlayerInputs = (team, players) => {
     return (
       <div className="player-row">
-        <div className="player-label">Player</div>
+       
         <Input.Search
          style={{border:"0.5px solid gray"}}
           placeholder="Enter Player Name"
@@ -232,13 +232,13 @@ const CreateTeams = () => {
         <TabPane tab={matchData?.teamOneName} key="1">
           <Form onFinish={addTeam1Players} layout="vertical" className="player-form">
             {renderPlayerInputs("team1", team1Players)}
-            <h3>Selected Players:</h3>
+            <h3    style={{ color:"white" }} >Selected Players:</h3>
             {selectedPlayers !== null && selectedPlayers !== undefined && Object.keys(selectedPlayers).length > 0 ? (
-              <List
+              <List 
                 itemLayout="horizontal"
                 dataSource={Object.entries(selectedPlayers)} // Convert object to array
                 renderItem={([playerId, player]) => (
-                  <List.Item
+                  <List.Item 
                     actions={[
                       <Button
                         type="text"
@@ -248,7 +248,7 @@ const CreateTeams = () => {
                       />
                     ]}
                   >
-                    <List.Item.Meta
+                    <List.Item.Meta 
                       avatar={
                         <Avatar
                           src={`data:image/jpeg;base64,${player?.playerImage}`}
