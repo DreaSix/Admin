@@ -76,6 +76,7 @@ const ChatBox = ({ currentBidId }) => {
   }, []);
 
   const sendMessage = (message) => {
+    
     if (client && client.connected) {
 
       const messageData = {
