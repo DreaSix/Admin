@@ -7,25 +7,6 @@ import { matchDetails } from "../../Service/MatchDetailsService";
 import { bidService } from "../../Service/BidService";
 import ChatBox from "../Chatbox/Chatbox";
 
-const players = [
-  {
-    name: "Dhoni",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4wGYdrRQsCseDMXG_OpyGnzPzRhZzbPV2Yw&s",
-  },
-  {
-    name: "Kohli",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmvgF1br3j0w6pHctdBKbZdURoU1zVylWqwTgaH4o3ZgfYVHYeyltUVlYOYcqfOtBovwM&usqp=CAU",
-  },
-  {
-    name: "Devillers",
-    img: "https://static.cricketaddictor.com/wp-content/uploads/2021/03/AB-de-Villiers.png?q=80",
-  },
-  {
-    name: "Maxwell",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcqyHRRD0u_3GmE89M8-Gk_zLwlObLE63HOA&s",
-  },
-];
-
 const Auction = () => {
   const { matchId } = useParams();
   const [showNextPlayers, setShowNextPlayers] = useState(false);
@@ -33,7 +14,8 @@ const Auction = () => {
   const [nextPlayers, setNextPlayers] = useState([]);
   const [soldPlayers, setSoldPlayers] = useState([]);
   const [selectedPlayer, setSelectedPlayer] = useState();
-  const [bidId, setBidId] = useState()
+  const [matchPlayerDetails, setMatchPlayerDetails] = useState();
+  const [bidId, setBidId] = useState();
 
   useEffect(() => {
     if (matchId) {
@@ -67,6 +49,8 @@ const Auction = () => {
           return;
         }
 
+        setMatchPlayerDetails(response?.data);
+
         const unSoldPlayers = response.data.flatMap((match) =>
           Object.values(match?.playersDtoMap || {}).filter(
             (player) => player?.status === "UNSOLD"
@@ -80,8 +64,7 @@ const Auction = () => {
         );
 
         setSelectedPlayer(biddingPlayer[0]);
-        setBidId(biddingPlayer[0]?.bidId)
-
+        setBidId(biddingPlayer[0]?.bidId);
 
         const soldPlayers = response.data.flatMap((match) =>
           Object.values(match?.playersDtoMap || {}).filter(
@@ -107,8 +90,8 @@ const Auction = () => {
       .createBid(params)
       .then((response) => {
         console.log("response", response);
-        setBidId(response?.id)
-        setSelectedPlayer(player);
+        setBidId(response?.id);
+        getPlayerDetailsByMatchId()
       })
       .catch((error) => {
         console.log("error", error);
@@ -160,7 +143,7 @@ const Auction = () => {
                         alt={player.playerName}
                         className="player-img"
                       />
-                      <div className="player-name">{player.playerName}</div>
+                      <div className="player-name">{player?.playerName}</div>
                     </div>
                   ))}
               </div>
@@ -175,13 +158,13 @@ const Auction = () => {
               <div className="players">
                 {Array.isArray(soldPlayers) &&
                   soldPlayers?.map((player) => (
-                    <div className="player-card" key={player.playerName}>
+                    <div className="player-card" key={player?.playerName}>
                       <img
                         src={`data:image/jpeg;base64,${player?.playerImage}`}
                         alt={player.playerName}
                         className="player-img"
                       />
-                      <div className="player-name">{player.playerName}</div>
+                      <div className="player-name">{player?.playerName}</div>
                     </div>
                   ))}
               </div>
@@ -205,7 +188,12 @@ const Auction = () => {
           </div>
         )}
 
-        <ChatBox currentBidId={bidId} />
+        <ChatBox
+          currentBidId={bidId}
+          playerData={selectedPlayer}
+          matchPlayerDetails={matchPlayerDetails}
+          getPlayerDetailsByMatchId={getPlayerDetailsByMatchId}
+        />
 
         <div>
           <Footer />

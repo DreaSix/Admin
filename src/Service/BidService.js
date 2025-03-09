@@ -1,5 +1,5 @@
-import { CREATE_BID } from "../Constants/Constants"
-import { PostAPIRequest } from "./Api"
+import { CREATE_BID, GET_MATCH_PLAYER_DETAILS, SOLD_PLAYER } from "../Constants/Constants"
+import { PostAPIRequest, PutAPIRequest } from "./Api"
 
 const createBid = (params) => {
     return PostAPIRequest({
@@ -8,6 +8,14 @@ const createBid = (params) => {
     })
 }
 
+const soldPlayer = (id, payload) => {
+    return PutAPIRequest({
+        url: GET_MATCH_PLAYER_DETAILS + id + SOLD_PLAYER,
+        data: payload
+    })
+}
+
 export const bidService = {
-    createBid
+    createBid,
+    soldPlayer
 }

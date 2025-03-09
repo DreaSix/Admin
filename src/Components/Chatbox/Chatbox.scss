@@ -209,4 +209,98 @@
       }
     }
   }
+
+  .customModal {
+    
+    .ant-modal-content {
+      border-radius: 12px;
+      background-color: #1C3A56;
+    }
+  }
+  
+  .playerCard {
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #1C3A56;
+  
+    .cardContent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 12px;
+    
+        .playerImage {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    
+        .playerInfo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;  // Center text horizontally
+            gap: 4px;
+    
+            p {
+                margin: 0;
+                font-size: 16px;
+                font-weight: 500;
+            }
+        }
+    
+        .playerName {
+            font-weight: bold;
+            font-size: 20px;
+            color: #ccee22;
+        }
+    
+        .playerSoldBy,
+        .playerPrice {
+            font-size: 14px;
+            color: #fefdfd;
+        }
+    }
+    
+  
+    .buttonGroup {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 16px;
+    
+        // Always in single row, even on mobile
+        flex-direction: row; 
+    
+        // Optional: If you want the buttons to take equal space
+        width: 100%;
+    
+        .actionButton {
+            flex: 1;  // Ensures both buttons take equal width
+            font-weight: bold;
+            color: white;
+        }
+    
+        .undoButton {
+            background-color: red;
+            border: none;
+    
+            &:hover {
+                background-color: darkred;
+            }
+        }
+    
+        .doneButton {
+            background-color: green;
+            border: none;
+    
+            &:hover {
+                background-color: darkgreen;
+            }
+        }
+    }
+    
+  }
+  
   
