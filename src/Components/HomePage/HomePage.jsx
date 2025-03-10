@@ -270,15 +270,15 @@ const HomePage = () => {
               </div>
             </Col>
             <Col>
-              <Text className="winner-name">{winner?.winnerName}</Text>
+              <Text className="winner-name">{winner?.winnerName?.name}</Text>
               <br />
-              <Text className="winner-match">{winner?.matchDetails?.matchName}</Text>
+              <Text className="winner-match">{winner?.matchDetailsResponse?.matchName}</Text>
             </Col>
             <Col flex="auto" />
             <Col>
               <Text className="winner-prize">₹ {winner?.winnerAmount}</Text>
               <br />
-              <Button className="top-sixer-button">{winner?.matchDetails?.matchAction}</Button>
+              <Button className="top-sixer-button">{winner?.matchDetailsResponse?.matchAction}</Button>
             </Col>
           </Row>
         </Card>

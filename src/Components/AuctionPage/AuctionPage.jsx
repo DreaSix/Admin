@@ -165,6 +165,7 @@ const Auction = () => {
                         className="player-img"
                       />
                       <div className="player-name">{player?.playerName}</div>
+                      <div>{player?.soldPrice}</div>
                     </div>
                   ))}
               </div>

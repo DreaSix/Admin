@@ -34,15 +34,15 @@ const Users = () => {
       dataIndex: "phoneNumber",
       key: "phoneNumber",
     },
-    {
-      title: "Password",
-      dataIndex: "password",
-      key: "password",
-    },
+    // {
+    //   title: "Password",
+    //   dataIndex: "password",
+    //   key: "password",
+    // },
     {
       title: "Wallet",
-      dataIndex: "wallet",
-      key: "wallet",
+      dataIndex: "balance",
+      key: "balance",
     },
   ];
 

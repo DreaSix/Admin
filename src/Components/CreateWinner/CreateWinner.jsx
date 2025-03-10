@@ -6,6 +6,7 @@ import { matchDetails } from "../../Service/MatchDetailsService";
 import { useNavigate } from "react-router";
 import { Option } from "antd/es/mentions";
 import { all } from "axios";
+import { getAllPlayers } from "../../Service/UsersService";
 
 const CreateWinners = () => {
   const navigate = useNavigate();
@@ -13,10 +14,28 @@ const CreateWinners = () => {
   const [selectedMatchId, setSelectedMatchId] = useState()
   const [playerDetails, setPlayerDetails] = useState([])
   const [form] = Form.useForm();
+  const [users, setUsers] = useState([])
+
+  useEffect(() => {
+      getAllUsers()
+    }, [])
+  
+    const getAllUsers = () => {
+      getAllPlayers.getAllUsers()
+        .then(response => {
+          setUsers(response?.totalContent)
+        })
+        .catch(error => {
+          console.log('error', error)
+        })
+    }
 
   const handleSubmit = (values) => {
+    const user = playerDetails?.find(player => player?.playerId === values?.playerId)
+    console.log('user', user)
     const payload = {
-      ...values
+      ...values,
+      userId: user?.userResponseVO?.id
     }
     matchDetails
       .createWinner(payload)
@@ -44,7 +63,9 @@ const CreateWinners = () => {
   }
 
   useEffect(() => {
-      getPlayerDetailsByMatchId();
+      if (selectedMatchId){
+        getPlayerDetailsByMatchId()
+      }
     }, [selectedMatchId]);
   
     const getPlayerDetailsByMatchId = () => {
@@ -55,7 +76,17 @@ const CreateWinners = () => {
             Object.values(match?.playersDtoMap || {})
           );
 
+          const matchUsers = response.data.flatMap(match => 
+            Object.values(match?.playersDtoMap || {}) // Convert object to array safely
+              .filter(player => player?.userResponseVO !== null) // Filter valid players
+          );
+
+          const allUsers = matchUsers.map(user => user?.userResponseVO)
+
+          console.log('matchUsers', allUsers)
+
           setPlayerDetails(allPlayers)
+          setUsers(allUsers)
       
         })
         .catch((error) => {
@@ -77,13 +108,14 @@ const CreateWinners = () => {
         className="create-winners-form"
         onFinish={handleSubmit}
       >
-        <Form.Item
+        {/* <Form.Item
           name="winnerName"
           label="Winner Name"
           rules={[{ required: true, message: "Please enter winner name" }]}
         >
           <Input placeholder="Enter Winner Name" />
-        </Form.Item>
+        </Form.Item> */}
+        
 
         <Form.Item
           name="matchId"
@@ -102,12 +134,24 @@ const CreateWinners = () => {
           label="Player Name"
           rules={[{ required: true, message: "Please select player" }]}
         >
-          <Select>
+          <Select disabled={!selectedMatchId}>
             {playerDetails?.map(player => (
               <Option value={player?.playerId}>{player?.playerName}</Option>
             ))}
           </Select>
         </Form.Item>
+
+        {/* <Form.Item
+          name="userId"
+          label="User Name"
+          rules={[{ required: true, message: "Please select user" }]}
+        >
+          <Select disabled={!selectedMatchId}>
+            {users?.map(user => (
+              <Option value={user?.id}>{user?.name}</Option>
+            ))}
+          </Select>
+        </Form.Item> */}
 
         <Form.Item
           name="winnerAmount"
