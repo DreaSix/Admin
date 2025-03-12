@@ -12,9 +12,8 @@ const CreateMatch = () => {
   const navigate = useNavigate();
 
   const onFinish = (values) => {
-    console.log("values?.matchImage", values?.matchImage);
+    console.log('values', values)
 
-    // Format date and time as a string
     const dateTimeString = values?.countDownEndTime
       ? dayjs(values.countDownEndTime).format("YYYY-MM-DD HH:mm:ss")
       : "";
@@ -25,7 +24,9 @@ const CreateMatch = () => {
     formData.append("countDownEndTime", dateTimeString); // Send formatted date-time string
     formData.append("teamOneName", values?.teamOneName);
     formData.append("teamTwoName", values?.teamTwoName);
-    formData.append("matchAction", values?.matchAction);
+    values?.matchAction?.forEach(auction => {
+      formData.append("matchAction", auction);
+    })
 
     if (values?.matchImage?.length > 0) {
       values.matchImage.forEach((file) => {

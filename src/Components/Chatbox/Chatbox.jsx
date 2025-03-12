@@ -134,8 +134,9 @@ const ChatBox = ({ currentBidId, playerData, matchPlayerDetails, getPlayerDetail
       .then(response => {
         getPlayerDetailsByMatchId()
         setVisible(false);
-        setMessages([]);
+        
         sendMessage("Done")
+        setMessages([]);
         console.log('response', response)
       })
       .catch(error => {
