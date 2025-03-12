@@ -39,6 +39,21 @@ const WithdrawlPage = () => {
       })
   }
 
+  const handleClickReject = (record) => {
+    const payload = {
+      approvalStatus: "REJECTED",
+      transactionId: record?.id
+    }
+    transactionService.updateTransactions(payload)
+      .then(response => {
+        getWithdrawTransactions()
+        message.success("Transaction updated successfully")
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
+  }
+
   const columns = [
     {
       title: "Username",
@@ -69,7 +84,7 @@ const WithdrawlPage = () => {
           <Button type="primary" onClick={() => handleClickAccept(record)} className="accept-btn">
             Accept
           </Button>
-          <Button type="danger" className="reject-btn">
+          <Button type="danger" onClick={() => handleClickReject(record)} className="reject-btn">
             Reject
           </Button>
         </div>
