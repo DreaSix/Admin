@@ -29,6 +29,8 @@ export const GET_MATCH_PLAYER_DETAILS = ADMIN_BASE_URL + "/api/player-details/";
 export const GET_MATCH_PLAYER_DETAILS_END_POINT = "/matchDetails";
 export const SOLD_PLAYER = "/updateSoldPrice";
 
+export const UN_SOLD_PLAYER = "/updateUnSoldPlayer";
+
 //match Winner
 
 export const  MATCH_WINNER = ADMIN_BASE_URL + "/api/winner-details";

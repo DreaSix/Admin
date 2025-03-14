@@ -193,6 +193,7 @@ const Auction = () => {
           currentBidId={bidId}
           playerData={selectedPlayer}
           matchPlayerDetails={matchPlayerDetails}
+          setSelectedPlayer={setSelectedPlayer}
           getPlayerDetailsByMatchId={getPlayerDetailsByMatchId}
         />
 
