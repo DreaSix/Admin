@@ -24,6 +24,8 @@ import Footer from "./Components/Footer/Footer";
 import Header from "./Components/Header/Header";
 import MatchViewDetails from "./Components/MatchViewDetails/MatchViewDetails";
 import Auction from "./Components/AuctionPage/AuctionPage";
+import Registration from "./Components/Registration/Registration";
+import ChangePassword from "./Components/ChangePassword/ChangePassword";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -38,10 +40,11 @@ function App() {
             path="/"
             element={<LoginPage setIsAuthenticated={setIsAuthenticated} />}
           />
+          <Route path="/registration" element={<Registration />} />
         </Routes>
       ) : (
         <>
-          <Header />
+          <Header setIsAuthenticated={setIsAuthenticated} />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/create-match" element={<CreateMatchPage />} />
@@ -62,11 +65,12 @@ function App() {
             <Route path="/withdrawl-page" element={<WithdrawalPage />} />
             <Route path="/match-list" element={<MatchViewDetails />} />
             <Route path="/auction-page/:matchId" element={<Auction />} />
+            <Route path="/change-password" element={<ChangePassword />} />
+            
           </Routes>
           <Footer />
         </>
       )}
-
     </Router>
   );
 }

@@ -75,6 +75,10 @@ const LoginPage = ({setIsAuthenticated}) => {
             Login
           </Button>
         </Form.Item>
+
+        <Form.Item className="Create-Account">
+          <Link to="/registration">Do you have an account ?  <span style={{color:"#ffd700"}}>  Create-Account</span> </Link>
+        </Form.Item>
       </Form>
     </div>
   );

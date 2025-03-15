@@ -1,0 +1,99 @@
+.registration-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(to top, #99ccff 0%, #003366 100%);
+  
+    .register-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    
+        img {
+          width: 120px;
+          height: 50px;
+          margin-right: 10px;
+        }
+    }
+  
+    .card-container {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+  
+      .whatsapp-card {
+        background: #080000;
+        border-radius: 8px;
+        text-align: center;
+        padding: 20px;
+  
+        .whatsapp-icon {
+          width: 50px;
+          height: 50px;
+          margin-bottom: 16px;
+          border-radius: 8px;
+        }
+  
+        .wait-text {
+          font-size: 18px;
+          font-weight: bold;
+          color: #faf8f8;
+        }
+  
+        .description {
+          font-size: 14px;
+          color: #f2efef;
+          margin-top: 8px;
+        }
+      }
+    }
+  
+    .login-button-container {
+      margin-top: 20px;
+  
+      .login-button {
+        background: #ffcc00;
+        border-color: #ffcc00;
+        color: #000;
+        font-weight: bold;
+        width: 150px;
+        height: 45px;
+  
+        &:hover {
+          background: #ffd633;
+          border-color: #ffd633;
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .registration-container {
+  
+      .card-container {
+        .whatsapp-card {
+          padding: 16px;
+  
+          .wait-text {
+            font-size: 16px;
+          }
+  
+          .description {
+            font-size: 12px;
+          }
+        }
+      }
+  
+      .login-button-container {
+        .login-button {
+          width: 120px;
+          height: 40px;
+        }
+      }
+    }
+  }
+  

@@ -17,7 +17,7 @@ export const SAVE_TEAM_PLAYER_DETAILS =
 //Users
 
 export const GET_USERS = ADMIN_BASE_URL + "/api/user/get";
-export const CREATE_USER = ADMIN_BASE_URL + "/api/user/createUser";
+// export const CREATE_USER = ADMIN_BASE_URL + "/api/user/createUser";
 export const GET_ALL_USERS = ADMIN_BASE_URL + "/api/user/list";
 
 //match details
@@ -49,4 +49,15 @@ export const PAYMENTS = ADMIN_BASE_URL + "/api/payments"
 //bid
 
 export const CREATE_BID = ADMIN_BASE_URL + "/api/chat/createBid"
+
+export const SEND_OTP_URL = ADMIN_BASE_URL + "/api/otp/send"
+
+export const VERIFY_OTP_URL = ADMIN_BASE_URL + "/api/otp/verify"
+
+export const CHANGE_PASSWORD = ADMIN_BASE_URL + "/api/user/change-password";
+
+export const USER_DETAILS = ADMIN_BASE_URL + "/api/user";
+
+export const CREATE_USER = ADMIN_BASE_URL + "/api/user/create"
+
 
