@@ -108,8 +108,8 @@ const SideMenu = ({setIsAuthenticated}) => {
           </div>
           <hr/>
           <div style={{marginTop:"10px", marginBottom:"10px"}} className="balance-actions">
-            <Button  style={{marginRight:"10px", backgroundColor:"#ffd700",}} onClick={() => handleNavigation("/depositpage")}>Deposit</Button>
-            <Button onClick={() => handleNavigation("/withdraw")}>Withdrawal</Button>
+            <Button  style={{marginRight:"10px", backgroundColor:"#ffd700",}} onClick={() => handleNavigation("/deposite-page")}>Deposit</Button>
+            <Button onClick={() => handleNavigation("/withdrawl-page")}>Withdrawal</Button>
           </div>
         </div>
 
