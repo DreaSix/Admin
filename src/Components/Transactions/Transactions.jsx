@@ -3,6 +3,8 @@ import { Input, Table, Button } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import "./Transactions.scss";
 import { transactionService } from "../../Service/TransactionService";
+import Cookies from "js-cookie";
+
 
 const Transactions = () => {
   const [activeTab, setActiveTab] = useState("All");
@@ -15,13 +17,14 @@ const Transactions = () => {
   const getAllTransactions = () => {
     transactionService.getAllTransactions()
       .then(response => {
+        const filteredData = response?.data?.filter(item => item?.userResponseVO?.id === Cookies.get("userId"))
         let transactions;
         if (activeTab === "All"){
-          transactions = response?.data?.filter(deposit => deposit?.approvalStatus === "APPROVED")
+          transactions = filteredData?.filter(deposit => deposit?.approvalStatus === "APPROVED")
         }else if (activeTab === "DEPOSIT"){
-          transactions = response?.data?.filter(deposit => deposit?.approvalStatus === "APPROVED" && deposit?.transactionType === "DEPOSIT")
+          transactions = filteredData?.filter(deposit => deposit?.approvalStatus === "APPROVED" && deposit?.transactionType === "DEPOSIT")
         }else{
-          transactions = response?.data?.filter(deposit => deposit?.approvalStatus === "APPROVED" && deposit?.transactionType === "WITHDRAW")
+          transactions = filteredData?.filter(deposit => deposit?.approvalStatus === "APPROVED" && deposit?.transactionType === "WITHDRAW")
 
         }
         setAllTransactions(transactions)

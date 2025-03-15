@@ -6,7 +6,7 @@ import Logo from "../../assets/logo.jpeg";
 import "./Header.scss";
 import SideMenu from "./SideMenu";
 
-const Header = () => {
+const Header = ({setIsAuthenticated}) => {
   const navigate = useNavigate();
 
   const onDeposit = () => {
@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <div className="header">
       <div className="menu-container">
-        <SideMenu />
+        <SideMenu setIsAuthenticated={setIsAuthenticated} />
       </div>
       <img src={Logo} alt="DreamSix Logo" className="logo" />
     </div>

@@ -1,0 +1,120 @@
+.register-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(to right, #1c3a56, #005f73);
+
+  .register-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+
+    img {
+      width: 150px;
+      height: auto;
+    }
+  }
+
+  h2 {
+    color: #fbfaf8;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+  }
+
+  .register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    background-color: #08273b;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+    .ant-form-item {
+      width: 100%;
+      label {
+        font-weight: bold;
+        color: white;
+      }
+    }
+
+    .ant-input,
+    .ant-input-password {
+      height: 45px;
+      border-radius: 8px;
+    }
+
+    .otp-button {
+      width: 100%;
+      background-color: #ffd700;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      height: 45px;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      transition: background 0.3s ease-in-out;
+      &:hover {
+        background-color: #f4c400;
+      }
+      &:disabled {
+        background-color: #ccc;
+        color: #666;
+      }
+    }
+
+    .register-button {
+      width: 100%;
+      background-color: #ffd700;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      height: 45px;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      transition: background 0.3s ease-in-out;
+      &:hover {
+        background-color: #f4c400;
+      }
+    }
+  }
+
+  .login-link {
+    margin-top: 1rem;
+    color: white;
+    font-size: 1rem;
+    text-align: center;
+
+    a {
+      color: #ffd700;
+      text-decoration: none;
+      font-weight: bold;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+/* 📌 Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .register-container {
+    padding: 1rem;
+  }
+
+  .register-form {
+    max-width: 100%;
+    padding: 1.5rem;
+  }
+}
