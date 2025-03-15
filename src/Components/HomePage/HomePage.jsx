@@ -266,7 +266,7 @@ const HomePage = () => {
           <Row align="middle">
             <Col>
               <div className="winner-badge">
-                <img src={"http://pluspng.com/img-png/user-png-icon-download-icons-logos-emojis-users-2240.png"} alt="Winner" />
+                <img src={`data:image/jpeg;base64,${winner?.playerDetailsResponse?.playerImage}`} alt="Winner" />
               </div>
             </Col>
             <Col>
