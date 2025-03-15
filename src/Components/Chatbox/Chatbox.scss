@@ -178,6 +178,11 @@
       color: white;
     }
 
+    &.match-done {
+      background-color: #962cbc;
+      color: white;
+    }
+
     &.any-one {
       background-color: #ffc107; /* Yellow */
       color: black;
@@ -294,6 +299,7 @@
         .doneButton {
             background-color: green;
             border: none;
+
     
             &:hover {
                 background-color: darkgreen;

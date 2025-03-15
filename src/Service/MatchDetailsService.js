@@ -1,14 +1,21 @@
 import {
+  COMPLETE_BID,
   CREATE_MATCH_URL,
   CREATE_PLAYER,
   GET_MATCH_DETAILS,
-  GET_MATCH_DETAILS_BY_ID, GET_MATCH_PLAYER_DETAILS,
+  GET_MATCH_DETAILS_BY_ID,
+  GET_MATCH_PLAYER_DETAILS,
   GET_MATCH_PLAYER_DETAILS_END_POINT,
   GET_PLAYERS,
   MATCH_WINNER,
   SAVE_TEAM_PLAYER_DETAILS,
 } from "../Constants/Constants";
-import { FileUploadPostAPIRequest, GetAPIRequest, PostAPIRequest } from "./Api";
+import {
+  FileUploadPostAPIRequest,
+  GetAPIRequest,
+  PostAPIRequest,
+  PutAPIRequest,
+} from "./Api";
 
 const createMatch = (payload) => {
   return PostAPIRequest({
@@ -44,7 +51,6 @@ const createWinner = (payload) => {
   });
 };
 
-
 const getWinners = () => {
   return GetAPIRequest({
     url: MATCH_WINNER,
@@ -59,13 +65,20 @@ const getAllMatches = () => {
 
 const getMtachDetailsById = (matchId) => {
   return GetAPIRequest({
-    url: GET_MATCH_DETAILS_BY_ID + matchId
-    })
-}
+    url: GET_MATCH_DETAILS_BY_ID + matchId,
+  });
+};
 
 const getMatchPlayerDetails = (matchId) => {
-    return GetAPIRequest({
-        url: GET_MATCH_PLAYER_DETAILS + matchId + GET_MATCH_PLAYER_DETAILS_END_POINT
+  return GetAPIRequest({
+    url:
+      GET_MATCH_PLAYER_DETAILS + matchId + GET_MATCH_PLAYER_DETAILS_END_POINT,
+  });
+};
+
+const completeBid = (id) => {
+  return PutAPIRequest({
+    url: COMPLETE_BID + id,
   });
 };
 
@@ -75,8 +88,9 @@ export const matchDetails = {
   getAllPlayers,
   saveTeamPlayerDetails,
   getAllMatches,
-  getMtachDetailsById, 
-    getMatchPlayerDetails,
+  getMtachDetailsById,
+  getMatchPlayerDetails,
   createWinner,
-  getWinners
+  getWinners,
+  completeBid,
 };

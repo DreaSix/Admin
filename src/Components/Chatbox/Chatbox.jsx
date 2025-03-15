@@ -7,6 +7,7 @@ import { Button, Card, Modal, message } from "antd"; // Using Ant Design buttons
 
 import "./Chatbox.scss";
 import { bidService } from "../../Service/BidService";
+import { matchDetails } from "../../Service/MatchDetailsService";
 
 const ChatBox = ({
   currentBidId,
@@ -170,6 +171,7 @@ const ChatBox = ({
       .unSoldPlayer(matchDetails?.id, params)
       .then((response) => {
         getPlayerDetailsByMatchId();
+        sendMessage("Un Sold Done")
         setUnSoldModal(false);
         setMessages([]);
       })
@@ -201,6 +203,19 @@ const ChatBox = ({
   const handleUnsoldClose = () => {
     setUnSoldModal(false);
   };
+
+  const handleBidOver = () => {
+
+    matchDetails.completeBid(matchPlayerDetails[0]?.matchDetailsResponse?.matchId)
+      .then(response => {
+        sendMessage("Un Sold Done")
+        getPlayerDetailsByMatchId()
+        setSelectedPlayer()
+      })
+      .catch(error => {
+        console.log('error', error)
+      })
+  }
 
   const filteredMessages = messages?.filter(
     (message) =>
@@ -278,6 +293,12 @@ const ChatBox = ({
               onClick={() => sendMessage("UnSold")}
             >
               Unsold
+            </Button>
+            <Button
+              className="action-btn match-done"
+              onClick={() => handleBidOver()}
+            >
+              Complete Bid
             </Button>
           </div>
         </div>

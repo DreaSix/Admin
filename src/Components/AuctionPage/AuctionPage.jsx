@@ -81,10 +81,10 @@ const Auction = () => {
   };
 
   const handlePlayerSelect = (player) => {
-    console.log("player", player);
     const params = {
       playerId: player?.playerId,
       matchId: matchId,
+      flag: "TOP_SIXERS"
     };
     bidService
       .createBid(params)
