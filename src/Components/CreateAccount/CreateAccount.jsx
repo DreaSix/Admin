@@ -3,6 +3,7 @@ import { Input, Button, Radio, Form, Card, Upload } from "antd";
 import "./CreateAccount.scss";
 import { paymentService } from "../../Service/PaymentService";
 import { UploadOutlined, ClockCircleOutlined } from "@ant-design/icons";
+import './CreateAccount.scss';
 
 const CreateAccount = () => {
   const [paymentMethod, setPaymentMethod] = useState("BANK");
@@ -59,8 +60,8 @@ const CreateAccount = () => {
                   setPaymentMethod(e.target.value);
                 }}
               >
-                <Radio value="BANK">Bank</Radio>
-                <Radio value="UPI">UPI</Radio>
+                <Radio value="BANK"><span style={{color:"white"}}>Bank</span></Radio>
+                <Radio value="UPI"><span style={{color:"white"}}>UPI</span></Radio>
               </Radio.Group>
             </Form.Item>
 
