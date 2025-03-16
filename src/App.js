@@ -26,6 +26,7 @@ import MatchViewDetails from "./Components/MatchViewDetails/MatchViewDetails";
 import Auction from "./Components/AuctionPage/AuctionPage";
 import Registration from "./Components/Registration/Registration";
 import ChangePassword from "./Components/ChangePassword/ChangePassword";
+import Updates from "./Components/Updates/Updates";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -66,7 +67,7 @@ function App() {
             <Route path="/match-list" element={<MatchViewDetails />} />
             <Route path="/auction-page/:matchId" element={<Auction />} />
             <Route path="/change-password" element={<ChangePassword />} />
-            
+            <Route path="/updates" element={<Updates />} />
           </Routes>
           <Footer />
         </>

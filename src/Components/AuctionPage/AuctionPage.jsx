@@ -12,6 +12,7 @@ const Auction = () => {
   const [showNextPlayers, setShowNextPlayers] = useState(false);
   const [matchData, setMatchDetails] = useState(null);
   const [nextPlayers, setNextPlayers] = useState([]);
+  const [unSoldPlayers, setUnSoldPlayers] = useState([])
   const [soldPlayers, setSoldPlayers] = useState([]);
   const [selectedPlayer, setSelectedPlayer] = useState();
   const [matchPlayerDetails, setMatchPlayerDetails] = useState();
@@ -51,9 +52,15 @@ const Auction = () => {
 
         setMatchPlayerDetails(response?.data);
 
-        const unSoldPlayers = response.data.flatMap((match) =>
+        const nextPlayers = response.data.flatMap((match) =>
           Object.values(match?.playersDtoMap || {}).filter(
             (player) => player?.status === "UNSOLD"
+          )
+        );
+
+        const unSoldPlayers = response.data.flatMap((match) =>
+          Object.values(match?.playersDtoMap || {}).filter(
+            (player) => player?.status === "UN_SOLD"
           )
         );
 
@@ -72,7 +79,8 @@ const Auction = () => {
           )
         );
 
-        setNextPlayers(unSoldPlayers);
+        setUnSoldPlayers(unSoldPlayers)
+        setNextPlayers(nextPlayers);
         setSoldPlayers(soldPlayers);
       })
       .catch((error) => {
@@ -158,6 +166,28 @@ const Auction = () => {
               <div className="players">
                 {Array.isArray(soldPlayers) &&
                   soldPlayers?.map((player) => (
+                    <div className="player-card" key={player?.playerName}>
+                      <img
+                        src={`data:image/jpeg;base64,${player?.playerImage}`}
+                        alt={player.playerName}
+                        className="player-img"
+                      />
+                      <div className="player-name">{player?.playerName}</div>
+                      <div>{player?.soldPrice}</div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="players-section">
+          {showNextPlayers && (
+            <div className="next-players">
+              <h3>Un Sold Players</h3>
+              <div className="players">
+                {Array.isArray(unSoldPlayers) &&
+                  unSoldPlayers?.map((player) => (
                     <div className="player-card" key={player?.playerName}>
                       <img
                         src={`data:image/jpeg;base64,${player?.playerImage}`}

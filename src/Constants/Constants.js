@@ -58,6 +58,8 @@ export const CHANGE_PASSWORD = ADMIN_BASE_URL + "/api/user/change-password";
 
 export const USER_DETAILS = ADMIN_BASE_URL + "/api/user";
 
-export const CREATE_USER = ADMIN_BASE_URL + "/api/user/create"
+export const CREATE_USER = ADMIN_BASE_URL + "/api/user/create";
+
+export const UPDATES = ADMIN_BASE_URL + "/updates";
 
 
