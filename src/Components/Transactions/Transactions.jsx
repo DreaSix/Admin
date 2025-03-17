@@ -20,11 +20,11 @@ const Transactions = () => {
         const filteredData = response?.data?.filter(item => item?.userResponseVO?.id === Cookies.get("userId"))
         let transactions;
         if (activeTab === "All"){
-          transactions = filteredData?.filter(deposit => deposit?.approvalStatus === "APPROVED")
+          transactions = filteredData
         }else if (activeTab === "DEPOSIT"){
-          transactions = filteredData?.filter(deposit => deposit?.approvalStatus === "APPROVED" && deposit?.transactionType === "DEPOSIT")
+          transactions = filteredData?.filter(deposit => deposit?.transactionType === "DEPOSIT")
         }else{
-          transactions = filteredData?.filter(deposit => deposit?.approvalStatus === "APPROVED" && deposit?.transactionType === "WITHDRAW")
+          transactions = filteredData?.filter(deposit => deposit?.transactionType === "WITHDRAW")
 
         }
         setAllTransactions(transactions)
@@ -37,7 +37,7 @@ const Transactions = () => {
   const filteredData =
     activeTab === "All"
       ? allTransactions
-      : allTransactions.filter((item) => item.transactionType === activeTab && item?.approvalStatus === "APPROVED");
+      : allTransactions.filter((item) => item.transactionType === activeTab );
 
   // Table Columns
   const columns = [
@@ -51,6 +51,11 @@ const Transactions = () => {
         ) : (
           <span style={{ color: "red" }}>{paymentOption}</span>
         ),
+    },
+    {
+      title: "Status",
+      dataIndex: "approvalStatus",
+      key: "approvalStatus",
     },
     {
       title: "Username",

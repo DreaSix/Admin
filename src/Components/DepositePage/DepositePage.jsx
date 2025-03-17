@@ -39,6 +39,21 @@ const DepositePage = () => {
         })
     }
 
+    const handleClickReject = (record) => {
+      console.log('record', record)
+      const params = {
+        approvalStatus: "Rejected"
+      }
+      transactionService.approveTransaction(record?.id, params)
+        .then(response => {
+          getDepositTransactions()
+          message.success("Transaction updated successfully")
+        })
+        .catch(error => {
+          console.log('error', error)
+        })
+    }
+
   const columns = [
     {
       title: "Username",
@@ -69,7 +84,7 @@ const DepositePage = () => {
           <Button type="primary" onClick={() => handleClickAccept(record)} className="accept-btn">
             Accept
           </Button>
-          <Button type="danger" className="reject-btn">
+          <Button type="danger" onClick={() => handleClickReject(record)} className="reject-btn">
             Reject
           </Button>
         </div>
