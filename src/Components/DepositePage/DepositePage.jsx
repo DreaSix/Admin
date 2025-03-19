@@ -131,7 +131,8 @@ const DepositePage = () => {
             </Button>,
           ]}
         >
-          <p><strong>Username:</strong> {selectedTransaction?.userName}</p>
+          <p><strong>Username:</strong> {selectedTransaction?.name}</p>
+          <p><strong>Phone No:</strong> {selectedTransaction?.userName}</p>
           <p><strong>Amount:</strong> {selectedTransaction?.amount}</p>
           <p><strong>UTR / Trans ID:</strong> {selectedTransaction?.utr}</p>
           <div className="modal-image-container">

@@ -6,6 +6,8 @@ import { useParams } from "react-router";
 import { matchDetails } from "../../Service/MatchDetailsService";
 import { bidService } from "../../Service/BidService";
 import ChatBox from "../Chatbox/Chatbox";
+import SockJS from "sockjs-client";
+import { Client } from "@stomp/stompjs";
 
 const Auction = () => {
   const { matchId } = useParams();
@@ -17,6 +19,9 @@ const Auction = () => {
   const [selectedPlayer, setSelectedPlayer] = useState();
   const [matchPlayerDetails, setMatchPlayerDetails] = useState();
   const [bidId, setBidId] = useState();
+  const [players, setPlayers] = useState([])
+    const [client, setClient] = useState(null);
+  
 
   useEffect(() => {
     if (matchId) {
@@ -34,6 +39,57 @@ const Auction = () => {
         console.log("Error fetching match details:", error);
       });
   };
+
+  useEffect(() => {
+    const socket = new SockJS("http://localhost:8080/ws");
+    const stompClient = new Client({
+      webSocketFactory: () => socket,
+      reconnectDelay: 5000,
+      onConnect: () => {
+        console.log("Connected to WebSocket");
+  
+        if (matchId) {
+          stompClient.subscribe(`/topic/teamPlayers/${matchId}`, (message) => {
+            const teamPlayers = JSON.parse(message.body);
+            console.log("Received Team Players:", teamPlayers);
+            setPlayers(teamPlayers); // Assuming `setPlayers` updates state
+          });
+        }
+  
+        setClient(stompClient);
+      },
+      onStompError: (error) => {
+        console.error("STOMP Error:", error);
+      },
+    });
+  
+    stompClient.activate();
+  
+    return () => {
+      stompClient.deactivate();
+    };
+  }, []);
+  
+
+  
+    const getPlayers = (matchId) => {
+      if (client && client.connected) {
+        client.subscribe(`/topic/teamPlayers/${matchId}`, (message) => {
+          const teamPlayers = JSON.parse(message.body);
+          console.log("Received Team Players:", teamPlayers);
+          setPlayers(teamPlayers); 
+        });
+    
+        client.publish({
+          destination: `/app/teamPlayers/${matchId}`,
+        });
+      } else {
+        console.error("Cannot send message: STOMP connection not active.");
+      }
+    };
+
+    console.log('players', players)
+    
 
   useEffect(() => {
     if (matchId) {
@@ -100,6 +156,7 @@ const Auction = () => {
         console.log("response", response);
         setBidId(response?.id);
         getPlayerDetailsByMatchId()
+        getPlayers()
       })
       .catch((error) => {
         console.log("error", error);
@@ -115,7 +172,7 @@ const Auction = () => {
               <img
                 src={`data:image/jpeg;base64,${matchData?.matchImage}`}
                 className="matchImage"
-                alt="Match Image"
+                alt="Match"
               />
               <div className="admin-name">Admin</div>
             </div>
