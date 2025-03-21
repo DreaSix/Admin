@@ -14,14 +14,14 @@ const Auction = () => {
   const [showNextPlayers, setShowNextPlayers] = useState(false);
   const [matchData, setMatchDetails] = useState(null);
   const [nextPlayers, setNextPlayers] = useState([]);
-  const [unSoldPlayers, setUnSoldPlayers] = useState([])
+  const [unSoldPlayers, setUnSoldPlayers] = useState([]);
   const [soldPlayers, setSoldPlayers] = useState([]);
   const [selectedPlayer, setSelectedPlayer] = useState();
   const [matchPlayerDetails, setMatchPlayerDetails] = useState();
   const [bidId, setBidId] = useState();
-  const [players, setPlayers] = useState([])
-    const [client, setClient] = useState(null);
-  
+  const [players, setPlayers] = useState([]);
+  const [client, setClient] = useState(null);
+  const [stompClient, setStompClient] = useState(null);
 
   useEffect(() => {
     if (matchId) {
@@ -42,54 +42,56 @@ const Auction = () => {
 
   useEffect(() => {
     const socket = new SockJS("http://localhost:8080/ws");
-    const stompClient = new Client({
+    const client = new Client({
       webSocketFactory: () => socket,
       reconnectDelay: 5000,
       onConnect: () => {
         console.log("Connected to WebSocket");
-  
-        if (matchId) {
-          stompClient.subscribe(`/topic/teamPlayers/${matchId}`, (message) => {
-            const teamPlayers = JSON.parse(message.body);
-            console.log("Received Team Players:", teamPlayers);
-            setPlayers(teamPlayers); // Assuming `setPlayers` updates state
-          });
-        }
-  
-        setClient(stompClient);
+
+        // Subscribe to match team players
+        client.subscribe(`/topic/teamPlayers/${matchId}`, (message) => {
+          const playerData = JSON.parse(message.body);
+          console.log("Received Team Players:", playerData);
+          setPlayers(playerData);
+        });
+
+        setStompClient(client);
       },
       onStompError: (error) => {
         console.error("STOMP Error:", error);
       },
     });
-  
-    stompClient.activate();
-  
+
+    client.activate();
+
     return () => {
-      stompClient.deactivate();
+      client.deactivate();
     };
-  }, []);
-  
+  }, [matchId]);
 
-  
-    const getPlayers = (matchId) => {
-      if (client && client.connected) {
-        client.subscribe(`/topic/teamPlayers/${matchId}`, (message) => {
-          const teamPlayers = JSON.parse(message.body);
-          console.log("Received Team Players:", teamPlayers);
-          setPlayers(teamPlayers); 
-        });
-    
-        client.publish({
-          destination: `/app/teamPlayers/${matchId}`,
-        });
-      } else {
-        console.error("Cannot send message: STOMP connection not active.");
-      }
-    };
+  const requestTeamPlayers = () => {
+    if (stompClient) {
+      stompClient.publish({ destination: `/app/teamPlayers/${matchId}` });
+    }
+  };
 
-    console.log('players', players)
-    
+  const getPlayers = (matchId) => {
+    if (client && client.connected) {
+      client.subscribe(`/topic/teamPlayers/${matchId}`, (message) => {
+        const teamPlayers = JSON.parse(message.body);
+        console.log("Received Team Players:", teamPlayers);
+        setPlayers(teamPlayers);
+      });
+
+      client.publish({
+        destination: `/app/teamPlayers/${matchId}`,
+      });
+    } else {
+      console.error("Cannot send message: STOMP connection not active.");
+    }
+  };
+
+  console.log("players", players);
 
   useEffect(() => {
     if (matchId) {
@@ -135,7 +137,7 @@ const Auction = () => {
           )
         );
 
-        setUnSoldPlayers(unSoldPlayers)
+        setUnSoldPlayers(unSoldPlayers);
         setNextPlayers(nextPlayers);
         setSoldPlayers(soldPlayers);
       })
@@ -148,15 +150,16 @@ const Auction = () => {
     const params = {
       playerId: player?.playerId,
       matchId: matchId,
-      flag: "TOP_SIXERS"
+      flag: "TOP_SIXERS",
     };
     bidService
       .createBid(params)
       .then((response) => {
         console.log("response", response);
         setBidId(response?.id);
-        getPlayerDetailsByMatchId()
-        getPlayers()
+        getPlayerDetailsByMatchId();
+        getPlayers();
+        requestTeamPlayers();
       })
       .catch((error) => {
         console.log("error", error);
