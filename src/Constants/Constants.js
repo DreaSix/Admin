@@ -1,10 +1,9 @@
-export const ADMIN_BASE_URL = "http://localhost:8080";
-// export const BASE_URL = "https://ec2-13-60-233-23.eu-north-1.compute.amazonaws.com:8082";
-
+//export const ADMIN_BASE_URL = "http://localhost:8080";
+export const ADMIN_BASE_URL = "http://34.224.218.201:8080/v1.0/dreamsix";
 
 export const LOGIN_URL = ADMIN_BASE_URL + "/api/auth/login";
 
-//Create Match  
+//Create Match
 export const CREATE_MATCH_URL = ADMIN_BASE_URL + "/api/match-details";
 
 export const GET_PLAYERS = ADMIN_BASE_URL + "/api/player-details/get";
@@ -28,13 +27,13 @@ export const GET_MATCH_DETAILS_BY_ID = ADMIN_BASE_URL + "/api/match-details/";
 export const GET_MATCH_PLAYER_DETAILS = ADMIN_BASE_URL + "/api/player-details/";
 export const GET_MATCH_PLAYER_DETAILS_END_POINT = "/matchDetails";
 export const SOLD_PLAYER = "/updateSoldPrice";
-export const COMPLETE_BID = GET_MATCH_DETAILS + "/update/"
+export const COMPLETE_BID = GET_MATCH_DETAILS + "/update/";
 
 export const UN_SOLD_PLAYER = "/updateUnSoldPlayer";
 
 //match Winner
 
-export const  MATCH_WINNER = ADMIN_BASE_URL + "/api/winner-details";
+export const MATCH_WINNER = ADMIN_BASE_URL + "/api/winner-details";
 
 //transactions
 
@@ -44,15 +43,15 @@ export const APPROVE_TRANSACTION_END_POINT = "/approval-status";
 
 //payments
 
-export const PAYMENTS = ADMIN_BASE_URL + "/api/payments"
+export const PAYMENTS = ADMIN_BASE_URL + "/api/payments";
 
 //bid
 
-export const CREATE_BID = ADMIN_BASE_URL + "/api/chat/createBid"
+export const CREATE_BID = ADMIN_BASE_URL + "/api/chat/createBid";
 
-export const SEND_OTP_URL = ADMIN_BASE_URL + "/api/otp/send"
+export const SEND_OTP_URL = ADMIN_BASE_URL + "/api/otp/send";
 
-export const VERIFY_OTP_URL = ADMIN_BASE_URL + "/api/otp/verify"
+export const VERIFY_OTP_URL = ADMIN_BASE_URL + "/api/otp/verify";
 
 export const CHANGE_PASSWORD = ADMIN_BASE_URL + "/api/user/change-password";
 
@@ -61,5 +60,3 @@ export const USER_DETAILS = ADMIN_BASE_URL + "/api/user";
 export const CREATE_USER = ADMIN_BASE_URL + "/api/user/create";
 
 export const UPDATES = ADMIN_BASE_URL + "/updates";
-
-

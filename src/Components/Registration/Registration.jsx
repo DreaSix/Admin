@@ -33,7 +33,7 @@ const Registration = () => {
 
   const getRoleList = () => {
     axios
-      .get("http://localhost:8080/api/role/all")
+      .get("http://34.224.218.201:8080/v1.0/dreamsix/api/role/all")
       .then((response) => {
         setRoleList(response?.data?.totalContent);
       })
@@ -104,6 +104,8 @@ const Registration = () => {
       .then((response) => {
         if (response?.type === "success") {
           onFinish(form.getFieldsValue());
+        } else if (response?.message === "otp already verifed") {
+          onFinish(form.getFieldsValue());
         } else if (response?.message === "invalid otp") {
           message.error("OTP verification failed, please try again");
         }
@@ -116,13 +118,21 @@ const Registration = () => {
 
   return (
     <div className="register-container">
-      <Form className="register-form" layout="vertical" form={form} onFinish={handleVerifyOtp}>
+      <Form
+        className="register-form"
+        layout="vertical"
+        form={form}
+        onFinish={handleVerifyOtp}
+      >
         <div className="register-logo">
           <img src={Logo} alt="DreamSix Logo" />
         </div>
         <h2>Welcome to DreamSix!</h2>
 
-        <Form.Item name="name" rules={[{ required: true, message: "Please enter your full name!" }]}>
+        <Form.Item
+          name="name"
+          rules={[{ required: true, message: "Please enter your full name!" }]}
+        >
           <Input placeholder="Full Name" />
         </Form.Item>
 
@@ -137,13 +147,22 @@ const Registration = () => {
         </Form.Item>
 
         {/* OTP Button */}
-        <Button onClick={handleSendOtp} disabled={isOtpSent && countdown > 0} className="otp-button">
-          {isOtpSent && countdown > 0 ? `Resend OTP in ${countdown}s` : "Get OTP"}
+        <Button
+          onClick={handleSendOtp}
+          disabled={isOtpSent && countdown > 0}
+          className="otp-button"
+        >
+          {isOtpSent && countdown > 0
+            ? `Resend OTP in ${countdown}s`
+            : "Get OTP"}
         </Button>
 
         {/* Show OTP input only after clicking "Get OTP" */}
         {isOtpSent && (
-          <Form.Item name="otp" rules={[{ required: true, message: "Enter OTP!" }]}>
+          <Form.Item
+            name="otp"
+            rules={[{ required: true, message: "Enter OTP!" }]}
+          >
             <Input
               placeholder="Enter OTP"
               onChange={(e) => setOtpNumber(e.target.value)}
@@ -152,11 +171,17 @@ const Registration = () => {
           </Form.Item>
         )}
 
-        <Form.Item name="password" rules={[{ required: true, message: "Enter your password!" }]}>
+        <Form.Item
+          name="password"
+          rules={[{ required: true, message: "Enter your password!" }]}
+        >
           <Input.Password placeholder="Create Password" type="password" />
         </Form.Item>
 
-        <Form.Item name="confirmPassword" rules={[{ required: true, message: "Re-enter your password!" }]}>
+        <Form.Item
+          name="confirmPassword"
+          rules={[{ required: true, message: "Re-enter your password!" }]}
+        >
           <Input.Password placeholder="Re-Enter Password" type="password" />
         </Form.Item>
 

@@ -14,7 +14,7 @@ const ChatBox = ({
   playerData,
   matchPlayerDetails,
   getPlayerDetailsByMatchId,
-  setSelectedPlayer
+  setSelectedPlayer,
 }) => {
   console.log("matchPlayerDetails", matchPlayerDetails);
   const [messages, setMessages] = useState([]);
@@ -31,7 +31,7 @@ const ChatBox = ({
     const fetchOldMessages = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/chat/chat/getMatchMessages/${currentBidId}`,
+          `http://34.224.218.201:8080/v1.0/dreamsix/api/chat/chat/getMatchMessages/${currentBidId}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -54,7 +54,7 @@ const ChatBox = ({
   }, [currentBidId]);
 
   useEffect(() => {
-    const socket = new SockJS("http://localhost:8080/ws");
+    const socket = new SockJS("http://34.224.218.201:8080/v1.0/dreamsix/ws");
     const stompClient = new Client({
       webSocketFactory: () => socket,
       reconnectDelay: 5000,
@@ -149,7 +149,7 @@ const ChatBox = ({
         setVisible(false);
         setMessages([]);
         sendMessage("Done");
-        setSelectedPlayer()
+        setSelectedPlayer();
 
         console.log("response", response);
       })
@@ -171,7 +171,7 @@ const ChatBox = ({
       .unSoldPlayer(matchDetails?.id, params)
       .then((response) => {
         getPlayerDetailsByMatchId();
-        sendMessage("Un Sold Done")
+        sendMessage("Un Sold Done");
         setUnSoldModal(false);
         setMessages([]);
       })
@@ -205,17 +205,17 @@ const ChatBox = ({
   };
 
   const handleBidOver = () => {
-
-    matchDetails.completeBid(matchPlayerDetails[0]?.matchDetailsResponse?.matchId)
-      .then(response => {
-        sendMessage("Un Sold Done")
-        getPlayerDetailsByMatchId()
-        setSelectedPlayer()
+    matchDetails
+      .completeBid(matchPlayerDetails[0]?.matchDetailsResponse?.matchId)
+      .then((response) => {
+        sendMessage("Un Sold Done");
+        getPlayerDetailsByMatchId();
+        setSelectedPlayer();
       })
-      .catch(error => {
-        console.log('error', error)
-      })
-  }
+      .catch((error) => {
+        console.log("error", error);
+      });
+  };
 
   const filteredMessages = messages?.filter(
     (message) =>
