@@ -193,7 +193,7 @@ const Registration = () => {
 
         <div className="login-link">
           <p>
-            Already Have An Account? <a href="/login">Login</a>
+            Already Have An Account? <a href="/">Login</a>
           </p>
         </div>
       </Form>
