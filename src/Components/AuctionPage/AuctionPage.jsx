@@ -41,7 +41,7 @@ const Auction = () => {
   };
 
   useEffect(() => {
-    const socket = new SockJS("https://api.dreamsix.in/v1.0/dreamsix/ws");
+    const socket = new SockJS("process.env.REACT_APP_API_BASE_URL/ws");
     const client = new Client({
       webSocketFactory: () => socket,
       reconnectDelay: 5000,
