@@ -83,7 +83,7 @@ const MatchDetails = () => {
                         ([playerId, player]) => (
                           <div key={playerId} className="player-item">
                             <img
-                              src={`data:image/jpeg;base64,${player?.playerImage}`}
+                              src={player?.playerImage}
                               alt={player.playerName}
                               className="player-icon"
                             />
@@ -101,7 +101,7 @@ const MatchDetails = () => {
                         ([playerId, player]) => (
                           <div key={playerId} className="player-item">
                             <img
-                              src={`data:image/jpeg;base64,${player?.playerImage}`}
+                              src={player?.playerImage}
                               alt={player.playerName}
                               className="player-icon"
                             />

@@ -138,7 +138,7 @@ const DepositePage = () => {
           <div className="modal-image-container">
             <strong>Uploaded Image:</strong>
             <img
-              src={`data:image/jpeg;base64,${selectedTransaction?.transactionImage}`}
+              src={selectedTransaction?.transactionImage}
               alt="Uploaded Screenshot"
               className="uploaded-image"
             />

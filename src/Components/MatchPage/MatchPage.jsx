@@ -40,7 +40,7 @@ const MatchPage = () => {
           matchData.map((match, index) => (
             <Card key={match?.matchId} hoverable className="match-card">
               <img
-              src={`data:image/jpeg;base64,${match?.matchImage}`}
+              src={match?.matchImage}
               alt={`Match ${match.matchId}`}
               onClick={() => onClickMatchImage(match?.matchId)}
               />

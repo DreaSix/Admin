@@ -173,7 +173,7 @@ const Auction = () => {
           <div className="admin-info">
             <div style={{ display: "flex" }}>
               <img
-                src={`data:image/jpeg;base64,${matchData?.matchImage}`}
+                src={matchData?.matchImage}
                 className="matchImage"
                 alt="Match"
               />
@@ -207,7 +207,7 @@ const Auction = () => {
                       key={player.playerName}
                     >
                       <img
-                        src={`data:image/jpeg;base64,${player?.playerImage}`}
+                        src={player?.playerImage}
                         alt={player.playerName}
                         className="player-img"
                       />
@@ -228,7 +228,7 @@ const Auction = () => {
                   soldPlayers?.map((player) => (
                     <div className="player-card" key={player?.playerName}>
                       <img
-                        src={`data:image/jpeg;base64,${player?.playerImage}`}
+                        src={player?.playerImage}
                         alt={player.playerName}
                         className="player-img"
                       />
@@ -250,7 +250,7 @@ const Auction = () => {
                   unSoldPlayers?.map((player) => (
                     <div className="player-card" key={player?.playerName}>
                       <img
-                        src={`data:image/jpeg;base64,${player?.playerImage}`}
+                        src={player?.playerImage}
                         alt={player.playerName}
                         className="player-img"
                       />
@@ -266,7 +266,7 @@ const Auction = () => {
         {selectedPlayer && (
           <div className="player-info">
             <img
-              src={`data:image/jpeg;base64,${selectedPlayer?.playerImage}`}
+              src={selectedPlayer?.playerImage}
               alt={selectedPlayer?.playerName}
               className="player-img"
             />

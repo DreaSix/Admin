@@ -1,4 +1,4 @@
-//export const ADMIN_BASE_URL = "http://localhost:8080";
+// export const ADMIN_BASE_URL = "http://localhost:8080/v1.0/dreamsix";
 export const ADMIN_BASE_URL = "https://api.dreamsix.in/v1.0/dreamsix";
 
 export const LOGIN_URL = ADMIN_BASE_URL + "/api/auth/login";

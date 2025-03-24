@@ -312,7 +312,7 @@ const ChatBox = ({
           <Card className="playerCard">
             <div className="cardContent">
               <img
-                src={`data:image/jpeg;base64,${playerData?.playerImage}`}
+                src={playerData?.playerImage}
                 alt={playerData?.playerName}
                 className="playerImage"
               />
@@ -355,7 +355,7 @@ const ChatBox = ({
           <Card className="playerCard">
             <div className="cardContent">
               <img
-                src={`data:image/jpeg;base64,${playerData?.playerImage}`}
+                src={playerData?.playerImage}
                 alt={playerData?.playerName}
                 className="playerImage"
               />

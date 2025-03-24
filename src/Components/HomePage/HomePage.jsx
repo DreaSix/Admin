@@ -157,7 +157,7 @@ const HomePage = () => {
                     onClick={() => onClickMatchImage(match.matchId)}
                     src={
                       match?.matchImage
-                        ? `data:image/jpeg;base64,${match?.matchImage}`
+                        ? match?.matchImage
                         : "https://i.pinimg.com/originals/a1/de/a2/a1dea2cf213703688b3d040e1c112a53.png"
                     }
                     alt="Match"
@@ -365,7 +365,7 @@ const HomePage = () => {
                   <Col>
                     <div className="winner-badge">
                       <img
-                        src={`data:image/jpeg;base64,${winner?.playerDetailsResponse?.playerImage}`}
+                        src={winner?.playerDetailsResponse?.playerImage}
                         alt="Winner"
                       />
                     </div>

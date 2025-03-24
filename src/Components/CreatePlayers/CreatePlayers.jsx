@@ -45,7 +45,7 @@ const CreatePlayers = () => {
         {players?.length > 0 ? (
           players?.map((player) => (
             <div className="player-card" key={player.playerId}>
-              <img src={`data:image/jpeg;base64,${player.playerImage}`} alt={player.playerName} className="player-image" />
+              <img src={player.playerImage} alt={player.playerName} className="player-image" />
               <div className="player-details">
                 <span className="player-name">{player.playerName}</span>
                 <span className="player-country">#{player.countryName}</span>
