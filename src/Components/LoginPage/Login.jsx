@@ -1,7 +1,7 @@
 import React from "react";
 import Cookies from "js-cookie";
 
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.scss";
 import Logo from "../../assets/logo.jpeg";
@@ -21,9 +21,11 @@ const LoginPage = ({setIsAuthenticated}) => {
         Cookies.set("username", response?.data?.username)
         setIsAuthenticated(response?.data?.accessToken)
         navigate("/")
+        message.success("Login successfully")
       })
       .catch(error => {
         console.log('error', error)
+        message.error("Error occured while login")
       })
   };
 

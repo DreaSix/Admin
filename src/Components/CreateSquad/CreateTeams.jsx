@@ -185,7 +185,7 @@ const CreateTeams = () => {
                 onClick={() => handleAddPlayer(player)}
                 style={{ cursor: 'pointer', margin: '5px 0', border: "2px solid black", width: "200px", backgroundColor: "#d6d3d3" }}
               >
-                <Avatar src={`data:image/jpeg;base64,${player?.playerImage}`} size="medium" style={{ marginRight: '10px' }} />
+                <Avatar src={player?.playerImage} size="medium" style={{ marginRight: '10px' }} />
                 {player?.playerName}
               </div>
             ))}
@@ -251,7 +251,7 @@ const CreateTeams = () => {
                     <List.Item.Meta 
                       avatar={
                         <Avatar
-                          src={`data:image/jpeg;base64,${player?.playerImage}`}
+                          src={player?.playerImage}
                           style={{ backgroundColor: "#d6d3d3" }}
                         />
                       }
@@ -291,7 +291,7 @@ const CreateTeams = () => {
                     <List.Item.Meta
                       avatar={
                         <Avatar
-                          src={`data:image/jpeg;base64,${player?.playerImage}`}
+                          src={player?.playerImage}
                           style={{ backgroundColor: "#d6d3d3" }}
                         />
                       }
