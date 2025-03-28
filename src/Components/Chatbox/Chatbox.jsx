@@ -31,7 +31,7 @@ const ChatBox = ({
     const fetchOldMessages = async () => {
       try {
         const response = await axios.get(
-          `process.env.REACT_APP_API_BASE_URL/api/chat/chat/getMatchMessages/${currentBidId}`,
+          `https://api.dreamsix.in/v1.0/dreamsix/api/chat/chat/getMatchMessages/${currentBidId}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -54,7 +54,7 @@ const ChatBox = ({
   }, [currentBidId]);
 
   useEffect(() => {
-    const socket = new SockJS("process.env.REACT_APP_API_BASE_URL/ws");
+    const socket = new SockJS("https://api.dreamsix.in/v1.0/dreamsix/ws");
     const stompClient = new Client({
       webSocketFactory: () => socket,
       reconnectDelay: 5000,

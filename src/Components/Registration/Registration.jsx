@@ -33,7 +33,7 @@ const Registration = () => {
 
   const getRoleList = () => {
     axios
-      .get("process.env.REACT_APP_API_BASE_URL/api/role/all")
+      .get("https://api.dreamsix.in/v1.0/dreamsix/api/role/all")
       .then((response) => {
         setRoleList(response?.data?.totalContent);
       })
