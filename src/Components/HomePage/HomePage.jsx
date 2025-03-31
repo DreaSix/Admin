@@ -386,7 +386,7 @@ const HomePage = () => {
                     </Text>
                     <br />
                     <Button className="top-sixer-button">
-                      {winner?.matchDetailsResponse?.matchAction}
+                      {"Top Sixer"}
                     </Button>
                   </Col>
                 </Row>

@@ -40,58 +40,6 @@ const Auction = () => {
       });
   };
 
-  useEffect(() => {
-    const socket = new SockJS("https://api.dreamsix.in/v1.0/dreamsix/ws");
-    const client = new Client({
-      webSocketFactory: () => socket,
-      reconnectDelay: 5000,
-      onConnect: () => {
-        console.log("Connected to WebSocket");
-
-        // Subscribe to match team players
-        client.subscribe(`/topic/teamPlayers/${matchId}`, (message) => {
-          const playerData = JSON.parse(message.body);
-          console.log("Received Team Players:", playerData);
-          setPlayers(playerData);
-        });
-
-        setStompClient(client);
-      },
-      onStompError: (error) => {
-        console.error("STOMP Error:", error);
-      },
-    });
-
-    client.activate();
-
-    return () => {
-      client.deactivate();
-    };
-  }, [matchId]);
-
-  const requestTeamPlayers = () => {
-    if (stompClient) {
-      stompClient.publish({ destination: `/app/teamPlayers/${matchId}` });
-    }
-  };
-
-  const getPlayers = (matchId) => {
-    if (client && client.connected) {
-      client.subscribe(`/topic/teamPlayers/${matchId}`, (message) => {
-        const teamPlayers = JSON.parse(message.body);
-        console.log("Received Team Players:", teamPlayers);
-        setPlayers(teamPlayers);
-      });
-
-      client.publish({
-        destination: `/app/teamPlayers/${matchId}`,
-      });
-    } else {
-      console.error("Cannot send message: STOMP connection not active.");
-    }
-  };
-
-  console.log("players", players);
 
   useEffect(() => {
     if (matchId) {
@@ -158,8 +106,6 @@ const Auction = () => {
         console.log("response", response);
         setBidId(response?.id);
         getPlayerDetailsByMatchId();
-        getPlayers();
-        requestTeamPlayers();
       })
       .catch((error) => {
         console.log("error", error);
