@@ -115,10 +115,19 @@ const HomePage = () => {
   }, []);
 
   const getAllMatches = () => {
-    matchDetails
-      .getAllMatches()
+    matchDetails.getAllMatches()
       .then((response) => {
-        setMatches(response?.data);
+        const currentDate = new Date();
+        
+        // Filter matches where countdownEndTime is still valid
+        const validMatches = response?.data?.filter((match) => {
+          const matchEndTime = new Date(match.countdownEndTime);
+          matchEndTime.setDate(matchEndTime.getDate() + 1); // Shift by one day
+  
+          return matchEndTime > currentDate; // Display if still valid
+        });
+  
+        setMatches(validMatches);
       })
       .catch((error) => {
         console.log("error", error);
