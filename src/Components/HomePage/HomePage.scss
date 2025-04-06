@@ -1,6 +1,100 @@
 .dashboard-container {
   padding: 7px;
 
+  .recent-winners {
+    margin-bottom: 40px;
+
+    .winner-card {
+      background-color: #161b22;
+      border-radius: 10px;
+
+      .winner-badge {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right:10px;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .winner-name {
+        color: #ffffff;
+        font-weight: bold;
+      }
+
+      .winner-match {
+        color: #aaa;
+      }
+
+      .winner-prize {
+        color: #ffffff;
+        font-weight: bold;
+      }
+
+      .top-sixer-button {
+        background: linear-gradient(45deg, #ff7a45, #40a9ff);
+        color: #fff;
+        border: none;
+        font-weight: bold;
+        border-radius: 8px;
+      }
+    }
+
+    h2 {
+      font-size: 22px;
+      color: #fdfcfd;
+      margin-bottom:10px;
+      margin-left: 10px;
+    }
+
+    .winner-card {
+      background: #001529;
+    
+   
+      margin-bottom:3px;
+
+      .winner-match {
+        font-weight: bold;
+        font-size: 18px;
+        color: #1890ff; /* Highlight with a blue color */
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 8px;
+      }
+      
+
+      .winner-info {
+        display: flex;
+        align-items: center;
+
+        img {
+          margin-right: 10px;
+        }
+
+        h3 {
+          margin: 0;
+          font-size: 18px;
+          color: #fff;
+        }
+
+        span {
+          font-size: 14px;
+          color: #fff;
+        }
+      }
+
+      .amount {
+        font-size: 18px;
+        font-weight: bold;
+        color: #f4d005;
+      }
+    }
+  }
+  
+
   .section {
     margin-bottom: 20px;
 
@@ -158,3 +252,33 @@
     }
   }
 }
+
+// .recent-winners {
+//   h2 {
+//     font-size: 18px;
+//     color: white;
+//   }
+
+//   .winner-card {
+//     padding: 10px;
+
+//     .winner-info {
+//       img {
+//         width: 40px;
+//         height: 40px;
+//       }
+
+//       h3 {
+//         font-size: 16px;
+//       }
+
+//       span {
+//         font-size: 12px;
+//       }
+//     }
+
+//     .amount {
+//       font-size: 16px;
+//     }
+//   }
+// }

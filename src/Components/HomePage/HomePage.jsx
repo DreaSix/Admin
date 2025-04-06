@@ -61,11 +61,27 @@ const HomePage = () => {
     matchDetails
       .getWinners()
       .then((response) => {
-        setWinnersList(response?.data);
+        const winners = response?.data || [];
+        const groupedWinners = groupWinnersByMatch(winners);
+        setWinnersList(groupedWinners);
       })
       .catch((error) => {
-        console.log("error", error);
+        console.log("Error fetching winners:", error);
       });
+  };
+
+  const groupWinnersByMatch = (winners) => {
+    return winners.reduce((acc, winner) => {
+      const matchId = winner?.matchDetailsResponse?.matchId;
+      if (!acc[matchId]) {
+        acc[matchId] = {
+          matchDetails: winner.matchDetailsResponse,
+          winners: [],
+        };
+      }
+      acc[matchId].winners.push(winner);
+      return acc;
+    }, {});
   };
 
   const navigate = useNavigate(); // Create navigate function
@@ -361,47 +377,46 @@ const HomePage = () => {
           </div>
 
           {/* Winners Section */}
-          <div className="section">
-            <Row justify="space-between" align="middle">
-              <Title level={4} className="section-title">
-                Winners
-              </Title>
-              {/* <Button className="create-button" onClick={handleCreateWinners} >Create</Button> */}
-            </Row>
-            {winnersList?.map((winner) => (
-              <Card className="winner-card">
+          <section className="recent-winners">
+            <h2>DreamSix Recent Winners</h2>
+            {Object.values(winnersList).map((match) => (
+              <Card key={match.matchDetails.matchId} className="winner-card">
                 <Row align="middle">
-                  <Col>
-                    <div className="winner-badge">
-                      <img
-                        src={winner?.playerDetailsResponse?.playerImage}
-                        alt="Winner"
-                      />
-                    </div>
-                  </Col>
-                  <Col>
-                    <Text className="winner-name">
-                      {winner?.winnerName?.name}
-                    </Text>
-                    <br />
-                    <Text className="winner-match">
-                      {winner?.matchDetailsResponse?.matchName}
-                    </Text>
-                  </Col>
-                  <Col flex="auto" />
-                  <Col>
-                    <Text className="winner-prize">
-                      ₹ {winner?.winnerAmount}
-                    </Text>
-                    <br />
-                    <Button className="top-sixer-button">
-                      {"Top Sixer"}
-                    </Button>
+                  <Col span={24}>
+                    <Typography.Title level={4} className="winner-match">
+                      {match?.matchDetails?.matchName}
+                    </Typography.Title>
                   </Col>
                 </Row>
+                {match?.winners.map((winner, index) => (
+                  <Row align="middle" key={index} className="winner-details">
+                    <Col>
+                      <div className="winner-badge">
+                        <img
+                          src={winner?.playerDetailsResponse?.playerImage}
+                          alt="Winner"
+                          style={{height: "40px", width:"40px"}}
+                        />
+                      </div>
+                    </Col>
+                    <Col>
+                      <Text className="winner-name">
+                        {winner?.winnerName?.name}
+                      </Text>
+                    </Col>
+                    <Col flex="auto" />
+                    <Col>
+                      <Text className="winner-prize">
+                        ₹ {winner?.winnerAmount}
+                      </Text>
+                      <br />
+                      <Button className="top-sixer-button">Top Sixer</Button>
+                    </Col>
+                  </Row>
+                ))}
               </Card>
             ))}
-          </div>
+          </section>
         </div>
         <Footer />
       </div>

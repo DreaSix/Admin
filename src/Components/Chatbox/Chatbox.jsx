@@ -85,14 +85,30 @@ const ChatBox = ({
   }, []);
 
   const findLastValidBid = () => {
+    let highestValidBid = null;
+  
     for (let i = messages.length - 1; i >= 0; i--) {
       const bid = messages[i];
-      if (!isNaN(bid.message) && bid.message > 3) {
-        return bid;
+      if (!isNaN(bid.message) && Number(bid.message) > 3) {
+        highestValidBid = Number(bid.message);
+        break;
       }
     }
+  
+    if (highestValidBid === null) {
+      return null;
+    }
+  
+    for (let i = 0; i < messages.length; i++) {
+      const bid = messages[i];
+      if (!isNaN(bid.message) && Number(bid.message) === highestValidBid) {
+        return bid; 
+      }
+    }
+  
     return null;
   };
+  
 
   const sendMessage = (message) => {
     if (client && client.connected) {

@@ -72,27 +72,30 @@ const CreateWinners = () => {
       matchDetails
         .getMatchPlayerDetails(selectedMatchId)
         .then((response) => {
-          const allPlayers = response.data.flatMap(match => 
+          // Flatten all players
+          const allPlayers = response.data.flatMap(match =>
             Object.values(match?.playersDtoMap || {})
           );
-
-          const matchUsers = response.data.flatMap(match => 
-            Object.values(match?.playersDtoMap || {}) // Convert object to array safely
-              .filter(player => player?.userResponseVO !== null) // Filter valid players
-          );
-
-          const allUsers = matchUsers.map(user => user?.userResponseVO)
-
-          console.log('matchUsers', allUsers)
-
-          setPlayerDetails(allPlayers)
-          setUsers(allUsers)
-      
+    
+          // ✅ Filter only SOLD players
+          const soldPlayers = allPlayers.filter(player => player?.status === "SOLD");
+    
+          // Get all players with userResponseVO not null
+          const matchUsers = soldPlayers.filter(player => player?.userResponseVO !== null);
+    
+          const allUsers = matchUsers.map(user => user?.userResponseVO);
+    
+          console.log("SOLD Players:", soldPlayers);
+          console.log("Users with SOLD players:", allUsers);
+    
+          setPlayerDetails(soldPlayers); // ✅ Only SOLD players
+          setUsers(allUsers); // ✅ Users from SOLD players
         })
         .catch((error) => {
           console.log("error", error);
         });
     };
+    
 
     const handleMatchChange = (value) => {
       setSelectedMatchId(value)
