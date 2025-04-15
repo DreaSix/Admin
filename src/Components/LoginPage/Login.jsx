@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Cookies from "js-cookie";
 
 import { Form, Input, Button, message } from "antd";
@@ -8,14 +8,17 @@ import Logo from "../../assets/logo.jpeg";
 import { authService } from "../../Service/Auth";
 
 const LoginPage = ({setIsAuthenticated}) => {
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
 
   const onFinish = (values) => {
+    setLoading(true)
     const payload = {
       ...values,
     }
     authService.loginUser(payload)
       .then(response => {
+        setLoading(false)
         Cookies.set("jwtToken", response?.data?.accessToken)
         Cookies.set("userId", response?.data?.userId)
         Cookies.set("username", response?.data?.username)
@@ -73,6 +76,7 @@ const LoginPage = ({setIsAuthenticated}) => {
             type="primary"
             htmlType="submit"
             className="login-button"
+            loading={loading}
           >
             Login
           </Button>
